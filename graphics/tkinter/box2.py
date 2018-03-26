@@ -2,7 +2,7 @@
 
 from tkinter import *
 tk = Tk()
-tk.title("Terminal emulator")
+tk.title("Events and bindings")
 canvas = Canvas(tk, width=800, height=800)
 canvas.pack()
 canvas.create_line(100, 0, 100, 800)
