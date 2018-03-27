@@ -29,9 +29,9 @@ while True:
     time.sleep(0.01)
     def move_paddle(event):
         if event.keysym == 'Left':
-            canvas.move(paddle, -25, 0)
+            canvas.move(paddle, -35, 0)
         elif event.keysym == 'Right':
-            canvas.move(paddle, 25, 0)
+            canvas.move(paddle, 35, 0)
     pos2 = canvas.coords(paddle)
     if pos2[1] == pos[3]:
         break
