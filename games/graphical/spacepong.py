@@ -80,8 +80,8 @@ def spacepong():
     elif x >= 9 and x <= 12:
         n = 590
     # paddle and meteor objects
-    paddle = canvas.create_rectangle(0, 980, 100, 1000, fill="blue2", outline='blue2')
-    earthtext = canvas.create_text(50, 990, fill="skyblue", text="e a r t h", font=('helvetica', 15))
+    paddle = canvas.create_rectangle(0, 980, 100, 1000, fill="skyblue", outline='blue2')
+    earthtext = canvas.create_text(50, 990, fill="blue2", text="e a r t h", font=('helvetica', 15))
     fire = canvas.create_polygon(467, 500, 533, 500, n, 340, fill="orange", outline="darkorange")
     ball = canvas.create_oval((WIDTH/2)-30, (HEIGHT/2)-30, (WIDTH/2)+30, (HEIGHT/2)+30, fill="lightgoldenrod2", outline="peachpuff")
     while True:
@@ -100,16 +100,6 @@ def spacepong():
             x = -x
         tk.update()
         time.sleep(0.01)
-        if pos[3] == 980:
-            if pos[0] >= xpaddle1 and pos[0] <= xpaddle2:
-                point = point + 1
-                if point%2 == 0:
-                    canvas.create_rectangle(350, 350, 650, 450, fill="gray20")
-                    canvas.create_text(500, 400, text="score: " + str(int(point)), font=('helvetica', 40), fill="red")
-                    tk.update()
-                else:
-                    canvas.create_rectangle(350, 350, 650, 450, fill="gray20")
-                    canvas.create_text(500, 400, text="score: " + str(point), font=('helvetica', 40), fill="red")
         # moves the paddle depending on the user's key symbol
         def move_paddle(event):
             if event.keysym == 'Left':
@@ -124,6 +114,20 @@ def spacepong():
                 ypaddle2 += 100
         canvas.bind_all('<KeyPress-Left>', move_paddle)
         canvas.bind_all('<KeyPress-Right>', move_paddle)
+        if pos[3] == 980:
+            if pos[0] > xpaddle1 and pos[0] < xpaddle2:
+                point = point + 1
+                print("point", point)
+                print("xpaddle1", xpaddle1)
+                print("xpaddle2", xpaddle2)
+                print("pos[0]", pos[0])
+                print("pos[2]", pos[2])
+                canvas.create_rectangle(350, 350, 650, 450, fill="gray20")
+                canvas.create_text(500, 400, text="score: " + str(int(point)), font=('helvetica', 40), fill="red")
+                tk.update()
+            else:
+                canvas.create_rectangle(350, 350, 650, 450, fill="gray20")
+                canvas.create_text(500, 400, text="score: " + str(point), font=('helvetica', 40), fill="red")
 # calls the spacepong() function
 spacepong()
 canvas.mainloop()
