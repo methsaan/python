@@ -4,6 +4,7 @@
 import random
 import time
 import math
+import subprocess as sp
 from tkinter import *
 # Constants
 WIDTH = 1000
@@ -16,6 +17,7 @@ canvas.pack()
 
 def spacepong():
     point = 0
+    miss = 0
     # black background
     canvas.create_rectangle(0, 0, WIDTH, HEIGHT, fill="black")
     # sun
@@ -62,8 +64,8 @@ def spacepong():
     canvas.create_line(675, 400, 700, 550, fill="gray50", width=45)
     canvas.create_line(725, 400, 750, 550, fill="gray50", width=45)
     # ball speed
-    x = 1
-    y = 2
+    x = 6
+    y = 10
     # define the direction of the meteor
     if x == 0:
         x = 6
@@ -80,19 +82,20 @@ def spacepong():
     elif x >= 9 and x <= 12:
         n = 590
     # paddle and meteor objects
-    paddle = canvas.create_rectangle(0, 980, 100, 1000, fill="skyblue", outline='blue2')
-    earthtext = canvas.create_text(50, 990, fill="blue2", text="e a r t h", font=('helvetica', 15))
+    paddle = canvas.create_rectangle(0, 980, 205, 1000, fill="skyblue", outline='blue2')
+    earthtext = canvas.create_text(100, 990, fill="blue2", text="E A R T H", font=('helvetica', 15))
     fire = canvas.create_polygon(467, 500, 533, 500, n, 340, fill="orange", outline="darkorange")
     ball = canvas.create_oval((WIDTH/2)-30, (HEIGHT/2)-30, (WIDTH/2)+30, (HEIGHT/2)+30, fill="lightgoldenrod2", outline="peachpuff")
-    while True:
+    running = True
+    while running:
         # move the ball
         canvas.move(ball, x, y)
         canvas.move(fire, x, y)
         pos = canvas.coords(ball)
         pos2 = canvas.coords(fire)
         padpos = canvas.coords(paddle)
-        xpaddle1 = padpos[0] - 50
-        xpaddle2 = padpos[0] + 50
+        xpaddle1 = padpos[0] - 100
+        xpaddle2 = padpos[0] + 100
         # detect whether the ball hit the wall
         if pos[3] >= WIDTH or pos2[1] < 0:
             y = -y
@@ -103,31 +106,36 @@ def spacepong():
         # moves the paddle depending on the user's key symbol
         def move_paddle(event):
             if event.keysym == 'Left':
-                canvas.move(paddle, -100, 0)
-                canvas.move(earthtext, -100, 0)
-                xpaddle1 -= 100
-                xpaddle2 -= 100
+                canvas.move(paddle, -50, 0)
+                canvas.move(earthtext, -50, 0)
+                xpaddle1 -= 50
+                xpaddle2 -= 50
             elif event.keysym == 'Right':
-                canvas.move(paddle, 100, 0)
-                canvas.move(earthtext, 100, 0)
-                xpaddle1 += 100
-                ypaddle2 += 100
+                canvas.move(paddle, 50, 0)
+                canvas.move(earthtext, 50, 0)
+                xpaddle1 += 50
+                ypaddle2 += 50
         canvas.bind_all('<KeyPress-Left>', move_paddle)
         canvas.bind_all('<KeyPress-Right>', move_paddle)
         if pos[3] == 980:
             if pos[0] > xpaddle1 and pos[0] < xpaddle2:
-                point = point + 1
-                print("point", point)
-                print("xpaddle1", xpaddle1)
-                print("xpaddle2", xpaddle2)
-                print("pos[0]", pos[0])
-                print("pos[2]", pos[2])
+                point = point + 0.5
                 canvas.create_rectangle(350, 350, 650, 450, fill="gray20")
                 canvas.create_text(500, 400, text="score: " + str(int(point)), font=('helvetica', 40), fill="red")
                 tk.update()
             else:
                 canvas.create_rectangle(350, 350, 650, 450, fill="gray20")
                 canvas.create_text(500, 400, text="score: " + str(point), font=('helvetica', 40), fill="red")
+                miss += 0.5
+                canvas.create_rectangle(350, 350, 650, 450, fill="gray20")
+                canvas.create_text(500, 400, text="STRIKE " + str(miss), fill="red", font=('helvetica', 40))
+                if miss == 8:
+                    canvas.create_rectangle(0, 0, 1000, 1000, fill="red")
+                    canvas.create_text(500, 500, text="GAME OVER", font=('roboto', 90))
+                    canvas.create_text(500, 700, text="Score: " + str(point), font=('helvetica', 50), fill="blue")
+                    sp.call('clear', shell=True)
+                    print("score: " + str(point) + " misses: " + str(miss))
+                    running = False
 # calls the spacepong() function
 spacepong()
 canvas.mainloop()
