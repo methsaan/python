@@ -15,6 +15,7 @@ canvas = Canvas(tk, width=WIDTH, height=HEIGHT)
 canvas.pack()
 
 def spacepong():
+    point = 0
     # black background
     canvas.create_rectangle(0, 0, WIDTH, HEIGHT, fill="black")
     # sun
@@ -61,8 +62,8 @@ def spacepong():
     canvas.create_line(675, 400, 700, 550, fill="gray50", width=45)
     canvas.create_line(725, 400, 750, 550, fill="gray50", width=45)
     # ball speed
-    x = random.randrange(-12, 12)
-    y = random.randrange(11, 17)
+    x = 6
+    y = 10
     # define the direction of the meteor
     if x == 0:
         x = 6
@@ -79,7 +80,6 @@ def spacepong():
     elif x >= 9 and x <= 12:
         n = 590
     # paddle and meteor objects
-    #track = canvas.create_rectangle(0, 935, 1000, 965, fill="orange", outline="orange")
     paddle = canvas.create_rectangle(300, HEIGHT-65, 600, HEIGHT-35, fill='blue2', outline='blue2')
     earthtext = canvas.create_text(470, 950, fill="blue4", text="EARTH", font=('helvetica', 25))
     fire = canvas.create_polygon(467, 500, 533, 500, n, 340, fill="orange", outline="darkorange")
@@ -90,14 +90,19 @@ def spacepong():
         canvas.move(fire, x, y)
         pos = canvas.coords(ball)
         pos2 = canvas.coords(fire)
-        pos3 = canvas.coords(paddle)
+        padpos = canvas.coords(paddle)
         # detect whether the ball hit the wall
-        if pos[3] >= WIDTH-65 or pos2[1] < 0:
+        if pos[3] >= WIDTH-35 or pos2[1] < 0:
             y = -y
         if pos[2] >= HEIGHT or pos[0] < 0:
             x = -x
         tk.update()
         time.sleep(0.01)
+        if pos[3] == 930:
+            point = point + 1
+            canvas.create_rectangle(350, 350, 650, 450, fill="gray20")
+            canvas.create_text(500, 400, text="score: " + str(point), font=('helvetica', 40), fill="red")
+            tk.update()
         # moves the paddle depending on the user's key symbol
         def move_paddle(event):
             if event.keysym == 'Left':
