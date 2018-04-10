@@ -82,7 +82,7 @@ def spacepong():
     elif x >= 9 and x <= 12:
         n = 590
     # paddle and meteor objects
-    paddle = canvas.create_rectangle(0, 980, 205, 1000, fill="skyblue", outline='blue2')
+    paddle = canvas.create_rectangle(0, 980, 200, 1000, fill="skyblue", outline='blue2')
     earthtext = canvas.create_text(100, 990, fill="blue2", text="E A R T H", font=('helvetica', 15))
     fire = canvas.create_polygon(467, 500, 533, 500, n, 340, fill="orange", outline="darkorange")
     ball = canvas.create_oval((WIDTH/2)-30, (HEIGHT/2)-30, (WIDTH/2)+30, (HEIGHT/2)+30, fill="lightgoldenrod2", outline="peachpuff")
@@ -129,13 +129,18 @@ def spacepong():
                 miss += 0.5
                 canvas.create_rectangle(350, 350, 650, 450, fill="gray20")
                 canvas.create_text(500, 400, text="STRIKE " + str(miss), fill="red", font=('helvetica', 40))
-                if miss == 8:
-                    canvas.create_rectangle(0, 0, 1000, 1000, fill="red")
-                    canvas.create_text(500, 500, text="GAME OVER", font=('roboto', 90))
-                    canvas.create_text(500, 700, text="Score: " + str(point), font=('helvetica', 50), fill="blue")
+                if miss == 3:
+                    canvas.create_text(500, 250, text="GAME OVER", font=('roboto', 90), fill="red")
+                    canvas.create_text(500, 700, text="Score: " + str(point), font=('helvetica', 70), fill="white")
                     sp.call('clear', shell=True)
-                    print("score: " + str(point) + " misses: " + str(miss))
-                    running = False
-# calls the spacepong() function
-spacepong()
+canvas.create_rectangle(0, 0, 1001, 1001, fill="navy")
+canvas.create_text(500, 450, text="Use the shield to protect the earth", font=('times', 35), fill="skyblue")
+canvas.create_text(500, 500, text="from the meteor. You have 3 chances", font=('times', 35), fill="skyblue")
+canvas.create_text(500, 550, text="To restart press the return key. Press", font=('times', 35), fill="skyblue")
+canvas.create_text(500, 600, text="the return key to start.", font=('times', 35), fill="skyblue")
+def start(event):
+    if event.keysym == 'Return':
+        spacepong()
+        sp.call('clear', shell=True)
+canvas.bind_all('<KeyPress-Return>', start)
 canvas.mainloop()
