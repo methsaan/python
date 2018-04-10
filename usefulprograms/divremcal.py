@@ -6,4 +6,3 @@ second = float(input("Enter second number: "))
 intans = int(round(first/second, 0))
 rem = int(first % second)
 print(str(intans) + " R" + str(rem))
-
