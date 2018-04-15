@@ -6,9 +6,9 @@ print("Welcome to the calculator")
 oper = input("Enter operator: ")
 first = float(input("Enter first number: "))
 second = float(input("Enter second number: "))
-if oper == "add":
+if oper == "addition":
     print(str(first) + " + " + str(second) + " = " + str((first+second)))
-elif oper == "subtract":
+elif oper == "subtraction":
     print(str(first) + " - " + str(second) + " = " + str((first-second)))
 elif oper == "multiplication":
     print(str(first) + " x " + str(second) + " = " + str((first*second)))
