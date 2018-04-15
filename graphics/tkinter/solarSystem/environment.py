@@ -1,0 +1,16 @@
+#! /usr/bin/python3
+
+from sun import create_sun
+import random
+from tkinter import *
+tk = Tk()
+canvas = Canvas(tk, width=1500, height=700)
+canvas.pack()
+canvas.create_rectangle(0, 0, 1500, 700, fill="black")
+def star(x, y):
+    canvas.create_oval(x, y, x+3, y+3, fill="white", outline="gray33", width=1)
+for x in range(1000):
+    a = random.randrange(0, 1500)
+    b = random.randrange(0, 700)
+    star(a, b)
+canvas.mainloop()
