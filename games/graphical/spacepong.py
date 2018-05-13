@@ -110,11 +110,13 @@ def spacepong():
                 canvas.move(earthtext, -50, 0)
                 xpaddle1 -= 50
                 xpaddle2 -= 50
+                sp.call('clear', shell=True)
             elif event.keysym == 'Right':
                 canvas.move(paddle, 50, 0)
                 canvas.move(earthtext, 50, 0)
                 xpaddle1 += 50
                 ypaddle2 += 50
+                sp.call('clear', shell=True)
         canvas.bind_all('<KeyPress-Left>', move_paddle)
         canvas.bind_all('<KeyPress-Right>', move_paddle)
         if pos[3] == 980:

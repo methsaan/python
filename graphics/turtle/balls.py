@@ -19,5 +19,5 @@ for x in range(900):
     t.begin_fill()
     t.circle(random.randrange(10, 60))
     t.end_fill()
-    time.sleep(0.001)
+    time.sleep(0.00025)
 time.sleep(5)
