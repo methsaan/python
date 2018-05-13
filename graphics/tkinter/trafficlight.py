@@ -22,7 +22,7 @@ x = True
 while x == True:
     def quit(event):
         if event.keysym == "Return":
-            x = False
+            tk.quit()
     canvas.bind_all('<KeyPress-Return>', quit)
     topnorm()
     midnorm()
