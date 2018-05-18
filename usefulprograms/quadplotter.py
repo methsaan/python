@@ -23,5 +23,13 @@ canvas.create_line(0, 250, 400, 250)
 canvas.create_line(0, 300, 400, 300)
 canvas.create_line(0, 350, 400, 350)
 canvas.create_line(0, 400, 400, 400)
-
+plotx1 = int(input("Enter first coordinate x: ")) * 50
+ploty1 = int(input("Enter first coordinate y: ")) * 50
+plotx2 = int(input("Enter second coordinate x: ")) * 50
+ploty2 = int(input("Enter second coordinate y: ")) * 50
+plotx3 = int(input("Enter third coordinate x: ")) * 50
+ploty3 = int(input("Enter third coordinate y: ")) * 50
+plotx4 = int(input("Enter fourth coordinate x: ")) * 50
+ploty4 = int(input("Enter fourth coordinate y: ")) * 50
+print("loading quadrilateral ...")
 canvas.mainloop()
