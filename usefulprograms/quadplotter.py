@@ -31,6 +31,8 @@ plotx3 = int(input("Enter third coordinate x: ")) * 50
 ploty3 = int(input("Enter third coordinate y: ")) * 50
 plotx4 = int(input("Enter fourth coordinate x: ")) * 50
 ploty4 = int(input("Enter fourth coordinate y: ")) * 50
-print("loading quadrilateral ...", end="", flush=True)
-canvas.create_line(plotx1, ploty1, plotx2, ploty2, plotx3, ploty3, plotx4, ploty4, fill="gray60", outline="gray60")
+print("loading quadrilateral ...      ", end="", flush=True)
+time.sleep(3)
+print("[done]")
+canvas.create_polygon(plotx1, ploty1, plotx2, ploty2, plotx3, ploty3, plotx4, ploty4, fill="gray60", outline="gray60")
 canvas.mainloop()
