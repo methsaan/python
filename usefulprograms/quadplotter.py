@@ -8,7 +8,7 @@ tk = Tk()
 plotx1 = None
 canvas = Canvas(tk, width=400, height=400)
 canvas.pack()
-while plotx1 != 1000:
+while True:
     canvas.create_line(50, 0, 50, 400, width=2)
     canvas.create_line(100, 0, 100, 400, width=2)
     canvas.create_line(150, 0, 150, 400, width=2)
@@ -27,6 +27,8 @@ while plotx1 != 1000:
     canvas.create_line(0, 400, 400, 400, width=2)
     print("Welcome to the quadrilateral plotter. Type 1000 for the following input to quit")
     plotx1 = int(input("Enter first coordinate x: ")) * 50
+    if plotx1 == 1000:
+        break
     ploty1 = int(input("Enter first coordinate y: ")) * 50
     plotx2 = int(input("Enter second coordinate x: ")) * 50
     ploty2 = int(input("Enter second coordinate y: ")) * 50
