@@ -39,9 +39,8 @@ for x in range(20):
         h = canvas.create_rectangle(700, 700, 800, 800, fill="deeppink")
         canvas.move(h, -28, 0)
         colorlist = ['red', 'blue', 'green', 'gold']
-        def write(ontext):
-            canvas.create_text(400, 400, text=ontext, font=('helvetica', 40),  fill=random.choice(colorlist))
-        write("HAPPY MOTHER'S DAY!")
+        def write(ontext, y):
+            canvas.create_text(400, y, text=ontext, font=('helvetica', 40),  fill=random.choice(colorlist))
         tk.update()
     for x in range(175):
         canvas.move(a, -4, 0)
@@ -53,6 +52,7 @@ for x in range(20):
         canvas.move(f, 4, 0)
         canvas.move(g, -4, 0)
         canvas.move(h, 4, 0)
-        write("PRESS ENTER!")
+        write("Happy birthday\n man", 350)
+        write("PRESS ENTER!", 450)
         tk.update()
 canvas.mainloop()
