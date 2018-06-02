@@ -37,11 +37,11 @@ for x in range(114):
     canvas.move(hair3, 0, 3)
     tk.update()
     time.sleep(0.01)
-blues = ['gray80','gray70','gray60','gray50','gray40','gray30','gray20','gray10','gray10']
+blues = ['gray80', 'gray76', 'gray72', 'gray68', 'gray64', 'gray60', 'gray56', 'gray52', 'gray48', 'gray44', 'gray40', 'gray36', 'gray32', 'gray28', 'gray24', 'gray20', 'gray16', 'gray12', 'gray11', 'gray10']
 for x in blues:
     canvas.create_rectangle(70, 442, 170, 542, fill=x)
     tk.update()
-    time.sleep(0.125)
+    time.sleep(0.025)
 canvas.create_line(100, 492, 100, 542, fill="red2")
 canvas.create_line(100, 492, 90, 481, fill="red2")
 tk.update()
