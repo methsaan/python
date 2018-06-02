@@ -3,7 +3,7 @@
 import time
 from tkinter import *
 tk = Tk()
-canvas = Canvas(tk, width=600, height=600)
+canvas = Canvas(tk, width=600, height=600, bd=0, highlightthickness=0, bg="black")
 canvas.pack()
 canvas.create_rectangle(250, 200, 350, 400, fill="red")
 canvas.create_rectangle(265, 260, 400, 300, fill="red")
@@ -37,7 +37,7 @@ for x in range(19):
     canvas.move(hair3, 0, 18)
     tk.update()
     time.sleep(0.01)
-blues = ['white','skyblue','skyblue1','skyblue2','skyblue3','lightskyblue1','lightskyblue2','lightskyblue3','lightskyblue4']
+blues = ['gray80','gray70','gray60','gray50','gray40','gray30','gray20','gray10','gray1']
 for x in blues:
     canvas.create_rectangle(70, 442, 170, 542, fill=x)
     tk.update()
