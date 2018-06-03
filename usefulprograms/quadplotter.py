@@ -7,7 +7,7 @@ import subprocess
 
 tk = Tk()
 plotx1 = None
-canvas = Canvas(tk, width=400, height=400, bg="gray86", bd=0, highlightthickness=0)
+canvas = Canvas(tk, width=400, height=400, bg="white", bd=0, highlightthickness=0)
 canvas.pack()
 canvas.create_rectangle(0, 0, 400, 400, width=3)
 canvas.create_line(50, 0, 50, 400, width=2)
@@ -27,21 +27,21 @@ canvas.create_line(0, 300, 400, 300, width=2)
 canvas.create_line(0, 350, 400, 350, width=2)
 canvas.create_line(0, 400, 400, 400, width=2)
 while True:
-    print("Welcome to the quadrilateral plotter. Type -1 for the following input to quit.")
+    print("Welcome to the quadrilateral plotter. Type -1 for the coordinate x1 to quit.")
     color = input("Enter band color: ")
-    plotx1 = int(input("Enter first coordinate x: ")) * 50
+    plotx1 = float(input("Enter coordinate x1: ")) * 50
     if plotx1 == -50:
         print("Quitting ...               ", end="", flush=True)
         time.sleep(1)
         print("[DONE]")
         quit()
-    ploty1 = int(input("Enter first coordinate y: ")) * 50
-    plotx2 = int(input("Enter second coordinate x: ")) * 50
-    ploty2 = int(input("Enter second coordinate y: ")) * 50
-    plotx3 = int(input("Enter third coordinate x: ")) * 50
-    ploty3 = int(input("Enter third coordinate y: ")) * 50
-    plotx4 = int(input("Enter fourth coordinate x: ")) * 50
-    ploty4 = int(input("Enter fourth coordinate y: ")) * 50
+    ploty1 = float(input("Enter coordinate y1: ")) * 50
+    plotx2 = float(input("Enter coordinate x2: ")) * 50
+    ploty2 = float(input("Enter coordinate y2: ")) * 50
+    plotx3 = float(input("Enter coordinate x3: ")) * 50
+    ploty3 = float(input("Enter coordinate y3: ")) * 50
+    plotx4 = float(input("Enter coordinate x4: ")) * 50
+    ploty4 = float(input("Enter coordinate y4: ")) * 50
     print("loading quadrilateral ...      ", end="", flush=True)
     time.sleep(1)
     print("[DONE]")
