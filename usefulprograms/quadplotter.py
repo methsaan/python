@@ -7,8 +7,9 @@ import subprocess
 
 tk = Tk()
 plotx1 = None
-canvas = Canvas(tk, width=400, height=400)
+canvas = Canvas(tk, width=400, height=400, bg="gray86", bd=0, highlightthickness=0)
 canvas.pack()
+canvas.create_rectangle(0, 0, 400, 400, width=3)
 canvas.create_line(50, 0, 50, 400, width=2)
 canvas.create_line(100, 0, 100, 400, width=2)
 canvas.create_line(150, 0, 150, 400, width=2)
@@ -26,7 +27,8 @@ canvas.create_line(0, 300, 400, 300, width=2)
 canvas.create_line(0, 350, 400, 350, width=2)
 canvas.create_line(0, 400, 400, 400, width=2)
 while True:
-    print("Welcome to the quadrilateral plotter. Type -1 for the following input to quit")
+    print("Welcome to the quadrilateral plotter. Type -1 for the following input to quit.")
+    color = input("Enter band color: ")
     plotx1 = int(input("Enter first coordinate x: ")) * 50
     if plotx1 == -50:
         print("Quitting ...               ", end="", flush=True)
@@ -43,5 +45,5 @@ while True:
     print("loading quadrilateral ...      ", end="", flush=True)
     time.sleep(1)
     print("[DONE]")
-    canvas.create_polygon(plotx1, ploty1, plotx2, ploty2, plotx3, ploty3, plotx4, ploty4, fill="",outline="red", width=3)
+    canvas.create_polygon(plotx1, ploty1, plotx2, ploty2, plotx3, ploty3, plotx4, ploty4, fill="",outline=color, width=3)
 canvas.mainloop()
