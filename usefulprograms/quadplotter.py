@@ -45,5 +45,5 @@ while True:
     print("loading quadrilateral ...      ", end="", flush=True)
     time.sleep(1)
     print("[DONE]")
-    canvas.create_polygon(plotx1, ploty1, plotx2, ploty2, plotx3, ploty3, plotx4, ploty4, fill="",outline=color, width=3)
+    canvas.create_polygon(plotx1, ploty1, plotx2, ploty2, plotx3, ploty3, plotx4, ploty4, fill="",outline=color, width=5)
 canvas.mainloop()
