@@ -24,19 +24,19 @@ for x in range(1500):
     for x in range(16):
         canvas.move(rand_shape, 30, 0)
         tk.update()
-        time.sleep(0.005)
+        time.sleep(0.01)
     for x in range(16):
         canvas.move(rand_shape, 0, 30)
         tk.update()
-        time.sleep(0.0005)
+        time.sleep(0.01)
     for x in range(16):
         canvas.move(rand_shape, -30, 0)
         tk.update()
-        time.sleep(0.005)
+        time.sleep(0.01)
     for x in range(16):
         canvas.move(rand_shape, 0, -30)
         tk.update()
-        time.sleep(0.0005)
+        time.sleep(0.01)
     n = n + 1
     canvas.create_rectangle(185, 185, 415, 415, fill=color, outline=color)
     canvas.create_text(300, 300, text=str(n), font=('helvetica', size), fill="white")
