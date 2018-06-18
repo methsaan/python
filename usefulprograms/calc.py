@@ -6,15 +6,15 @@ print("Welcome to the calculator")
 oper = input("Enter operator: ")
 first = float(input("Enter first number: "))
 second = float(input("Enter second number: "))
-if oper == "addition":
+if oper == "+":
     print(str(first) + " + " + str(second) + " = " + str((first+second)))
-elif oper == "subtraction":
+elif oper == "-":
     print(str(first) + " - " + str(second) + " = " + str((first-second)))
-elif oper == "multiplication":
+elif oper == "x":
     print(str(first) + " x " + str(second) + " = " + str((first*second)))
-elif oper == "division":
+elif oper == "/":
     print(str(first) + " / " + str(second) + " = " + str((first/second)))
-elif oper == "modulus":
+elif oper == "%":
     print(str(first) + " % " + str(second) + " = " + str((first%second)))
 elif oper == "hypotenuse":
     print("The hypotenuse is " + str(math.sqrt((first*first)+(second*second))))
