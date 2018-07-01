@@ -6,7 +6,6 @@ class Dog:
         self.color = color
         self.age = age
     def eat(self):
-
         print("Munch munch")
     def bark(self):
         if self.age > 20:
