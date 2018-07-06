@@ -2,6 +2,7 @@
 
 from tkinter import *
 import time
+tk = Tk()
 canvas = Canvas(tk, width=500, height=500, bd=0, highlightthickness=0, bg="black")
 canvas.pack()
 def main():
