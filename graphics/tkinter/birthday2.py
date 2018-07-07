@@ -9,12 +9,12 @@ canvas.pack()
 def main():
     x = 0
     y = 0
-    colors = ["red", "aqua", "springgreen", "orangered", "yellowgreen"]
+    colors = ["red", "aqua", "springgreen", "orangered", "yellowgreen", "greenyellow", "gray", "cyan", "blue2"]
     for i in range(400):
         canvas.create_rectangle(x, y, x+100, y+100, fill=random.choice(colors), outline=random.choice(colors))
         canvas.create_text(250, 250, text="Happy birthday", font=("helvetica", 40), fill="white")
-        x += random.randrange(1, 16)
-        y += random.randrange(1, 16)
+        x += random.randrange(1, 25)
+        y += random.randrange(1, 25)
         tk.update()
         time.sleep(0.03)
 def doMain(event):
