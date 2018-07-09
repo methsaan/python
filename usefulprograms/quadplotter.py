@@ -35,13 +35,13 @@ while True:
         time.sleep(1)
         print("[DONE]")
         quit()
-    ploty1 = float(input("Enter coordinate y1: ")) * 50
+    ploty1 = 400-float(input("Enter coordinate y1: ")) * 50
     plotx2 = float(input("Enter coordinate x2: ")) * 50
-    ploty2 = float(input("Enter coordinate y2: ")) * 50
+    ploty2 = 400-float(input("Enter coordinate y2: ")) * 50
     plotx3 = float(input("Enter coordinate x3: ")) * 50
-    ploty3 = float(input("Enter coordinate y3: ")) * 50
+    ploty3 = 400-float(input("Enter coordinate y3: ")) * 50
     plotx4 = float(input("Enter coordinate x4: ")) * 50
-    ploty4 = float(input("Enter coordinate y4: ")) * 50
+    ploty4 = 400-float(input("Enter coordinate y4: ")) * 50
     print("loading quadrilateral ...      ", end="", flush=True)
     time.sleep(1)
     print("[DONE]")
