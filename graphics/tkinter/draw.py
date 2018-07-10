@@ -39,6 +39,9 @@ def movePen(event):
         at[2] = usercol
     elif event.char == "c":
         canvas.create_rectangle(0, 0, 500, 500, fill="white", outline="white")
+        at[5] = canvas.create_oval(240, 240, 260, 260, fill="black", outline="black")
+        at[0] = 250
+        at[1] = 250
     elif event.char == "r":
         at[0] = 250
         at[1] = 250
@@ -46,7 +49,7 @@ def movePen(event):
         at[3] = 1
         at[4] = 5
         canvas.create_rectangle(0, 0, 500, 500, fill="white", outline="white")
-        at[5] = canvas.create_rectangle(240, 240, 260, 260)
+        at[5] = canvas.create_rectangle(240, 240, 260, 260, fill="black", outline="black")
     elif event.char == "t":
         at[3] -= 2
     elif event.char == "s":
@@ -54,7 +57,7 @@ def movePen(event):
     elif event.char == "i":
         print("Manual for \"draw.py\":")
         print("Return: pick random color")
-        print("t: decrease speed of pen, s: decrease width of pen")
+        print("t: decrease width of pen, s: decrease speed of pen")
         print("w: increase width of pen, r: reset canvas, e: erase")
         print("o: increase speed of pen, spacebar: change pen color to transparent")
         print("h: change pen color by input")
@@ -73,4 +76,6 @@ canvas.bind_all("<KeyPress-r>", movePen)
 canvas.bind_all("<KeyPress-d>", movePen)
 canvas.bind_all("<KeyPress-s>", movePen)
 canvas.bind_all("<KeyPress-i>", movePen)
+canvas.bind_all("<KeyPress-h>", movePen)
+canvas.bind_all("<KeyPress-t>", movePen)
 canvas.mainloop()
