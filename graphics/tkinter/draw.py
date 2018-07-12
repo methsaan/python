@@ -61,6 +61,8 @@ def movePen(event):
         print("w: increase width of pen, r: reset canvas, e: erase")
         print("o: increase speed of pen, spacebar: change pen color to transparent")
         print("h: change pen color by input")
+    elif event.char == "q":
+        canvas.destroy()
 canvas.bind_all("<KeyPress-Up>", movePen)
 canvas.bind_all("<KeyPress-Down>", movePen)
 canvas.bind_all("<KeyPress-Left>", movePen)
