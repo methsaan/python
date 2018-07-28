@@ -7,7 +7,7 @@ canvas = Canvas(tk, width=0, height=0)
 canvas.pack()
 
 x = 0
-for x in range(1000000000000000000000000000000000):
+while x < 1000000000000000000000000000000000:
     x += 0
     sp.call("clear", shell=True)
     print(" " * x + "O")

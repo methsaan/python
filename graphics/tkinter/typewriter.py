@@ -2,90 +2,111 @@
 
 from tkinter import *
 tk = Tk()
-canvas = Canvas(tk, width=500, height=1000)
-canvas.pack()
-x = 20
-y = 20
+canvases = [Canvas(tk, width=500, height=1000), 20, 20]
+canvases[0].pack()
 def write(event):
-    x = 20
-    y = 20
-    while True:
-        if event.char == "a":
-            canvas.create_text(x, y, text="a")
-            x = x + 20
-        if event.char == "b":
-            canvas.create_text(x, y, text="b")
-            x = x + 20
-        if event.char == "c":
-            canvas.create_text(x, y, text="c")
-            x = x + 20
-        if event.char == "d":
-            canvas.create_text(x, y, text="d")
-            x = x + 20
-        if event.char == "e":
-            canvas.create_text(x, y, text="e")
-            x = x + 20
-        if event.char == "f":
-            canvas.create_text(x, y, text="f")
-            x = x + 20
-        if event.char == "g":
-            canvas.create_text(x, y, text="g")
-            x = x + 20
-        if event.char == "h":
-            canvas.create_text(x, y, text="h")
-            x = x + 20
-        if event.char == "i":
-            canvas.create_text(x, y, text="i")
-            x = x + 20
-        if event.char == "j":
-            canvas.create_text(x, y, text="j")
-            x = x + 20
-        if event.char == "k":
-            canvas.create_text(x, y, text="k")
-            x = x + 20
-        if event.char == "l":
-            canvas.create_text(x, y, text="l")
-            x = x + 20
-        if event.char == "m":
-            canvas.create_text(x, y, text="m")
-            x = x + 20
-        if event.char == "n":
-            canvas.create_text(x, y, text="n")
-            x = x + 20
-        if event.char == "o":
-            canvas.create_text(x, y, text="o")
-            x = x + 20
-        if event.char == "p":
-            canvas.create_text(x, y, text="p")
-            x = x + 20
-        if event.char == "q":
-            canvas.create_text(x, y, text="q")
-            x = x + 20
-        if event.char == "r":
-            canvas.create_text(x, y, text="r")
-            x = x + 20
-        if event.char == "s":
-            canvas.create_text(x, y, text="s")
-            x = x + 20
-        if event.char == "t":
-            canvas.create_text(x, y, text="t")
-            x = x + 20
-        if event.char == "u":
-            canvas.create_text(x, y, text="u")
-            x = x + 20
-        if event.char == "v":
-            canvas.create_text(x, y, text="v")
-            x = x + 20
-        if event.char == "w":
-            canvas.create_text(x, y, text="w")
-            x = x + 20
-        if event.char == "x":
-            canvas.create_text(x, y, text="x")
-            x = x + 20
-        if event.char == "y":
-            canvas.create_text(x, y, text="y")
-            x = x + 20
-        if event.char == "z":
-            canvas.create_text(x, y, text="z")
-            x = x + 20
-canvas.mainloop()
+    if event.char == "a":
+        canvases[0].create_text(canvases[1], canvases[2], text="a")
+        canvases[1] = canvases[1] + 10
+    if event.char == "b":
+        canvases[0].create_text(canvases[1], canvases[2], text="b")
+        canvases[1] = canvases[1] + 10
+    if event.char == "c":
+        canvases[0].create_text(canvases[1], canvases[2], text="c")
+        canvases[1] = canvases[1] + 10
+    if event.char == "d":
+        canvases[0].create_text(canvases[1], canvases[2], text="d")
+        canvases[1] = canvases[1] + 10
+    if event.char == "e":
+        canvases[0].create_text(canvases[1], canvases[2], text="e")
+        canvases[1] = canvases[1] + 10
+    if event.char == "f":
+        canvases[0].create_text(canvases[1], canvases[2], text="f")
+        canvases[1] = canvases[1] + 10
+    if event.char == "g":
+        canvases[0].create_text(canvases[1], canvases[2], text="g")
+        canvases[1] = canvases[1] + 10
+    if event.char == "h":
+        canvases[0].create_text(canvases[1], canvases[2], text="h")
+        canvases[1] = canvases[1] + 10
+    if event.char == "i":
+        canvases[0].create_text(canvases[1], canvases[2], text="i")
+        canvases[1] = canvases[1] + 10
+    if event.char == "j":
+        canvases[0].create_text(canvases[1], canvases[2], text="j")
+        canvases[1] = canvases[1] + 10
+    if event.char == "k":
+        canvases[0].create_text(canvases[1], canvases[2], text="k")
+        canvases[1] = canvases[1] + 10
+    if event.char == "l":
+        canvases[0].create_text(canvases[1], canvases[2], text="l")
+        canvases[1] = canvases[1] + 10
+    if event.char == "m":
+        canvases[0].create_text(canvases[1], canvases[2], text="m")
+        canvases[1] = canvases[1] + 10
+    if event.char == "n":
+        canvases[0].create_text(canvases[1], canvases[2], text="n")
+        canvases[1] = canvases[1] + 10
+    if event.char == "o":
+        canvases[0].create_text(canvases[1], canvases[2], text="o")
+        canvases[1] = canvases[1] + 10
+    if event.char == "p":
+        canvases[0].create_text(canvases[1], canvases[2], text="p")
+        canvases[1] = canvases[1] + 10
+    if event.char == "q":
+        canvases[0].create_text(canvases[1], canvases[2], text="q")
+        canvases[1] = canvases[1] + 10
+    if event.char == "r":
+        canvases[0].create_text(canvases[1], canvases[2], text="r")
+        canvases[1] = canvases[1] + 10
+    if event.char == "s":
+        canvases[0].create_text(canvases[1], canvases[2], text="s")
+        canvases[1] = canvases[1] + 10
+    if event.char == "t":
+        canvases[0].create_text(canvases[1], canvases[2], text="t")
+        canvases[1] = canvases[1] + 10
+    if event.char == "u":
+        canvases[0].create_text(canvases[1], canvases[2], text="u")
+        canvases[1] = canvases[1] + 10
+    if event.char == "v":
+        canvases[0].create_text(canvases[1], canvases[2], text="v")
+        canvases[1] = canvases[1] + 10
+    if event.char == "w":
+        canvases[0].create_text(canvases[1], canvases[2], text="w")
+        canvases[1] = canvases[1] + 10
+    if event.char == "x":
+        canvases[0].create_text(canvases[1], canvases[2], text="x")
+        canvases[1] = canvases[1] + 10
+    if event.char == "y":
+        canvases[0].create_text(canvases[1], canvases[2], text="y")
+        canvases[1] = canvases[1] + 10
+    if event.char == "z":
+        canvases[0].create_text(canvases[1], canvases[2], text="z")
+        canvases[1] = canvases[1] + 10
+canvases[0].bind_all("<KeyPress-q>", write)
+canvases[0].bind_all("<KeyPress-w>", write)
+canvases[0].bind_all("<KeyPress-e>", write)
+canvases[0].bind_all("<KeyPress-r>", write)
+canvases[0].bind_all("<KeyPress-t>", write)
+canvases[0].bind_all("<KeyPress-y>", write)
+canvases[0].bind_all("<KeyPress-u>", write)
+canvases[0].bind_all("<KeyPress-i>", write)
+canvases[0].bind_all("<KeyPress-o>", write)
+canvases[0].bind_all("<KeyPress-p>", write)
+canvases[0].bind_all("<KeyPress-a>", write)
+canvases[0].bind_all("<KeyPress-s>", write)
+canvases[0].bind_all("<KeyPress-d>", write)
+canvases[0].bind_all("<KeyPress-f>", write)
+canvases[0].bind_all("<KeyPress-g>", write)
+canvases[0].bind_all("<KeyPress-h>", write)
+canvases[0].bind_all("<KeyPress-j>", write)
+canvases[0].bind_all("<KeyPress-k>", write)
+canvases[0].bind_all("<KeyPress-l>", write)
+canvases[0].bind_all("<KeyPress-z>", write)
+canvases[0].bind_all("<KeyPress-x>", write)
+canvases[0].bind_all("<KeyPress-c>", write)
+canvases[0].bind_all("<KeyPress-v>", write)
+canvases[0].bind_all("<KeyPress-b>", write)
+canvases[0].bind_all("<KeyPress-n>", write)
+canvases[0].bind_all("<KeyPress-m>", write)
+canvases[0].mainloop()
