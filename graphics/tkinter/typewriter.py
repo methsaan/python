@@ -4,6 +4,7 @@ from tkinter import *
 tk = Tk()
 canvases = [Canvas(tk, width=500, height=1000), 20, 20]
 canvases[0].pack()
+
 def write(event):
     if event.keysym == "Return":
         canvases[1] = 20
