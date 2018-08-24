@@ -43,18 +43,10 @@ while True:
             print("0"+str(s))
         else:
             print(s)
-    def restart():
-        print("R")
-        hrs=0
-        mins=0
-        secs=0
     def OPTIONS(event):
-        if event.char == "r":
-            restart()
-        elif event.char == "l":
+        if event.char == "l":
             lap(hrs, mins, secs)
     canvas.bind_all("<KeyPress-l>", OPTIONS)
-    canvas.bind_all("<KeyPress-r>", OPTIONS)
     printTime(secs, mins, hrs)
     time.sleep(1)
     secs = secs + 1
