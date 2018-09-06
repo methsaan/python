@@ -11,6 +11,7 @@ mins = 0
 hrs = 0
 def printTime(s, m, h):
     canvas.create_rectangle(0, 0, 700, 700, fill="springgreen")
+    canvas.create_text(350, 560, text="Press r to Restart; Press l to lap", font=("helvetica", 20))
     if h < 10:
         canvas.create_text(250, 350, text="0" + str(h), font=("helvetica", 40))
     else:
@@ -26,8 +27,10 @@ def printTime(s, m, h):
     else:
         canvas.create_text(450, 350, text=str(s), font=("helvetica", 40))
     tk.update()
+secs = 0
+hrs = 0
+mins = 0
 while True:
-    canvas.create_text(350, 560, text="Press r to Restart; Press l to lap", font=("helvetica", 40))
     def lap(h, m, s):
         if h < 10:
             print("0"+str(h), end="", flush=True)
@@ -37,16 +40,24 @@ while True:
         if m < 10:
             print("0"+str(m), end="", flush=True)
         else:
-            print(str(h), end="", flush=True)
+            print(str(m), end="", flush=True)
         print(": ", end="", flush=True)
         if s < 10:
             print("0"+str(s))
         else:
             print(s)
+    def restart(h, m, s):
+        h = 0
+        m = 0
+        s = 0
+        printTime(secs, mins, hrs)
     def OPTIONS(event):
         if event.char == "l":
             lap(hrs, mins, secs)
+        elif event.char == "r":
+            restart(hrs, mins, secs)
     canvas.bind_all("<KeyPress-l>", OPTIONS)
+    canvas.bind_all("<KeyPress-r>", OPTIONS)
     printTime(secs, mins, hrs)
     time.sleep(1)
     secs = secs + 1
