@@ -47,9 +47,12 @@ while True:
         else:
             print(s)
     def restart(h, m, s):
-        h = 0
-        m = 0
-        s = 0
+        if h is None:
+            h = 0
+        if m is None:
+            m = 0
+        if s is None:
+            s = 0
         printTime(secs, mins, hrs)
     def OPTIONS(event):
         if event.char == "l":
