@@ -65,7 +65,7 @@ def spacepong():
     canvas.create_line(725, 400, 750, 550, fill="gray50", width=45)
     # ball speed
     x = 6
-    y = 10
+    y = 15
     # define the direction of the meteor
     if x == 0:
         x = 6
@@ -88,6 +88,7 @@ def spacepong():
     ball = canvas.create_oval((WIDTH/2)-30, (HEIGHT/2)-30, (WIDTH/2)+30, (HEIGHT/2)+30, fill="lightgoldenrod2", outline="peachpuff")
     running = True
     while running:
+        sp.call("clear", shell=True)
         # move the ball
         canvas.move(ball, x, y)
         canvas.move(fire, x, y)
@@ -120,12 +121,16 @@ def spacepong():
         canvas.bind_all('<KeyPress-Left>', move_paddle)
         canvas.bind_all('<KeyPress-Right>', move_paddle)
         if pos[3] == 980:
-            if pos[0] > xpaddle1 and pos[0] < xpaddle2:
+            if pos[0] > xpaddle1 and pos[0] < xpaddle2 and miss < 3:
+                print("POINT")
+            elif (not pos[0] > xpaddle1 and pos[0] < xpaddle2) and miss < 3:
+                print("MISS")
+            if pos[0] > xpaddle1 and pos[0] < xpaddle2 and miss < 3:
                 point = point + 0.5
                 canvas.create_rectangle(350, 350, 650, 450, fill="gray20")
                 canvas.create_text(500, 400, text="score: " + str(int(point)), font=('helvetica', 40), fill="red")
                 tk.update()
-            else:
+            elif (not pos[0] > xpaddle1 and pos[0] < xpaddle2) and miss < 3:
                 canvas.create_rectangle(350, 350, 650, 450, fill="gray20")
                 canvas.create_text(500, 400, text="score: " + str(point), font=('helvetica', 40), fill="red")
                 miss += 0.5
