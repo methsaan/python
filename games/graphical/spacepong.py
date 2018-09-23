@@ -41,9 +41,9 @@ def spacepong():
     canvas.create_line(200, 250, 250, 250, fill="darkgreen", width=21)
     canvas.create_line(125, 400, 100, 540, fill="darkgreen", width=21)
     canvas.create_line(175, 400, 200, 540, fill="darkgreen", width=21)
-    for x in range(1600):
+    for x in range(3800):
         # creates the star
-        star('white', random.randrange(1, 17), -10, 1600, 280, 280, 3, 'gray33')
+        star('white', random.randrange(0, 15), -10, 1600, 280, 280, random.randrange(0, 6), 'gray33')
     for x in range(300):
         # sunshine
         spotx = random.randrange(350, 650)
@@ -103,7 +103,7 @@ def spacepong():
         if pos[2] >= HEIGHT or pos[0] < 0:
             x = -x
         tk.update()
-        time.sleep(0.01)
+        time.sleep(0.005)
         # moves the paddle depending on the user's key symbol
         def move_paddle(event):
             if event.keysym == 'Left':
