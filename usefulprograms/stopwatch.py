@@ -30,6 +30,9 @@ def printTime(s, m, h):
 secs = 0
 hrs = 0
 mins = 0
+pSecs = secs
+pMins = mins
+pHrs = hrs
 while True:
     def lap(h, m, s):
         if h < 10:
@@ -47,18 +50,16 @@ while True:
         else:
             print(s)
     def restart(h, m, s):
-        if h is None:
-            h = 0
-        if m is None:
-            m = 0
-        if s is None:
-            s = 0
-        printTime(secs, mins, hrs)
+        h = 0
+        m = 0
+        s = 0
     def OPTIONS(event):
         if event.char == "l":
             lap(hrs, mins, secs)
         elif event.char == "r":
-            restart(hrs, mins, secs)
+            pSecs = 0
+            pMins = 0
+            pHrs = 0
     canvas.bind_all("<KeyPress-l>", OPTIONS)
     canvas.bind_all("<KeyPress-r>", OPTIONS)
     printTime(secs, mins, hrs)
