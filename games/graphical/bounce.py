@@ -14,39 +14,57 @@ colors = [random.choice(["blue", "black", "orangered"]), random.choice(["springg
 canvas.create_rectangle(0, 0, WIDTH, HEIGHT, fill=colors[0], outline=colors[0])
 paddle = canvas.create_rectangle(400, HEIGHT-60, 500, HEIGHT-40, fill=colors[1], outline=colors[1])
 ball = canvas.create_oval((WIDTH/2)-15, (HEIGHT/2)-15, (WIDTH/2)+15, (WIDTH/2)+15, fill=colors[2], outline=colors[2])
-x = random.randrange(-28, 28)
-if x > -14 and x < 14:
-    x = random.randrange(14, 28)
-y = random.randrange(-30, 30)
-if y > -15 and y < 15:
-    y = random.randrange(-30, -15)
+x = random.randrange(-14, 14)
+if x > -7 and x < 7:
+    x = random.randrange(7, 14)
+y = random.randrange(-15, 15)
+if y > -8 and y < 8:
+    y = random.randrange(-15, -8)
+t1 = None
+t2 = None
 while True:
     canvas.move(ball, x, y)
     pos = canvas.coords(ball)
-    cnt = 0
-    #for x in pos:
-     #   print(str(cnt) + ": " + str(x))
-      #  cnt = cnt + 1
     if pos[3] >= WIDTH-65 or pos[1] < 0:
+        t1 = time.time()
         y = -y
-        pos = canvas.coords(ball)
-        if pos[3] < WIDTH-65 or pos[1] < 0:
-            if y > 0:
-                y = random.randrange(10, 28)
-            elif y < 0:
-                y = random.randrange(-28, -10)
-            else:
-                print("", end="", flush=True)
+        y = random.randrange(-15, 15)
+        if pos[3] >= WIDTH-65:
+            t2 = time.time()
+            if t2-t1 > 3:
+                pos[0] = WIDTH/2
+                pos[1] = HEIGHT/2
+                pos[2] = WIDTH/2
+                pos[3] = HEIGHT/2
+            x = random.randrange(-14, 0)
+        if pos[1] < 0:
+            t2 = time.time()
+            if t2-t1 > 3:
+                pos[0] = WIDTH/2
+                pos[1] = HEIGHT/2
+                pos[2] = WIDTH/2
+                pos[3] = HEIGHT/2
+            x = random.randrange(0, 14)
     if pos[2] >= HEIGHT or pos[0] < 0:
+        t1 = time.time()
         x = -x
-        pos = canvas.coords(ball)
-        if pos[2] > HEIGHT or pos[0] < 0:
-            if x > 0:
-               x = random.randrange(10, 30)
-            elif x < 0:
-               x = random.randrange(-30, -10)
-            else:
-               print("", end="", flush=True)
+        x = random.randrange(-14, 14)
+        if pos[2] >= HEIGHT:
+            t2 = time.time()
+            if t2-t1 > 3:
+                pos[0] = WIDTH/2
+                pos[1] = HEIGHT/2
+                pos[2] = WIDTH/2
+                pos[3] = HEIGHT/2
+            y = random.randrange(0, 15)
+        if pos[0] < 0:
+            t2 = time.time()
+            if t2-t1 > 3:
+                pos[0] = WIDTH/2
+                pos[1] = HEIGHT/2
+                pos[2] = WIDTH/2
+                pos[3] = HEIGHT/2
+            y = random.randrange(-15, 0)
     tk.update()
     time.sleep(0.01)
     def move_paddle(event):
