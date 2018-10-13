@@ -16,7 +16,7 @@ for x in range(20):
         canvas.move(d, -5, 0)
         canvas.move(e, 5, 0)
         tk.update()
-        time.sleep(0.001)
+        time.sleep(0.01)
     for x in range(165):
         canvas.move(k, 0, -5)
         canvas.move(l, 0, 5)
