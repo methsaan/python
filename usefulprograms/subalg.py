@@ -3,7 +3,7 @@
 import random
 from tkinter import *
 tk = Tk()
-canvas = Canvas(tk, width=500, height=500, bg="maroon", bd=0, highlightthickness=0)
+canvas = Canvas(tk, width=500, height=500, bg="brown", bd=0, highlightthickness=0)
 canvas.pack()
 
 x = int(input("Enter a three digit number: "))
@@ -70,7 +70,7 @@ canvas.create_text(250, 240, text=str(hundreds2)+" "+str(tens2)+" "+str(ones2), 
 canvas.create_line(200, 260, 300, 260, width=4, fill="tomato")
 canvas.create_line(195, 245, 205, 245, width=3, fill="tomato")
 if int(str1) == ones1 and int(str2) == tens1 and int(str3) == hundreds1:
-    
+    canvas.create_text(250, 280, text=str(hundreds1-hundreds2)+" "+str(tens1-tens2)+" "+str(ones1-ones2), font=("helvetica", 25), fill="tomato")
 else:
     canvas.create_text(250, 280, text=str(int(str3)-hundreds2)+" "+str(int(str2)-tens2)+" "+str(int(str1)-ones2), font=("helvetica", 25), fill="tomato")
 canvas.mainloop()
