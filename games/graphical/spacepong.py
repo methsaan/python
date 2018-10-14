@@ -64,8 +64,8 @@ def spacepong():
     canvas.create_line(675, 400, 700, 550, fill="gray50", width=45)
     canvas.create_line(725, 400, 750, 550, fill="gray50", width=45)
     # ball speed
-    x = 7
-    y = 18
+    x = 6
+    y = 10
     # define the direction of the meteor
     if x == 0:
         x = 6
