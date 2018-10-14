@@ -11,7 +11,7 @@ HEIGHT = 475
 tk.title("EXTREMELY HARD!")
 canvas = Canvas(tk, width=WIDTH, height=HEIGHT)
 canvas.pack()
-colors = [random.choice(["blue", "black", "orangered"]), random.choice(["springgreen", "gold", "tomato"]), random.choice(["white", "peachpuff", "navajowhite"])]
+colors = [random.choice(["blue", "black", "orangered"]), random.choice(["springgreen", "gold", "tomato"]), random.choice(["brown", "darkgreen", "purple"])]
 canvas.create_rectangle(0, 0, WIDTH, HEIGHT, fill=colors[0], outline=colors[0])
 scoreboard = canvas.create_rectangle(WIDTH/2-70, HEIGHT/2-50, WIDTH/2+70, HEIGHT/2-20, fill=colors[1], outline=colors[1])
 paddle = canvas.create_rectangle(400, HEIGHT-60, 500, HEIGHT-40, fill=colors[1], outline=colors[1])
@@ -48,6 +48,7 @@ while running:
         if strike == 30:
             sp.call("clear", shell=True)
             print("GAME OVER\nScore: ", score)
+            canvas.create_text(WIDTH/2, HEIGHT/2-100, text="GAME OVER", font=("helvetica", 40), fill=colors[1])
             break
     tk.update()
     time.sleep(0.01)
