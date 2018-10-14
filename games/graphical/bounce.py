@@ -8,7 +8,7 @@ from tkinter import *
 tk = Tk()
 WIDTH = 475
 HEIGHT = 475
-tk.title("EXTREMELY HARD!")
+tk.title("AWESOME BOUNCE GAME")
 canvas = Canvas(tk, width=WIDTH, height=HEIGHT)
 canvas.pack()
 colors = [random.choice(["blue", "black", "orangered"]), random.choice(["springgreen", "gold", "tomato"]), random.choice(["brown", "darkgreen", "purple"])]
