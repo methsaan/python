@@ -46,7 +46,7 @@ while running:
         strike = strike + 1
         canvas.create_text(WIDTH/2, HEIGHT/2-40, text="strikes: "+str(strike), font=("helvetica", 20), fill=colors[2])
         if strike == 30:
-            sp.call("clear", shell=True)
+            #sp.call("clear", shell=True)
             print("GAME OVER\nScore: ", score)
             canvas.create_text(WIDTH/2, HEIGHT/2-100, text="GAME OVER", font=("helvetica", 40), fill=colors[1])
             break
