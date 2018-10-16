@@ -6,8 +6,8 @@ import time
 import math
 from tkinter import *
 tk = Tk()
-WIDTH = 475
-HEIGHT = 475
+WIDTH = 450
+HEIGHT = 450
 tk.title("AWESOME BOUNCE GAME")
 canvas = Canvas(tk, width=WIDTH, height=HEIGHT)
 canvas.pack()
