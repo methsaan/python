@@ -2,11 +2,17 @@
 
 import subprocess as sp
 
+history = []
 while True:
     x = input("Enter a bash command: ")
-    if x[0:7] == "PYTHON-":
+    history.append(x)
+    if x[0:7] == "python-":
         inputs = list(map(str, x.split()))
-        print(inputs)
-        eval(x[7:len(x)])
+        inputstr = ''
+        for c in inputs:
+            inputstr += c + " "
+        inputstr = inputstr[7:]
+        inputstr = inputstr[:-1]
+        exec(str(inputstr))
     else:
         sp.call(x, shell=True)
