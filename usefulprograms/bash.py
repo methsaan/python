@@ -7,8 +7,8 @@ while True:
     x = input("Enter a bash command: ")
     history.append(x)
     if x == "bash.py-history":
-        for x in history:
-            print(x)
+        for x in range(len(history)):
+            print(x, history[x])
     elif x[0:7] == "python-":
         inputs = list(map(str, x.split()))
         inputstr = ''
