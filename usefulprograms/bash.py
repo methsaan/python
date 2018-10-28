@@ -10,15 +10,18 @@ while True:
     x = input("Enter a bash command: ")
     cnt = cnt + 1
     history2.append(x)
-    history.append(cnt)
+    history.append(str(cnt))
     history.append(x)
     if x == "bash.py-history":
         for x in range(len(history2)):
             print(x, "", history2[x])
     elif x[0:21] == "bash.py-clear_history":
         historymap = dict(zip(history[::2], history[1::2]))
-        print("Enter commands to remove from history: ", end="", flush=True)
-        x = input()
+        print("Enter range beginning: ", end="", flush=True)
+        x = int(input())
+        print("Enter range end: ", end="", flush=True)
+        y = int(input())
+        print(historymap["12"])
     elif x[0:12] == "python-exec-":
         inputs = list(map(str, x.split()))
         inputstr = ''
