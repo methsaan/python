@@ -1,7 +1,6 @@
 #! /usr/bin/python3
 
 import subprocess as sp
-from itertools import izip
 
 history = []
 history2 = []
@@ -17,8 +16,9 @@ while True:
         for x in range(len(history2)):
             print(x, "", history2[x])
     elif x[0:21] == "bash.py-clear_history":
-        historymap = dict(zip(history[::2], a[1::2]))
+        historymap = dict(zip(history[::2], history[1::2]))
         print("Enter commands to remove from history: ", end="", flush=True)
+        x = input()
     elif x[0:12] == "python-exec-":
         inputs = list(map(str, x.split()))
         inputstr = ''
