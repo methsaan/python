@@ -10,7 +10,7 @@ digits = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0, " "]
 x = 0
 
 while True:
-    print(str(random.choice(digits)) + " ", end="", flush=True)
+    print(str(random.choice(digits)), end="", flush=True)
     x = x + 1
     if x%100 == 0:
         print()
