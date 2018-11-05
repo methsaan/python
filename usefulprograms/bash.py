@@ -24,8 +24,6 @@ while True:
         print(len(history2))
         for i in range(1, len(history2)):
             print(i)
-            del history2[i]
-        print("history2", history2)
     elif x[0:12] == "python-exec-":
         inputs = list(map(str, x.split()))
         inputstr = ''
