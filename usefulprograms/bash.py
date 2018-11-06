@@ -1,6 +1,7 @@
 #! /usr/bin/python3
 
 import subprocess as sp
+import time
 
 history = []
 history2 = []
@@ -21,9 +22,14 @@ while True:
         x = int(input())
         print("Enter range end: ", end="", flush=True)
         y = int(input())
-        print(len(history2))
-        for i in range(1, len(history2)):
+        for i in range(x, y):
             print(i)
+            #del history2[i]
+        print("DELETING RANGE ", end="", flush=True)
+        for i in range(10):
+            print(".", end="", flush=True)
+            time.sleep(0.01)
+        print(" [DONE]")
     elif x[0:12] == "python-exec-":
         inputs = list(map(str, x.split()))
         inputstr = ''
