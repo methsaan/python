@@ -3,6 +3,7 @@
 import math
 
 print("Welcome to the calculator")
+print('''Options: "+", "-", "x", "/", "%", "Hypotenuse"''')
 oper = input("Enter operator: ")
 first = float(input("Enter first number: "))
 second = float(input("Enter second number: "))
