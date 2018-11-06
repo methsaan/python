@@ -14,9 +14,9 @@ if oper == "+":
 elif oper == "-":
     print(str(first) + " - " + str(second) + " = " + str((first-second)))
 elif oper == "x":
-    print(str(first) + " x " + str(second) + " = " + str((first*second)))
+    print(str(first) + " \u00D7 " + str(second) + " = " + str((first*second)))
 elif oper == "/":
-    print(str(first) + " / " + str(second) + " = " + str((first/second)))
+    print(str(first) + " \u00F7 " + str(second) + " = " + str((first/second)))
 elif oper == "%":
     print(str(first) + " % " + str(second) + " = " + str((first%second)))
 elif equals(oper, "hypotenuse"):
