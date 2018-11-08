@@ -20,5 +20,3 @@ while cnt < 100:
     cnt3 %= 10
 # prove theory of finding squareroot for 3 digit number in range
 # above
-
-

@@ -130,7 +130,7 @@ verbs = {"suivre" : "to follow",
 }
 
 score = 0
-numOfQuestions = int(input("How many questions do you want? "))
+numOfQuestions = int(eval(input("How many questions do you want? ")))
 for x in range(numOfQuestions):
     randWord = random.choice(list(verbs))
     a = [True, False]
