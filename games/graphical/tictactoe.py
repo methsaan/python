@@ -12,7 +12,8 @@ canvas.create_line(0, 100, 300, 100, width=5)
 canvas.create_line(0, 200, 300, 200, width=5)
 verti = [50, 150, 250]
 horiz = [50, 150, 250]
-def xo(event.char):
+def xo(event):
+	input_ = event.char
 	x = random.choice(horiz)
 	y = random.choice(verti)
 	canvas.create_rectangle(x-50, y-50, x+50, y+50, fill="gray75")
