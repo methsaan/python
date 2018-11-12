@@ -7,7 +7,7 @@ import math
 from tkinter import *
 tk = Tk()
 WIDTH = 450
-HEIGHT = 450
+HEIGHT = 900
 tk.title("bounce")
 canvas = Canvas(tk, width=WIDTH, height=HEIGHT)
 canvas.pack()
@@ -15,7 +15,7 @@ colors = [random.choice(["blue", "black", "orangered"]), random.choice(["springg
 canvas.create_rectangle(0, 0, WIDTH, HEIGHT, fill=colors[0], outline=colors[0])
 scoreboard = canvas.create_rectangle(WIDTH/2-70, HEIGHT/2-50, WIDTH/2+70, HEIGHT/2-20, fill=colors[1], outline=colors[1])
 paddle = canvas.create_rectangle(400, HEIGHT-60, 500, HEIGHT-40, fill=colors[1], outline=colors[1])
-ball = canvas.create_oval((WIDTH/2)-15, (HEIGHT/2)-15, (WIDTH/2)+15, (WIDTH/2)+15, fill=colors[2], outline=colors[2])
+ball = canvas.create_oval(250, 500, 280, 530, fill=colors[2], outline=colors[2])
 x = random.randrange(-10, 10)
 if x > -5 and x < 5:
     x = random.randrange(5, 10)
@@ -31,11 +31,11 @@ while running:
     pos2 = canvas.coords(paddle)
     left_of_paddle = pos2[2]-50
     right_of_paddle = pos2[2]+50
-    if pos[3] >= WIDTH-65 or pos[1] < 0:
+    if pos[3] >= 900 or pos[1] < 0:
         y = -y
-    if pos[2] >= HEIGHT or pos[0] < 0:
+    if pos[2] >= WIDTH or pos[0] < 0:
         x = -x
-    if pos[3] >= WIDTH-65:
+    if pos[3] >= HEIGHT-65:
         y = random.randrange(-8, -2)
     if pos[3] >= WIDTH-65 and (pos[2] < right_of_paddle and pos[2] > left_of_paddle):
         scoreboard = canvas.create_rectangle(WIDTH/2-70, HEIGHT/2-50, WIDTH/2+70, HEIGHT/2-20, fill=colors[1], outline=colors[1])
