@@ -9,9 +9,6 @@ tk = Tk()
 WIDTH = 900
 HEIGHT = 900
 tk.title("PONG")
-WIDTH = 450
-HEIGHT = 900
-tk.title("bounce")
 canvas = Canvas(tk, width=WIDTH, height=HEIGHT)
 canvas.pack()
 colors = [random.choice(["blue", "black", "orangered"]), random.choice(["springgreen", "gold", "tomato"]), random.choice(["brown", "darkgreen", "purple"])]
@@ -26,15 +23,6 @@ if x > -7 and x < 7:
 y = random.randrange(-10, 10)
 if y > -6 and y < 6:
     y = random.randrange(-10, -6)
-scoreboard = canvas.create_rectangle(WIDTH/2-70, HEIGHT/2-50, WIDTH/2+70, HEIGHT/2-20, fill=colors[1], outline=colors[1])
-paddle = canvas.create_rectangle(400, HEIGHT-60, 500, HEIGHT-40, fill=colors[1], outline=colors[1])
-ball = canvas.create_oval(250, 500, 280, 530, fill=colors[2], outline=colors[2])
-x = random.randrange(-10, 10)
-if x > -5 and x < 5:
-    x = random.randrange(5, 10)
-y = random.randrange(-8, 8)
-if y > -4 and y < 4:
-    y = random.randrange(-8, -4)
 score = 0
 score2 = 0
 running = True
@@ -55,16 +43,6 @@ while running:
         y = random.randrange(-16, -4)
     if pos[1] <= 65:
         y = random.randrange(4, 16)
-    if pos[3] >= 900 or pos[1] < 0:
-        y = -y
-    if pos[2] >= WIDTH or pos[0] < 0:
-        x = -x
-    if pos[3] >= HEIGHT-65:
-        y = random.randrange(-8, -2)
-    if pos[3] >= WIDTH-65 and (pos[2] < right_of_paddle and pos[2] > left_of_paddle):
-        scoreboard = canvas.create_rectangle(WIDTH/2-70, HEIGHT/2-50, WIDTH/2+70, HEIGHT/2-20, fill=colors[1], outline=colors[1])
-        score = score + 1
-        canvas.create_text(WIDTH/2, HEIGHT/2-40, text="score: "+str(score), font=("helvetica", 20), fill=colors[2])
     if pos[3] >= WIDTH-65 and (pos[2] > right_of_paddle or pos[2] < left_of_paddle):
         scoreboard = canvas.create_rectangle(WIDTH/2-140, HEIGHT/2-70, WIDTH/2+140, HEIGHT/2, fill=colors[1], outline=colors[1])
         score2 = score2 + 1
