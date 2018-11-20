@@ -7,4 +7,5 @@ canvas.pack()
 
 xLabel = input("Enter a label for the x axis: ")
 yLabel = input("Enter a label for the y axis: ")
+
 canvas.mainloop()
