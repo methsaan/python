@@ -7,36 +7,36 @@ tk = Tk()
 canvas = Canvas(tk, width=600, height=600)
 canvas.pack()
 canvas.create_rectangle(0, 0, 600, 600, fill="black")
-color = ['springgreen', 'aqua', 'deeppink', 'red', 'yellow', 'blue', 'gold']
-poly = canvas.create_polygon(30, 110, 110, 110, 70, 30, fill=color[0])
-poly2 = canvas.create_polygon(30, 110, 110, 110, 70, 30, fill=color[1])
-poly3 = canvas.create_polygon(30, 110, 110, 110, 70, 30, fill=color[2])
-poly4 = canvas.create_polygon(30, 110, 110, 110, 70, 30, fill=color[3])
-poly5 = canvas.create_polygon(30, 110, 110, 110, 70, 30, fill=color[4])
-poly6 = canvas.create_polygon(30, 110, 110, 110, 70, 30, fill=color[5])
-poly7 = canvas.create_polygon(30, 110, 110, 110, 70, 30, fill=color[6])
 n = 0
 size = 150
 color = "red"
+colors = ['springgreen', 'aqua', 'deeppink', 'red', 'yellow', 'blue', 'gold']
+poly = canvas.create_polygon(30, 110, 110, 110, 70, 30, fill=colors[0])
+poly2 = canvas.create_polygon(30, 110, 110, 110, 70, 30, fill=colors[1])
+poly3 = canvas.create_polygon(30, 110, 110, 110, 70, 30, fill=colors[2])
+poly4 = canvas.create_polygon(30, 110, 110, 110, 70, 30, fill=colors[3])
+poly5 = canvas.create_polygon(30, 110, 110, 110, 70, 30, fill=colors[4])
+poly6 = canvas.create_polygon(30, 110, 110, 110, 70, 30, fill=colors[5])
+poly7 = canvas.create_polygon(30, 110, 110, 110, 70, 30, fill=colors[6])
 for x in range(1500):
     shape = [poly, poly2, poly3, poly4, poly5, poly6, poly7]
     rand_shape = random.choice(shape)
     for x in range(16):
         canvas.move(rand_shape, 30, 0)
         tk.update()
-        time.sleep(0.0001)
+        time.sleep(0.01)
     for x in range(16):
         canvas.move(rand_shape, 0, 30)
         tk.update()
-        time.sleep(0.0001)
+        time.sleep(0.01)
     for x in range(16):
         canvas.move(rand_shape, -30, 0)
         tk.update()
-        time.sleep(0.001)
+        time.sleep(0.01)
     for x in range(16):
         canvas.move(rand_shape, 0, -30)
         tk.update()
-        time.sleep(0.001)
+        time.sleep(0.01)
     n = n + 1
     canvas.create_rectangle(185, 185, 415, 415, fill=color, outline=color)
     canvas.create_text(300, 300, text=str(n), font=('helvetica', size), fill="white")
