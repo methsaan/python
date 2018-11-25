@@ -18,7 +18,7 @@ numOfData = int(input("How many " + str(yLabel) + " values are you going to reco
 speed = 756/numOfData
 progress = 250
 for i in range(numOfData):
-    points.append([0, int(input("Enter your next " + yLabel + " value: "))])
+    points.append([0, float(input("Enter your next " + yLabel + " value: "))])
 points.append(points[len(points)-1])
 for x in range(len(points)-1):
     canvas.create_oval(progress+speed-5, (800-points[x][1]-5)-120, progress+speed+5, (800-points[x][1]+5)-120, fill="red", outline="red")
