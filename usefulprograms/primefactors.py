@@ -15,6 +15,7 @@ def isPrime(number):
         return False
 number = int(input("Enter a number: "))
 i = 1
+print("Prime factors: ", end="", flush=True)
 while True:
     if float(number/i) == float(int(number/i)) and isPrime(i):
         print(i, "", end="", flush=True)
