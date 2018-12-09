@@ -23,17 +23,13 @@ for x in range(numOfQuestions):
     if b:
         c = input("How do you say \"" + randWord + "\" in english? ")
         if c == verbs[randWord]:
-            print("correct")
             score = score + 1
         else:
-            print("not correct")
             print("answer: " + verbs[randWord])
     else:
         c = input("How do you say \"" + verbs[randWord] + "\" in french? ")
         if c == randWord:
-            print("correct")
             score = score + 1
         else:
-            print("not correct")
             print("answer: " + randWord)
 print("Your score: " + str(100*(score/numOfQuestions)) + "%")
