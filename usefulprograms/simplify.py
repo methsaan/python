@@ -27,4 +27,4 @@ for x in range(0, len(denfactors)):
         break
 simplestnum = int(num/gcf)
 simplestden = int(den/gcf)
-print("Simplest terms:", simplestnum, "\u00F7", simplestden)
+print("Simplest terms:", simplestnum, "/", simplestden)
