@@ -10,15 +10,15 @@ t.width(75)
 colors = ['red2', 'blue2', 'springgreen', 'yellow2', 'aqua', 'orange', 'hotpink']
 t.color(random.choice(colors))
 for x in range(3):
-    for x in range(150):
+    for x in range(75):
         t.color(random.choice(colors))
-        t.forward(1)
+        t.forward(2)
     t.left(90)
 t.right(180)
 for x in range(2):
-    for x in range(150):
+    for x in range(75):
         t.color(random.choice(colors))
-        t.forward(1)
+        t.forward(2)
     t.right(90)
 t.width(2)
 t.begin_fill()
