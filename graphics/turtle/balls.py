@@ -11,7 +11,7 @@ colors = ['green2', 'deeppink', 'blue2', 'cyan', 'red2', 'yellow', 'teal']
 t.up()
 t.goto(-360, 360)
 t.down()
-for x in range(900):
+for x in range(1400):
     t.color(random.choice(colors))
     t.up()
     t.goto(random.randrange(-360, 320), random.randrange(-360, 320))
@@ -19,5 +19,6 @@ for x in range(900):
     t.begin_fill()
     t.circle(random.randrange(10, 60))
     t.end_fill()
-    time.sleep(0.00025)
+    if x%200 == 0:
+        t.clear()
 time.sleep(5)
