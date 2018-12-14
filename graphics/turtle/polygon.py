@@ -8,5 +8,5 @@ x = int(input("How many sides: "))
 degs = 360/x
 
 for a in range(x):
-    t.forward(x/2+10)
+    t.forward((x/2+10)*5)
     t.left(degs)
