@@ -46,7 +46,7 @@ while True:
 	print(guess_x, rand_x)
 	if got_correct:
 		print_char(1, 24, "You are correct", "white")
-		print_char(rand_x, 19, "{}", "red")
+		print_char(rand_x, 19, "<>", "red")
 		time.sleep(3)
 		continue
 	else:
