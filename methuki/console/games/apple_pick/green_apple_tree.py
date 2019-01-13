@@ -10,8 +10,8 @@ def print_char(x, y, char, color):
     cprint("\033["+str(y)+";"+str(x)+"H"+char, color)
 
 rand_x = 1
-got_correct = False
 while True:
+	got_correct = False
 	subprocess.call("clear", shell=True)
 	cprint('''
 (U U U O U UU U Oo)  (UUU Ooo U UU UUU U)  (ouuuuO uUUU UUU O OUU UU)
@@ -43,10 +43,9 @@ while True:
 		#print(rand_x)
 		print_char(rand_x+1, y, " \b\b  ", "red")
 	print_char(1, 25, "Correct location: " + str(rand_x), "white")
-	print(guess_x, rand_x)
 	if got_correct:
 		print_char(1, 24, "You are correct", "white")
-		print_char(rand_x, 19, "<>", "red")
+		print_char(rand_x, 15, "{}", "red")
 		time.sleep(3)
 		continue
 	else:
