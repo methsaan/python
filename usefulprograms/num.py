@@ -5,7 +5,7 @@ import random
 
 sp.call("clear")
 
-digits = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0, " "]
+digits = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0]
 
 x = 0
 
