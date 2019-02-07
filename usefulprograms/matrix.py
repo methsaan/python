@@ -39,5 +39,5 @@ for x in range(height1):
     for y in range(width1):
         matrix1[x].append(int(input("Enter next number: ")))
 for x in range(len(matrix1)):
-    canvas.create_text(150, 200-(height1*2+x*2), text=str(matrix1[x]), font=("helovetica", 40))
+    canvas.create_text(x*40, 200, text=str(matrix[x]), font=("helvetica", 20))
 canvas.mainloop()
