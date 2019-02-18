@@ -16,4 +16,6 @@ matrix2 = []
 for x in range(height2):
     matrix2.append([])
 for x in range(len(matrix1)):
+    for y in range(width1):
+        matrix1
 
