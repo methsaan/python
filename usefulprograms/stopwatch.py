@@ -27,12 +27,9 @@ def printTime(s, m, h):
     else:
         canvas.create_text(450, 350, text=str(s), font=("helvetica", 40))
     tk.update()
-secs = 0
-hrs = 0
-mins = 0
-pSecs = secs
-pMins = mins
-pHrs = hrs
+secs = [0]
+hrs = [0]
+mins = [0]
 while True:
     def lap(h, m, s):
         if h < 10:
@@ -49,27 +46,23 @@ while True:
             print("0"+str(s))
         else:
             print(s)
-    def restart(h, m, s):
-        h = 0
-        m = 0
-        s = 0
     def OPTIONS(event):
         if event.char == "l":
-            lap(hrs, mins, secs)
+            lap(hrs[0], mins[0], secs[0])
         elif event.char == "r":
-            pSecs = 0
-            pMins = 0
-            pHrs = 0
+            secs[0] = 0
+            mins[0] = 0
+            hrs[0] = 0
     canvas.bind_all("<KeyPress-l>", OPTIONS)
     canvas.bind_all("<KeyPress-r>", OPTIONS)
-    printTime(secs, mins, hrs)
+    printTime(secs[0], mins[0], hrs[0])
     time.sleep(1)
-    secs = secs + 1
-    if secs == 60:
-        secs = 0
-        mins = mins + 1
-    if mins == 60:
-        mins = 0
-        hrs = hrs + 1
+    secs[0] = secs[0] + 1
+    if secs[0] == 60:
+        secs[0] = 0
+        mins[0] = mins[0] + 1
+    if mins[0] == 60:
+        mins[0] = 0
+        hrs[0] = hrs[0] + 1
     tk.update()
 canvas.mainloop()
