@@ -82,7 +82,7 @@ def spacepong():
     elif x >= 9 and x <= 12:
         n = 590
     # paddle and meteor objects
-    paddle = canvas.create_rectangle(0, 980, 200, 1000, fill="skyblue", outline='blue2')
+    paddle = canvas.create_rectangle(0, 880, 200, 900, fill="skyblue", outline='blue2')
     earthtext = canvas.create_text(100, 990, fill="blue2", text="E A R T H", font=('helvetica', 15))
     fire = canvas.create_polygon(467, 500, 533, 500, n, 340, fill="orange", outline="darkorange")
     ball = canvas.create_oval((WIDTH/2)-30, (HEIGHT/2)-30, (WIDTH/2)+30, (HEIGHT/2)+30, fill="lightgoldenrod2", outline="peachpuff")
@@ -98,9 +98,9 @@ def spacepong():
         xpaddle1 = padpos[0] - 100
         xpaddle2 = padpos[0] + 100
         # detect whether the ball hit the wall
-        if pos[3] >= WIDTH or pos2[1] < 0:
+        if pos[3] >= HEIGHT-100 or pos2[1] < 0:
             y = -y
-        if pos[2] >= HEIGHT or pos[0] < 0:
+        if pos[2] >= WIDTH or pos[0] < 0:
             x = -x
         tk.update()
         time.sleep(0.005)
