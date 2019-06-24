@@ -5,7 +5,7 @@ import random
 import time
 from tkinter import *
 tk = Tk()
-tk.title("Reach the safe box without touching the bombs")
+tk.title("Reach the safe box without touching the boxes")
 canvas = Canvas(tk, width=800, height=800, bg="white", bd=0, highlightthickness=0)
 canvas.pack()
 
@@ -143,13 +143,6 @@ while running:
                 xCoord = random.randrange(boxSize+75, 795-boxSize)
                 yCoord = random.randrange(boxSize+75, 695-boxSize)
             boxes.append(Box(boxSize, xCoord, yCoord, "black"))
-        for box in boxes:
-            canvas.itemconfig(box.box, fill=random.choice(["red", "orange", "yellow", "orangered"]))
-            tk.update()
-            time.sleep(0.01)
-            canvas.itemconfig(box.box, outline=random.choice(["red", "orange"]))
-            tk.update()
-            time.sleep(0.01)
     if not lost and canvas.coords(player.arm1)[0] >= 695 and canvas.coords(player.arm1)[0] <= 795 and canvas.coords(player.arm1)[1]-30 >= 695 and canvas.coords(player.arm1)[3]-3 <= 795:
         for x in range(20):
             boxSize = random.randrange(46, 92)
