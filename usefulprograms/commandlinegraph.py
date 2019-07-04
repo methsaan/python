@@ -1,8 +1,9 @@
 #! /usr/bin/python3
 
-import time
+from time import *
 import datetime
-import math
+from math import *
+from random import *
 import subprocess as sp
 
 def print_char(x, y, char):
@@ -17,4 +18,3 @@ for x in range(-20, 20):
     exec(function)
     if y in range(-20, 20):
        print_char(x+20, -y+20, "#")
-print_char(1, 1, "")
