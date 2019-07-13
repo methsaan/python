@@ -1,3 +1,5 @@
 #! /usr/bin/python3
 
-print("hello \"soug\" soeudgn\"\" \\\\\\\n\n\n\nsibgisudi \"\"")
+#you can use single quotes and put single quotes in that string!
+toe = 'methuki\'s bent toe nail:('
+print(toe)
