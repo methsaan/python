@@ -8,3 +8,5 @@ cant_walk = wind > 3 and rain > 2 and sunshine > 1000
 
 if cant_walk:
     print("The wind is " + str(wind) + "km/h and rain is greater than " + str(rain) + "mm and sunshine is greater than " + str(sunshine) + "lumins so you cannot walk")
+else:
+    print("You can walk")
