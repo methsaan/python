@@ -35,7 +35,7 @@ for x in range(numOfQuestions):
     b = random.choice(a)
     sp.call("clear", shell=True)
     if b:
-        c = input("How do you say \"" + randWord + "\" in english? ")
+        c = input(str(x+1) + ". How do you say \"" + randWord + "\" in english? ")
         if c == verbs[randWord]:
             score = score + 1
             print("Correct")
@@ -43,7 +43,7 @@ for x in range(numOfQuestions):
             print("answer: " + verbs[randWord])
         time.sleep(1)
     else:
-        c = input("What is the music term for \"" + verbs[randWord] + "\"? ")
+        c = input(str(x+1) + ". What is the music term for \"" + verbs[randWord] + "\"? ")
         if c == randWord:
             score = score + 1
             print("Correct")

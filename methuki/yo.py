@@ -9,5 +9,7 @@ elif name == "pamini":
     print("you are nice")
 elif name == "mohan":
     print("you are OK")
+elif name == "Prabha":
+    print("may the triple gem bless you")
 else:
     print("go away")
