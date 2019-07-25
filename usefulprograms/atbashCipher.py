@@ -16,10 +16,11 @@ def atbashDecrypt(keyword, encrypt):
     encryptAlpha = strToList(encrypt)
     decrypt = []
     atbashAlpha = atbashlist(keyword)
+    alphabet = atbashlist("")
     for x in range(len(encryptAlpha)):
-        decrypt.append(atbashAlpha[encryptAlpha.index(encrypt[x])])
-    return decrypt
+        decrypt.append(atbashAlpha[alphabet.index(encrypt[x])])
+    return ''.join(decrypt)
 
-print(atbashlist(""))
-print(atbashlist("hello"))
-print(atbashDecrypt("hello", "the boat and the by you float right by you"))
+kw = input("Enter keyword: ")
+encrypt = input("Enter word to encrypt: ")
+print(atbashDecrypt(kw, encrypt))
