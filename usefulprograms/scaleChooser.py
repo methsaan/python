@@ -13,4 +13,4 @@ while True:
     sp.call("clear", shell=True)
     scale = random.choice([random.choice(notes) + random.choice([" Major Scale", " Major Chord Broken", " Major Arpeggio"]), random.choice(notes2) + (random.choice(types+types2))])
     print(scale)
-    time.sleep(30)
+    time.sleep(35)
