@@ -1,6 +1,8 @@
 #! /usr/bin/python3
 
 import random
+import subprocess as sp
+import time
 
 verbs = {"suivre" : "to follow",
         "oublier" : "to forget",
@@ -112,7 +114,7 @@ verbs = {"suivre" : "to follow",
         "tracer" : "to trace",
         "voyager" : "to travel",
         "tourner" : "to turn",
-        "Enteindre" : "to turn off",
+        "enteindre" : "to turn off",
         "allumer" : "to turn on",
         "comprendre" : "to understand",
         "entendre" : "to wait",
@@ -135,8 +137,9 @@ for x in range(numOfQuestions):
     randWord = random.choice(list(verbs))
     a = [True, False]
     b = random.choice(a)
+    sp.call("clear", shell=True)
     if b:
-        c = input("How do you say \"" + randWord + "\" in english? ")
+        c = input(str(x+1) + ". How do you say \"" + randWord + "\" in English? ")
         if c == verbs[randWord]:
             print("correct")
             score = score + 1
@@ -144,11 +147,11 @@ for x in range(numOfQuestions):
             print("not correct")
             print("answer: " + verbs[randWord])
     else:
-        c = input("How do you say \"" + verbs[randWord] + "\" in french? ")
+        c = input(str(x+1) + ". How do you say \"" + verbs[randWord] + "\" in French? ")
         if c == randWord:
             print("correct")
             score = score + 1
         else:
-            print("not correct")
             print("answer: " + randWord)
+    time.sleep(0.3)
 print("Your score: " + str(100*(score/numOfQuestions)) + "%")
