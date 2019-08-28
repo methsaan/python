@@ -3,6 +3,7 @@
 import random
 import subprocess as sp
 import time
+import sys
 
 verbs = {"agitato" : "agitated",
         "dolente" : "sad",
@@ -28,7 +29,7 @@ verbs = {"agitato" : "agitated",
 }
 
 score = 0
-numOfQuestions = int(input("How many questions do you want? "))
+numOfQuestions = int(sys.argv[1])
 for x in range(numOfQuestions):
     randWord = random.choice(list(verbs))
     a = [True, False]
