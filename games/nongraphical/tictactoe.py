@@ -11,8 +11,11 @@ def isLinear(*nums):
             return False
     return True
 
-grid = [[" ", " ", " "], [" ", " ", " "], [" ", " ", " "]]
-a = (2, 4, 2)
-print(a)
-a = (4, 2, 4)
-print(a)
+grid = ((" ", " ", " "), (" ", " ", " "), (" ", " ", " "))
+print("_________")
+print("|  |  |  |")
+print("|__|__|__|")
+print("|  |  |  |")
+print("|__|__|__|")
+print("|  |  |  |")
+print("|__|__|__|")
