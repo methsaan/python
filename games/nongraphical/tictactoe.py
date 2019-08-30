@@ -1,5 +1,7 @@
 #! /usr/bin/python3
 
+import subprocess as sp
+
 def isLinear(*nums):
     difference = 0
     differenceList = []
@@ -12,10 +14,33 @@ def isLinear(*nums):
     return True
 
 grid = ((" ", " ", " "), (" ", " ", " "), (" ", " ", " "))
-print("_________")
-print("|  |  |  |")
-print("|__|__|__|")
-print("|  |  |  |")
-print("|__|__|__|")
-print("|  |  |  |")
-print("|__|__|__|")
+while True:
+    sp.call("clear", shell=True)
+    print("_______________________________")
+    print("|         |         |         |")
+    print("|    %s    |    %s    |    %s    |" % (grid[0][0], grid[0][1], grid[0][2]))
+    print("|_________|_________|_________|")
+    print("|         |         |         |")
+    print("|    %s    |    %s    |    %s    |" % (grid[1][0], grid[1][1], grid[1][2]))
+    print("|_________|_________|_________|")
+    print("|         |         |         |")
+    print("|    %s    |    %s    |    %s    |" % (grid[2][0], grid[2][1], grid[2][2]))
+    print("|_________|_________|_________|")
+    x = input("Enter position (X): ")
+    position = [0, 0]
+    if x.split(" ")[0] == "top":
+        position[0] = 0
+    elif x.split(" ")[0] == "middle":
+        position[0] = 1
+    else:
+        position[0] = 2
+    if x.split(" ")[1] == "left":
+        position[1] = 0
+    elif x.split(" ")[1] == "middle":
+        position[1] = 1
+    else:
+        position[1] = 2
+    grid = list(grid)
+    for x in grid:
+
+    grid[position[0

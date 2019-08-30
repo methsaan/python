@@ -29,7 +29,7 @@ for x in range(int(sys.argv[1])):
     randSong = random.choice(songList)
     randData = random.choice(datalist)
     randProperty = propertyList[datalist.index(randData)]
-    guess = input(randData + " of " + randSong.name + ": ")
+    guess = input(str(x+1) + ". " + randData + " of " + randSong.name + ": ")
     if guess == eval("randSong." + randProperty):
         print("Correct")
         time.sleep(1)
