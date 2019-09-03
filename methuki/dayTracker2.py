@@ -14,7 +14,7 @@ if month[0] == "q":
 day.append(input("Date: "))
 schedule.append(input("Fwor/Fwr/perfect/PERFECT: "))
 print("Requirements: PA, PP, D, MT, ST")
-numOfReq.append(input("Number of requirements met /5: ") + "/5")
+numOfReq.append(input("Number of requirements met /4: ") + "/4")
 reason.append(input("Reason / N/A: "))
 open("dayTracker", "a").write(str(month));
 open("dayTracker", "a").write("\t\t");
