@@ -13,7 +13,7 @@ dayx = daylist[datetime.datetime.today().weekday()]
 days_of_the_week = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
 months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
 timea = datetime.datetime.now().strftime("%H:%M:%S")
-if timea[0] == '2' and timea[1] == '1' and timea[3] == '4':
+if timea[0] == '1' and timea[1] == '8' and timea[3] == '2':
     fpw = open("schedfile", "w")
     fpw.write("%s\n" % dayx)
     fpw.write("%s\n" % random.randrange(2))
