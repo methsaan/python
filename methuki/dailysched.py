@@ -15,13 +15,24 @@ days_of_the_week = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Fri
 months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
 timea = datetime.datetime.now().strftime("%H:%M:%S")
 if timea[0] == '0' and timea[1] == '6' and timea[3] == '0':
+    readfile = open("schedfile", "r")
+    filelines = readfile.read().split("\n")
+    dayy = int(filelines[0])
+    randnum = int(filelines[1])
+    randday = int(filelines[2])
+    randnum2 = int(filelines[3])
+    studytype = filelines[4]
+    readfile.close()
     fpw = open("schedfile", "w")
     fpw.write("%s\n" % dayx)
     fpw.write("%s\n" % random.randrange(2))
     fpw.write("%s\n" % random.randrange(12))
     fpw.write("%s\n" % random.randrange(2))
     studytypes = ["Geometry", "EQAO", "Algebra", "English Writing", "French Grammar", "English Language", "Sinhala Vocabulary", "Government", "Countries", "Hacking", "Human Body"]
-    fpw.write("%s" % random.choice(studytypes))
+    if datetime.datetime.today().day%4 == 0:
+        fpw.write("%s" % random.choice(studytypes))
+    else:
+        fpw.write("%s" % studytype)
     fpw.close()
 fp = open("schedfile", "r")
 filelines = fp.read().split("\n")
