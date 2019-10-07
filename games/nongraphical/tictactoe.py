@@ -21,20 +21,6 @@ def filled(filllist, char):
             break
     return fill
 
-def hasLinearChar(multidlist, char):
-    pos = []
-    c1 = False
-    c2 = False
-    for x in multidlist:
-        pos.append(list(x).index(char))
-    if isLinear(*pos):
-        c1 = True
-    for x in range(len(multidlist)):
-        if filled(multidlist[x], char):
-            c2 = True
-            break
-    return c1 and c2
-
 grid = ((" ", " ", " "), (" ", " ", " "), (" ", " ", " "))
 while True:
     sp.call("clear", shell=True)
@@ -65,13 +51,26 @@ while True:
     grid = list(grid)
     for x in range(len(grid)):
         grid[x] = list(grid[x])
-    print(grid)
     grid[position[0]][position[1]] = "X"
     for x in range(len(grid)):
         grid[x] = tuple(grid[x])
     grid = tuple(grid)
-    if hasLinearChar(grid, "X"):
-        print("X wins")
+    xPos = []
+    for x in range(len(grid)):
+        if "X" in grid[x]:
+            for y in [i for i, n in enumerate(x) if n == 's']:
+                arr = []
+                for z in range(len(y)):
+                    arr.append(grid
+                    xPos.append(grid[x].index("X"), y[z])
+        else:
+            xPos.append(5)
+    print(xPos)
+    for x in grid:
+        if filled(x, "X"):
+            print(True)
+            break
+    print(isLinear(*xPos))
     sp.call("clear", shell=True)
     print("_______________________________")
     print("|         |         |         |")
@@ -104,5 +103,3 @@ while True:
     for x in range(len(grid)):
         grid[x] = tuple(grid[x])
     grid = tuple(grid)
-    if hasLinearChar(grid, "O"):
-        print("O wins")

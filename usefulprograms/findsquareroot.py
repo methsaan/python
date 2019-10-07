@@ -4,7 +4,7 @@ import math
 
 square = int(input("Enter a 3-digit number: "))
 digits = str(square)
-sqrtOnes = {1 : [1, 9], 2 : [], 3: [], 4: [2, 8], 5: [5], 6: [4, 6], 7: [], 8: [], 9: [3, 7]}
+sqrtOnes = {0: [0], 1 : [1, 9], 2 : [], 3: [], 4: [2, 8], 5: [5], 6: [4, 6], 7: [], 8: [], 9: [3, 7]}
 print(" ", square)
 sqrtTenth = int(math.sqrt(int(digits[0])))
 print("  |")
@@ -26,6 +26,9 @@ for x in sqrtOnesOptions:
     print(sqrtOption, "^ 2 =", sqrtOption**2)
     if sqrtOption**2 == square:
         ans = sqrtOption
-print("Answer:", ans)
+if ans == None:
+    print("Not a perfect square")
+else:
+    print("Answer:", ans)
 # prove theory of finding squareroot for 3 digit number in range
 # above
