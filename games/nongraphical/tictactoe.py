@@ -61,7 +61,7 @@ while True:
             for y in [i for i, n in enumerate(x) if n == 's']:
                 arr = []
                 for z in range(len(y)):
-                    arr.append(grid
+                    arr.append(grid)
                     xPos.append(grid[x].index("X"), y[z])
         else:
             xPos.append(5)
