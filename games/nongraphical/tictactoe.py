@@ -6,7 +6,7 @@ def isLinear(*nums):
     difference = 0
     differenceList = []
     for x in range(len(nums)-1):
-        difference = abs(nums[x]-nums[x+1])
+        difference = nums[x]-nums[x+1]
         differenceList.append(difference)
     for x in range(1, len(differenceList)):
         if differenceList[x] != differenceList[x-1]:
@@ -55,22 +55,18 @@ while True:
     for x in range(len(grid)):
         grid[x] = tuple(grid[x])
     grid = tuple(grid)
-    xPos = []
-    for x in range(len(grid)):
-        if "X" in grid[x]:
-            for y in [i for i, n in enumerate(x) if n == 's']:
-                arr = []
-                for z in range(len(y)):
-                    arr.append(grid)
-                    xPos.append(grid[x].index("X"), y[z])
-        else:
-            xPos.append(5)
-    print(xPos)
+    filledHoriz = False
     for x in grid:
         if filled(x, "X"):
-            print(True)
+            filledHoriz = True
             break
-    print(isLinear(*xPos))
+    xPos = []
+    for x in grid:
+        if "X" in x:
+            xPos.append(x.index("X"))
+        else:
+            xPos.append(4)
+    filledVertOrDiag = isLinear(*xPos)
     sp.call("clear", shell=True)
     print("_______________________________")
     print("|         |         |         |")
@@ -103,3 +99,15 @@ while True:
     for x in range(len(grid)):
         grid[x] = tuple(grid[x])
     grid = tuple(grid)
+    filledHoriz = False
+    for x in grid:
+        if filled(x, "O"):
+            filledHoriz = True
+            break
+    xPos = []
+    for x in grid:
+        if "O" in x:
+            xPos.append(x.index("O"))
+        else:
+            xPos.append(4)
+    filledVertOrDiag = isLinear(*xPos)
