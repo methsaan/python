@@ -65,7 +65,7 @@ else:
     print("Today you are following schedule %s, FAIL%s or %s" % (day_array[randday], randnum2+1, pdbr[idx][randnum]))
 print("Study subject: %s" % studytype)
 print("__________________________________________________________________________________________________________________________________________________________________________________________")
-print("| REGULAR SCHEDULE     Wake up 5:30 AM      Sleep 8:40 PM         Workout:      Push ups:   3 sets of 2      Squats:   2 sets of 20     Plank: 1.5 min               |     FAIL1         |")
+print("| REGULAR SCHEDULE     Wake up 5:30 AM      Sleep 8:40 PM         Workout:      Push ups:   3 sets of 1      Squats:   2 sets of 20     Plank: 1.5 min               |     FAIL1         |")
 print("|____________________________________________________________________________________________________________________________________________________________________|___________________|")
 print("|_________1_________|_________3_________|_______ 5  _______|_______SAT1_______|______SUN1______|______PDBR1______|_____PDBR3_______|_____PDBR5_____|______PDBR7______|6-12:00AM __1___   |")
 print("|        PA         |        PA         |    Study + D    |(PA+Breakfast+OA)/PA|      PA       |       PA        |       PA        |      PA       |       PA        |           PA      |")
