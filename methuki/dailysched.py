@@ -9,12 +9,11 @@ breaktype = sys.argv[1]
 sp.call("clear", shell=True)
 sp.call("./dayTracker2.py", shell=True)
 daylist = [1, 2, 3, 4, 5, 6, 0]
-#dayx = daylist[datetime.datetime.today().weekday()]
-dayx = None
+dayx = daylist[datetime.datetime.today().weekday()]
 days_of_the_week = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
 months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
 timea = datetime.datetime.now().strftime("%H:%M:%S")
-if timea[0] == '0' and timea[1] == '6' and timea[3] == '0':
+if timea[0] == '2' and timea[1] == '0' and timea[3] == '0':
     readfile = open("schedfile", "r")
     filelines = readfile.read().split("\n")
     dayy = int(filelines[0])
