@@ -61,12 +61,21 @@ while True:
             filledHoriz = True
             break
     xPos = []
+    xPos2 = []
+    xPos3 = []
     for x in grid:
         if "X" in x:
+            positions = [i for i, n in enumerate(x) if n == 'X'] + [4, 4]
             xPos.append(x.index("X"))
+            xPos2.append(positions[1])
+            xPos3.append(positions[2])
         else:
             xPos.append(4)
-    filledVertOrDiag = isLinear(*xPos)
+            xPos2.append(4)
+            xPos3.append(4)
+    filledVertOrDiag = isLinear(*xPos) or isLinear(*xPos2) or isLinear(*xPos3)
+    if filledVertOrDiag:
+        print("Filled vertically or diagonally")
     sp.call("clear", shell=True)
     print("_______________________________")
     print("|         |         |         |")
