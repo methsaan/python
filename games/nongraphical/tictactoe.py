@@ -73,10 +73,12 @@ while True:
             xPos.append(4)
             xPos2.append(4)
             xPos3.append(4)
-    filledVertOrDiag = isLinear(*xPos) or isLinear(*xPos2) or isLinear(*xPos3)
+    filledVertOrDiag = (isLinear(*xPos) and 4 not in xPos) or (isLinear(*xPos2) and 4 not in xPos2) or (isLinear(*xPos3) and 4 not in xPos3)
+    sp.call("clear", shell=True)
     if filledVertOrDiag:
         print("Filled vertically or diagonally")
-    sp.call("clear", shell=True)
+    if filledHoriz:
+        print("Filled horizontally");
     print("_______________________________")
     print("|         |         |         |")
     print("|    %s    |    %s    |    %s    |" % (grid[0][0], grid[0][1], grid[0][2]))
