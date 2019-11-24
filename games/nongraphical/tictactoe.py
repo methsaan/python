@@ -76,9 +76,9 @@ while True:
     filledVertOrDiag = (isLinear(*xPos) and 4 not in xPos) or (isLinear(*xPos2) and 4 not in xPos2) or (isLinear(*xPos3) and 4 not in xPos3)
     sp.call("clear", shell=True)
     if filledVertOrDiag:
-        print("Filled vertically or diagonally")
+        print("X is filled vertically or diagonally")
     if filledHoriz:
-        print("Filled horizontally");
+        print("X is filled horizontally");
     print("_______________________________")
     print("|         |         |         |")
     print("|    %s    |    %s    |    %s    |" % (grid[0][0], grid[0][1], grid[0][2]))
@@ -116,9 +116,16 @@ while True:
             filledHoriz = True
             break
     xPos = []
+    xPos2 = []
+    xPos3 = []
     for x in grid:
-        if "O" in x:
-            xPos.append(x.index("O"))
+        if "X" in x:
+            positions = [i for i, n in enumerate(x) if n == 'X'] + [4, 4]
+            xPos.append(x.index("X"))
+            xPos2.append(positions[1])
+            xPos3.append(positions[2])
         else:
             xPos.append(4)
+            xPos2.append(4)
+            xPos3.append(4)
     filledVertOrDiag = isLinear(*xPos)
