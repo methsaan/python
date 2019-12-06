@@ -14,20 +14,20 @@ import time
 # passe anterieur
 # futur anterieur
 
-present = {"Je" : "finis", "Tu" : "finis", "Il" : "finit", "Elle" : "finit", "Nous" : "finissons", "Vous" : "finissez", "Ils" : "finissent", "Elles" : "finissent"}
-passeCompose = {"Je" : "ai fini", "Tu" : "as fini", "Il" : "a fini", "Elle" : "a fini", "Nous" : "avons fini", "Vous" : "avez fini", "Ils" : "ont fini", "Elles" : "ont fini"}
-passeImparfait = {"Je" : "finissais", "Tu" : "finissais", "Il" : "finissait", "Elle" : "finissait", "Nous" : "finissions", "Vous" : "finissiez", "Ils" : "finissaient", "Elles" : "finissaient"}
-passePlusQueParfait = {"Je" : "avais fini", "Tu" : "avais fini", "Il" : "avait fini", "Elle" : "avait fini", "Nous" : "avions fini", "Vous" : "aviez fini", "Ils" : "avaient fini", "Elles" : "avaient fini"}
-futurSimple = {"Je" : "finirai", "Tu" : "finiras", "Il" : "finira", "Elle" : "finira", "Nous" : "finirons", "Vous" : "finirez", "Ils" : "finiront", "Elles" : "finiront"}
-passeSimple = {"Je" : "finis", "Tu" : "finis", "Il" : "finit", "Elle" : "finit", "Nous" : "finimes", "Vous" : "finites", "Ils" : "finirent", "Elles" : "finirent"}
-passeAnterieur = {"Je" : "eus fini", "Tu" : "eus fini", "Il" : "eut fini", "Elle" : "eut fini", "Nous" : "eumes fini", "Vous" : "eutes fini", "Ils" : "eurent fini", "Elles" : "eurent fini"}
-futurAnterieur = {"Je" : "aurais fini", "Tu" : "auras fini", "Il" : "aura fini", "Elle" : "aura fini", "Nous" : "aurons fini", "Vous" : "aurez fini", "Ils" : "auront fini", "Elles" : "auront fini"}
+present = {"Je" : "vais", "Tu" : "vas", "Il" : "va", "Elle" : "va", "Nous" : "allons", "Vous" : "allez", "Ils" : "vont", "Elles" : "vont"}
+passeCompose = {"Je" : "ai alle", "Tu" : "as alle", "Il" : "a alle", "Elle" : "a alle", "Nous" : "avons alle", "Vous" : "avez alle", "Ils" : "ont alle", "Elles" : "ont alle"}
+passeImparfait = {"Je" : "allais", "Tu" : "allais", "Il" : "allait", "Elle" : "allait", "Nous" : "allions", "Vous" : "alliez", "Ils" : "allaient", "Elles" : "allaient"}
+passePlusQueParfait = {"Je" : "avais alle", "Tu" : "avais alle", "Il" : "avait alle", "Elle" : "avait alle", "Nous" : "avions alle", "Vous" : "aviez alle", "Ils" : "avaient alle", "Elles" : "avaient alle"}
+futurSimple = {"Je" : "irai", "Tu" : "iras", "Il" : "ira", "Elle" : "ira", "Nous" : "irons", "Vous" : "irez", "Ils" : "iront", "Elles" : "iront"}
+passeSimple = {"Je" : "allai", "Tu" : "allas", "Il" : "alla", "Elle" : "alla", "Nous" : "allames", "Vous" : "allates", "Ils" : "allerent", "Elles" : "allerent"}
+passeAnterieur = {"Je" : "eus alle", "Tu" : "eus alle", "Il" : "eut alle", "Elle" : "eut alle", "Nous" : "eumes alle", "Vous" : "eutes alle", "Ils" : "eurent alle", "Elles" : "eurent alle"}
+futurAnterieur = {"Je" : "aurais alle", "Tu" : "auras alle", "Il" : "aura alle", "Elle" : "aura alle", "Nous" : "aurons alle", "Vous" : "aurez alle", "Ils" : "auront alle", "Elles" : "auront alle"}
 indicatif = [present, passeCompose, passeImparfait, passePlusQueParfait, futurSimple, passeSimple, passeAnterieur, futurAnterieur]
 indicatifNames = ["present", "passe compose", "passe imparfait", "passe plus-que-parfait", "futur simple", "passe simple", "passe anterieur", "futur anterieur"]
-presentCond = {"Je" : "finirais", "Tu" : "finirais", "Il" : "finirait", "Elle" : "finirait", "Nous" : "finirions", "Vous" : "finiriez", "Ils" : "finiraient", "Elles" : "finiraient"}
-passeCond = {"Je" : "aurais fini", "Tu" : "aurais fini", "Il" : "aurait fini", "Elle" : "aurait fini", "Nous" : "aurions fini", "Vous" : "auriez fini", "Ils" : "auraient fini", "Elles" : "auraient fini"}
+presentCond = {"Je" : "irais", "Tu" : "irais", "Il" : "irait", "Elle" : "irait", "Nous" : "irions", "Vous" : "iriez", "Ils" : "iraient", "Elles" : "iraient"}
+passeCond = {"Je" : "eusse alle", "Tu" : "eusses alle", "Il" : "eût alle", "Elle" : "eût alle", "Nous" : "eussions alle", "Vous" : "eussiez alle", "Ils" : "eussent alle", "Elles" : "eussent alle"}
 conditionnel = [presentCond, passeCond]
-conditionNames = ["present conditional", "passe conditional"]
+conditionNames = ["present conditionel", "passe conditionel"]
 
 score = 0
 for x in range(int(sys.argv[1])):
