@@ -14,18 +14,18 @@ import time
 # passe anterieur
 # futur anterieur
 
-present = {"Je" : "vais", "Tu" : "vas", "Il" : "va", "Elle" : "va", "Nous" : "allons", "Vous" : "allez", "Ils" : "vont", "Elles" : "vont"}
-passeCompose = {"Je" : "ai alle", "Tu" : "as alle", "Il" : "a alle", "Elle" : "a alle", "Nous" : "avons alle", "Vous" : "avez alle", "Ils" : "ont alle", "Elles" : "ont alle"}
-passeImparfait = {"Je" : "allais", "Tu" : "allais", "Il" : "allait", "Elle" : "allait", "Nous" : "allions", "Vous" : "alliez", "Ils" : "allaient", "Elles" : "allaient"}
-passePlusQueParfait = {"Je" : "avais alle", "Tu" : "avais alle", "Il" : "avait alle", "Elle" : "avait alle", "Nous" : "avions alle", "Vous" : "aviez alle", "Ils" : "avaient alle", "Elles" : "avaient alle"}
-futurSimple = {"Je" : "irai", "Tu" : "iras", "Il" : "ira", "Elle" : "ira", "Nous" : "irons", "Vous" : "irez", "Ils" : "iront", "Elles" : "iront"}
-passeSimple = {"Je" : "allai", "Tu" : "allas", "Il" : "alla", "Elle" : "alla", "Nous" : "allames", "Vous" : "allates", "Ils" : "allerent", "Elles" : "allerent"}
-passeAnterieur = {"Je" : "eus alle", "Tu" : "eus alle", "Il" : "eut alle", "Elle" : "eut alle", "Nous" : "eumes alle", "Vous" : "eutes alle", "Ils" : "eurent alle", "Elles" : "eurent alle"}
-futurAnterieur = {"Je" : "aurais alle", "Tu" : "auras alle", "Il" : "aura alle", "Elle" : "aura alle", "Nous" : "aurons alle", "Vous" : "aurez alle", "Ils" : "auront alle", "Elles" : "auront alle"}
+present = {"Je" : "sers", "Tu" : "sers", "Il" : "sert", "Elle" : "sert", "Nous" : "servons", "Vous" : "servez", "Ils" : "servent", "Elles" : "servent"}
+passeCompose = {"Je" : "ai servi", "Tu" : "as servi", "Il" : "a servi", "Elle" : "a servi", "Nous" : "avons servi", "Vous" : "avez servi", "Ils" : "ont servi", "Elles" : "ont servi"}
+passeImparfait = {"Je" : "servais", "Tu" : "servais", "Il" : "servait", "Elle" : "servait", "Nous" : "servions", "Vous" : "serviez", "Ils" : "servaient", "Elles" : "servaient"}
+passePlusQueParfait = {"Je" : "avais servi", "Tu" : "avais servi", "Il" : "avait servi", "Elle" : "avait servi", "Nous" : "avions servi", "Vous" : "aviez servi", "Ils" : "avaient servi", "Elles" : "avaient servi"}
+futurSimple = {"Je" : "servirai", "Tu" : "serviras", "Il" : "servira", "Elle" : "servira", "Nous" : "servirons", "Vous" : "servirez", "Ils" : "serviront", "Elles" : "serviront"}
+passeSimple = {"Je" : "servis", "Tu" : "servis", "Il" : "servit", "Elle" : "servit", "Nous" : "servimes", "Vous" : "servites", "Ils" : "servirent", "Elles" : "servirent"}
+passeAnterieur = {"Je" : "eus servi", "Tu" : "eus servi", "Il" : "eut servi", "Elle" : "eut servi", "Nous" : "eumes servi", "Vous" : "eutes servi", "Ils" : "eurent servi", "Elles" : "eurent servi"}
+futurAnterieur = {"Je" : "aurai servi", "Tu" : "auras servi", "Il" : "aura servi", "Elle" : "aura servi", "Nous" : "aurons servi", "Vous" : "aurez servi", "Ils" : "auront servi", "Elles" : "auront servi"}
 indicatif = [present, passeCompose, passeImparfait, passePlusQueParfait, futurSimple, passeSimple, passeAnterieur, futurAnterieur]
 indicatifNames = ["present", "passe compose", "passe imparfait", "passe plus-que-parfait", "futur simple", "passe simple", "passe anterieur", "futur anterieur"]
-presentCond = {"Je" : "irais", "Tu" : "irais", "Il" : "irait", "Elle" : "irait", "Nous" : "irions", "Vous" : "iriez", "Ils" : "iraient", "Elles" : "iraient"}
-passeCond = {"Je" : "eusse alle", "Tu" : "eusses alle", "Il" : "eût alle", "Elle" : "eût alle", "Nous" : "eussions alle", "Vous" : "eussiez alle", "Ils" : "eussent alle", "Elles" : "eussent alle"}
+presentCond = {"Je" : "servirais", "Tu" : "servirais", "Il" : "servirait", "Elle" : "servirait", "Nous" : "servirions", "Vous" : "serviriez", "Ils" : "serviraient", "Elles" : "serviraient"}
+passeCond = {"Je" : "eusse servi", "Tu" : "eusses servi", "Il" : "eût servi", "Elle" : "eût servi", "Nous" : "eussions servi", "Vous" : "eussiez servi", "Ils" : "eussent servi", "Elles" : "eussent servi"}
 conditionnel = [presentCond, passeCond]
 conditionNames = ["present conditionel", "passe conditionel"]
 
