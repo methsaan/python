@@ -129,3 +129,7 @@ while True:
             xPos2.append(4)
             xPos3.append(4)
     filledVertOrDiag = isLinear(*xPos)
+    if filledVertOrDiag:
+        print("O is filled vertically or diagonally")
+    if filledHoriz:
+        print("O is filled horizontally");
