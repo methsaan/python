@@ -18,3 +18,4 @@ for x in range(-20, 20):
     exec(function)
     if y in range(-20, 20):
         print_char(x+20, -y+20, "#")
+print()

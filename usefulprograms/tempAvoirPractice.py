@@ -14,13 +14,13 @@ import time
 # passe anterieur
 # futur anterieur
 
-present = {"Je" : "sers", "Tu" : "sers", "Il" : "sert", "Elle" : "sert", "Nous" : "servons", "Vous" : "servez", "Ils" : "servent", "Elles" : "servent"}
-passeCompose = {"Je" : "ai servi", "Tu" : "as servi", "Il" : "a servi", "Elle" : "a servi", "Nous" : "avons servi", "Vous" : "avez servi", "Ils" : "ont servi", "Elles" : "ont servi"}
-passeImparfait = {"Je" : "servais", "Tu" : "servais", "Il" : "servait", "Elle" : "servait", "Nous" : "servions", "Vous" : "serviez", "Ils" : "servaient", "Elles" : "servaient"}
-passePlusQueParfait = {"Je" : "avais servi", "Tu" : "avais servi", "Il" : "avait servi", "Elle" : "avait servi", "Nous" : "avions servi", "Vous" : "aviez servi", "Ils" : "avaient servi", "Elles" : "avaient servi"}
+present = {"Je" : "joue", "Tu" : "joues", "Il" : "joue", "Elle" : "joue", "Nous" : "jouons", "Vous" : "jouez", "Ils" : "jouent", "Elles" : "jouent"}
+passeCompose = {"Je" : "ai joue", "Tu" : "as joue", "Il" : "a joue", "Elle" : "a joue", "Nous" : "avons joue", "Vous" : "avez joue", "Ils" : "ont joue", "Elles" : "ont joue"}
+passeImparfait = {"Je" : "jouais", "Tu" : "jouais", "Il" : "jouait", "Elle" : "jouait", "Nous" : "jouions", "Vous" : "jouiez", "Ils" : "jouaient", "Elles" : "jouaient"}
+passePlusQueParfait = {"Je" : "avais joue", "Tu" : "avais joue", "Il" : "avait joue", "Elle" : "avait joue", "Nous" : "avions joue", "Vous" : "aviez joue", "Ils" : "avaient joue", "Elles" : "avaient joue"}
 futurSimple = {"Je" : "servirai", "Tu" : "serviras", "Il" : "servira", "Elle" : "servira", "Nous" : "servirons", "Vous" : "servirez", "Ils" : "serviront", "Elles" : "serviront"}
 passeSimple = {"Je" : "servis", "Tu" : "servis", "Il" : "servit", "Elle" : "servit", "Nous" : "servimes", "Vous" : "servites", "Ils" : "servirent", "Elles" : "servirent"}
-passeAnterieur = {"Je" : "eus servi", "Tu" : "eus servi", "Il" : "eut servi", "Elle" : "eut servi", "Nous" : "eumes servi", "Vous" : "eutes servi", "Ils" : "eurent servi", "Elles" : "eurent servi"}
+passeAnterieur = {"Je" : "eus joue", "Tu" : "eus joue", "Il" : "eut joue", "Elle" : "eut joue", "Nous" : "eumes joue", "Vous" : "eutes joue", "Ils" : "eurent joue", "Elles" : "eurent joue"}
 futurAnterieur = {"Je" : "aurai servi", "Tu" : "auras servi", "Il" : "aura servi", "Elle" : "aura servi", "Nous" : "aurons servi", "Vous" : "aurez servi", "Ils" : "auront servi", "Elles" : "auront servi"}
 indicatif = [present, passeCompose, passeImparfait, passePlusQueParfait, futurSimple, passeSimple, passeAnterieur, futurAnterieur]
 indicatifNames = ["present", "passe compose", "passe imparfait", "passe plus-que-parfait", "futur simple", "passe simple", "passe anterieur", "futur anterieur"]
