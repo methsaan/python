@@ -111,24 +111,24 @@ while True:
         grid[x] = tuple(grid[x])
     grid = tuple(grid)
     filledHoriz = False
-    for x in grid:
-        if filled(x, "O"):
+    for a in grid:
+        if filled(a, "O"):
             filledHoriz = True
             break
     xPos = []
     xPos2 = []
     xPos3 = []
-    for x in grid:
-        if "X" in x:
-            positions = [i for i, n in enumerate(x) if n == 'X'] + [4, 4]
-            xPos.append(x.index("X"))
+    for a in grid:
+        if "O" in a:
+            positions = [i for i, n in enumerate(a) if n == 'O'] + [4, 4]
+            xPos.append(a.index("O"))
             xPos2.append(positions[1])
             xPos3.append(positions[2])
         else:
             xPos.append(4)
             xPos2.append(4)
             xPos3.append(4)
-    filledVertOrDiag = isLinear(*xPos)
+    filledVertOrDiag = (isLinear(*xPos) and 4 not in xPos) or (isLinear(*xPos2) and 4 not in xPos2) or (isLinear(*xPos3) and 4 not in xPos3)
     if filledVertOrDiag:
         print("O is filled vertically or diagonally")
     if filledHoriz:

@@ -14,18 +14,18 @@ import time
 # passe anterieur
 # futur anterieur
 
-present = {"Je" : "joue", "Tu" : "joues", "Il" : "joue", "Elle" : "joue", "Nous" : "jouons", "Vous" : "jouez", "Ils" : "jouent", "Elles" : "jouent"}
-passeCompose = {"Je" : "ai joue", "Tu" : "as joue", "Il" : "a joue", "Elle" : "a joue", "Nous" : "avons joue", "Vous" : "avez joue", "Ils" : "ont joue", "Elles" : "ont joue"}
-passeImparfait = {"Je" : "jouais", "Tu" : "jouais", "Il" : "jouait", "Elle" : "jouait", "Nous" : "jouions", "Vous" : "jouiez", "Ils" : "jouaient", "Elles" : "jouaient"}
-passePlusQueParfait = {"Je" : "avais joue", "Tu" : "avais joue", "Il" : "avait joue", "Elle" : "avait joue", "Nous" : "avions joue", "Vous" : "aviez joue", "Ils" : "avaient joue", "Elles" : "avaient joue"}
-futurSimple = {"Je" : "jouerai", "Tu" : "joueras", "Il" : "jouera", "Elle" : "jouera", "Nous" : "jouerons", "Vous" : "jouerez", "Ils" : "joueront", "Elles" : "joueront"}
-passeSimple = {"Je" : "jouai", "Tu" : "jouas", "Il" : "joua", "Elle" : "joua", "Nous" : "jouames", "Vous" : "jouates", "Ils" : "jouerent", "Elles" : "jouerent"}
-passeAnterieur = {"Je" : "eus joue", "Tu" : "eus joue", "Il" : "eut joue", "Elle" : "eut joue", "Nous" : "eumes joue", "Vous" : "eutes joue", "Ils" : "eurent joue", "Elles" : "eurent joue"}
-futurAnterieur = {"Je" : "aurai joue", "Tu" : "auras joue", "Il" : "aura joue", "Elle" : "aura joue", "Nous" : "aurons joue", "Vous" : "aurez joue", "Ils" : "auront joue", "Elles" : "auront joue"}
+present = {"Je" : "ecris", "Tu" : "ecris", "Il" : "ecrit", "Elle" : "ecrit", "Nous" : "ecrivons", "Vous" : "ecrivez", "Ils" : "ecrivent", "Elles" : "ecrivent"}
+passeCompose = {"Je" : "ai ecrit", "Tu" : "as ecrit", "Il" : "a ecrit", "Elle" : "a ecrit", "Nous" : "avons ecrit", "Vous" : "avez ecrit", "Ils" : "ont ecrit", "Elles" : "ont ecrit"}
+passeImparfait = {"Je" : "ecrivais", "Tu" : "ecrivais", "Il" : "ecrivait", "Elle" : "ecrivait", "Nous" : "ecrivions", "Vous" : "ecriviez", "Ils" : "ecrivaient", "Elles" : "ecrivaient"}
+passePlusQueParfait = {"Je" : "avais ecrit", "Tu" : "avais ecrit", "Il" : "avait ecrit", "Elle" : "avait ecrit", "Nous" : "avions ecrit", "Vous" : "aviez ecrit", "Ils" : "avaient ecrit", "Elles" : "avaient ecrit"}
+futurSimple = {"Je" : "ecrirai", "Tu" : "ecriras", "Il" : "ecrira", "Elle" : "ecrira", "Nous" : "ecrirons", "Vous" : "ecrirez", "Ils" : "ecriront", "Elles" : "ecriront"}
+passeSimple = {"Je" : "ecrivis", "Tu" : "ecrivis", "Il" : "ecrivit", "Elle" : "ecrivit", "Nous" : "ecrivimes", "Vous" : "ecrivites", "Ils" : "ecrivirent", "Elles" : "ecrivirent"}
+passeAnterieur = {"Je" : "eus ecrit", "Tu" : "eus ecrit", "Il" : "eut ecrit", "Elle" : "eut ecrit", "Nous" : "eumes ecrit", "Vous" : "eutes ecrit", "Ils" : "eurent ecrit", "Elles" : "eurent ecrit"}
+futurAnterieur = {"Je" : "aurai ecrit", "Tu" : "auras ecrit", "Il" : "aura ecrit", "Elle" : "aura ecrit", "Nous" : "aurons ecrit", "Vous" : "aurez ecrit", "Ils" : "auront ecrit", "Elles" : "auront ecrit"}
 indicatif = [present, passeCompose, passeImparfait, passePlusQueParfait, futurSimple, passeSimple, passeAnterieur, futurAnterieur]
 indicatifNames = ["present", "passe compose", "passe imparfait", "passe plus-que-parfait", "futur simple", "passe simple", "passe anterieur", "futur anterieur"]
-presentCond = {"Je" : "jouerais", "Tu" : "jouerais", "Il" : "jouerait", "Elle" : "jouerait", "Nous" : "jouerions", "Vous" : "joueriez", "Ils" : "joueraient", "Elles" : "joueraient"}
-passeCond = {"Je" : "aurais joue", "Tu" : "aurais joue", "Il" : "aurait joue", "Elle" : "aurait joue", "Nous" : "aurions joue", "Vous" : "auriez joue", "Ils" : "auraient joue", "Elles" : "auraient joue"}
+presentCond = {"Je" : "ecrirais", "Tu" : "ecrirais", "Il" : "ecrirait", "Elle" : "ecrirait", "Nous" : "ecririons", "Vous" : "ecririez", "Ils" : "ecriraient", "Elles" : "ecriraient"}
+passeCond = {"Je" : "aurais ecrit", "Tu" : "aurais ecrit", "Il" : "aurait ecrit", "Elle" : "aurait ecrit", "Nous" : "aurions ecrit", "Vous" : "auriez ecrit", "Ils" : "auraient ecrit", "Elles" : "auraient ecrit"}
 conditionnel = [presentCond, passeCond]
 conditionNames = ["present conditionel", "passe conditionel"]
 
