@@ -22,8 +22,8 @@ def filled(filllist, char):
     return fill
 
 grid = ((" ", " ", " "), (" ", " ", " "), (" ", " ", " "))
+oWin = False
 while True:
-    sp.call("clear", shell=True)
     print("_______________________________")
     print("|         |         |         |")
     print("|    %s    |    %s    |    %s    |" % (grid[0][0], grid[0][1], grid[0][2]))
@@ -34,6 +34,8 @@ while True:
     print("|         |         |         |")
     print("|    %s    |    %s    |    %s    |" % (grid[2][0], grid[2][1], grid[2][2]))
     print("|_________|_________|_________|")
+    if oWin:
+        print("O wins!");quit()
     x = input("Enter position (X): ")
     position = [0, 0]
     if x.split(" ")[0] == "top":
@@ -75,10 +77,8 @@ while True:
             xPos3.append(4)
     filledVertOrDiag = (isLinear(*xPos) and 4 not in xPos) or (isLinear(*xPos2) and 4 not in xPos2) or (isLinear(*xPos3) and 4 not in xPos3)
     sp.call("clear", shell=True)
-    if filledVertOrDiag:
-        print("X is filled vertically or diagonally")
-    if filledHoriz:
-        print("X is filled horizontally");
+    if filledVertOrDiag or filledHoriz:
+        print("X wins!");quit()
     print("_______________________________")
     print("|         |         |         |")
     print("|    %s    |    %s    |    %s    |" % (grid[0][0], grid[0][1], grid[0][2]))
@@ -129,7 +129,6 @@ while True:
             xPos2.append(4)
             xPos3.append(4)
     filledVertOrDiag = (isLinear(*xPos) and 4 not in xPos) or (isLinear(*xPos2) and 4 not in xPos2) or (isLinear(*xPos3) and 4 not in xPos3)
-    if filledVertOrDiag:
-        print("O is filled vertically or diagonally")
-    if filledHoriz:
-        print("O is filled horizontally");
+    if filledVertOrDiag or filledHoriz:
+        oWin = True
+    sp.call("clear", shell=True)
