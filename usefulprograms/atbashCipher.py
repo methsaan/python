@@ -1,4 +1,4 @@
-#! /usr/bin/python3
+#! /usr/bin/pythonr
 
 def strToList(string):
     return [string[i:i+1] for i in range(0, len(string), 1)]
