@@ -12,6 +12,5 @@ for factor1 in range(1, 65536):
 		for x in range(len(product)):
 			productbackward += product[-(x+1)]
 		if productbackward == product:
-			#print(str(factor1) + " \u00D7 " + str(factor2) + " = " + product)
+			print(str(factor1) + " \u00D7 " + str(factor2) + " = " + product)
 			cnt = cnt + 1
-	print(factor1, cnt)
