@@ -17,4 +17,4 @@ t.down()
 for x in range(4):
     t.forward(sidelength)
     t.left(90)
-time.sleep(20)
+time.sleep(5)
