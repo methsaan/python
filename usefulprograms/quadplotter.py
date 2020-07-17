@@ -30,11 +30,6 @@ while True:
     print("Welcome to the quadrilateral plotter. Type -1 for the coordinate x1 to quit.")
     color = input("Enter band color: ")
     plotx1 = float(input("Enter coordinate x1: ")) * 50
-    if plotx1 == -50:
-        print("Quitting ...               ", end="", flush=True)
-        time.sleep(1)
-        print("[DONE]")
-        quit()
     ploty1 = 400-float(input("Enter coordinate y1: ")) * 50
     plotx2 = float(input("Enter coordinate x2: ")) * 50
     ploty2 = 400-float(input("Enter coordinate y2: ")) * 50
