@@ -4,11 +4,17 @@ import random
 import subprocess as sp
 import time
 
-countryFlags = {"red maple leaf, red verticle triband" : "Canadian",
-        "13 red horizontal stripes, 50 stars at corner" : "American",
-        "green stripe left, red stripe right, eagle" : "Mexican",
-        "yellow diagnoal cross, green top and bottom, black sides" : "Jamaican",
-        "white top half, red bottom half, flipped disc middle left" : "Greenlandic",
+countryFlags = {"red background, big yellow star, 4 small stars forming semi-circle on the right" : "China",
+        "orange, white and green horizontal stripes, navy blue 24-spoke wheel at center" : "India",
+        "thirteen red and yellow horizontal stripes, blue box with 50 stars at top left corner" : "United States of America",
+        "top half red, bottom half white" : "Indonesia",
+        "green background, yellow rhombus center, \"Ordum e Progresso\" band and 27 stars at center" : "Brazil",
+        "vertical white stripe at left, green background with white slanted moon and star" : "Pakistan",
+        "green, white, green triband" : "Nigeria",
+        "green background, red circle middle left" : "Bangladesh",
+        "horizontal white, blue, red" : "Russia",
+        "white background, red circle at center" : "Japan",
+        "vertical green, white, red, golden eagle emblem at center" : "Mexico",
 }
 
 score = 0

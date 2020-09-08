@@ -144,7 +144,6 @@ for x in range(numOfQuestions):
             print("correct")
             score = score + 1
         else:
-            print("not correct")
             print("answer: " + verbs[randWord])
     else:
         c = input(str(x+1) + ". How do you say \"" + verbs[randWord] + "\" in French? ")
