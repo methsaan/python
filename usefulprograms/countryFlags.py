@@ -15,6 +15,11 @@ countryFlags = {"red background, big yellow star, 4 small stars forming semi-cir
         "horizontal white, blue, red" : "Russia",
         "white background, red circle at center" : "Japan",
         "vertical green, white, red, golden eagle emblem at center" : "Mexico",
+        "horizontal green, yellow, red, blue disk with yellow star in th middle" : "Ethiopia",
+        "horizontal blue, red, white equilateral triangle on the left" : "Philippines",
+        "horizontal red, white, black, golden egyptian eagle in the middle" : "Egypt",
+	"red background, yellow star in the middle" : "Vietnam",
+        "sky blue background, yellow star upper left, diagonal red stripe with yellow fimbriation" : "Democratic Republic of the Congo",
 }
 
 score = 0

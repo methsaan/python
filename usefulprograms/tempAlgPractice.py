@@ -5,16 +5,16 @@ import subprocess as sp
 import time
 
 verbs = {"x^-n = " : "1/x^n",
-        "(x^m)^n = " : "x^mn",
+        "(x^m)^n = " : "x^(mn)",
         "x^m(x^n) = " : "x^(m+n)",
         "x^m/x^n = " : "x^(m-n)",
-        "xy^m = " : "x^m(y^m)",
+        "(xy)^m = " : "x^m(y^m)",
         "(x/y)^m = " : "x^m/y^m",
         "1/x^n = " : "x^-n",
-        "x^mn = " : "(x^m)^n",
+        "x^(mn) = " : "(x^m)^n",
         "x^(m+n) = " : "x^m(x^n)",
         "x^(m-n) = " : "x^m/x^n",
-        "x^m(y^m) = " : "xy^m",
+        "x^m(y^m) = " : "(xy)^m",
         "x^m/y^m = " : "(x/y)^m",
 }
 
