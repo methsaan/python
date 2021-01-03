@@ -4,8 +4,8 @@ import time
 import turtle
 t = turtle.Pen()
 
-semimajor = int(input("Enter semi-major axis: "))
-semiminor = int(input("Enter semi-minor axis: "))
+semimajor = int(input("Enter semi-major axis (longest radius): "))
+semiminor = int(input("Enter semi-minor axis (shortest radius): "))
 
 d1 = semimajor*2
 d2 = semiminor*2

@@ -20,6 +20,17 @@ countryFlags = {"red background, big yellow star, 4 small stars forming semi-cir
         "horizontal red, white, black, golden egyptian eagle in the middle" : "Egypt",
 	"red background, yellow star in the middle" : "Vietnam",
         "sky blue background, yellow star upper left, diagonal red stripe with yellow fimbriation" : "Democratic Republic of the Congo",
+        "red background, white star and crescent" : "Turkey",
+        "" : "Iran",
+        "sky blue background, yellow star upper left, diagonal red stripe with yellow fimbriation" : "Germany",
+        "sky blue background, yellow star upper left, diagonal red stripe with yellow fimbriation" : "Thailand",
+        "sky blue background, yellow star upper left, diagonal red stripe with yellow fimbriation" : "United Kingdom",
+        "sky blue background, yellow star upper left, diagonal red stripe with yellow fimbriation" : "France",
+        "sky blue background, yellow star upper left, diagonal red stripe with yellow fimbriation" : "Italy",
+        "sky blue background, yellow star upper left, diagonal red stripe with yellow fimbriation" : "Tanzania",
+        "sky blue background, yellow star upper left, diagonal red stripe with yellow fimbriation" : "South Africa",
+        "sky blue background, yellow star upper left, diagonal red stripe with yellow fimbriation" : "Myanmar",
+        "sky blue background, yellow star upper left, diagonal red stripe with yellow fimbriation" : "Kenya",
 }
 
 score = 0
