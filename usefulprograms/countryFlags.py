@@ -21,7 +21,7 @@ countryFlags = {"red background, big yellow star, 4 small stars forming semi-cir
 	"red background, yellow star in the middle" : "Vietnam",
         "sky blue background, yellow star upper left, diagonal red stripe with yellow fimbriation" : "Democratic Republic of the Congo",
         "red background, white star and crescent" : "Turkey",
-        "" : "Iran",
+        "horizontal green, white, red, national tulip emblem center" : "Iran",
         "sky blue background, yellow star upper left, diagonal red stripe with yellow fimbriation" : "Germany",
         "sky blue background, yellow star upper left, diagonal red stripe with yellow fimbriation" : "Thailand",
         "sky blue background, yellow star upper left, diagonal red stripe with yellow fimbriation" : "United Kingdom",
