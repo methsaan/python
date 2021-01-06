@@ -15,17 +15,24 @@ y = 0
 cntx = 0
 cnty = 0
 
-listmaj = [50, 40, 30, 20, 10]
-listmin = [50, 40, 30, 20, 10]
-
-while x < semiminor and y < semimajor:
-	t.forward(listmin[x])
-	t.left(90)
-	t.forward(listmaj[y])
-	t.right(90)
-	x += 1
-	y += 1
-	cntx += listmin[x]
-	cnty += listmaj[y]
+t.up()
+t.backward(semimajor)
+t.down()
+t.forward(d1)
+t.up()
+t.backward(d1)
+t.forward(semiminor)
+t.down()
+t.left(90)
+t.circle(semiminor)
+t.right(90)
+t.up()
+t.backward(semiminor)
+t.forward(d1)
+t.right(180)
+t.forward(semiminor)
+t.down()
+t.left(90)
+t.circle(semiminor)
 
 time.sleep(3)
