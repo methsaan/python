@@ -22,9 +22,9 @@ ones = ones1 - ones2
 tens = tens1 - tens2
 hundreds = hundreds1 - hundreds2
 if hundreds < 0 and tens < 0 and ones < 0:
-    str1 = str(ones1+10)
-    str2 = str(tens1+9)
-    str3 = str(hundreds1-1)
+    str1 = "-"
+    str2 = "-"
+    str3 = "-"
 else:
     if ones < 0:
         str1 = str(ones1+10)
@@ -53,6 +53,10 @@ if str2 == "":
     str2 = str(tens1)
 if str1 == "":
     str1 = str(ones1)
+if str3 == "-" and str2 == "-" and str1 == "-":
+    str3 = str(-(hundreds2-hundreds1))
+    str2 = str(tens2-tens1)
+    str1 = str(ones2-ones1)
 if int(str3) != hundreds1:
     canvas.create_text(224, 170, text=str3, font=("helvetica", 15), fill="tomato")
 else:
