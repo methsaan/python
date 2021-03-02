@@ -21,9 +21,7 @@ hundreds2 = int((y-(y%100))/100)
 ones = ones1 - ones2
 tens = tens1 - tens2
 hundreds = hundreds1 - hundreds2
-if hundreds < 0 and tens < 0 and ones < 0:
-    str1 = "-"
-    str2 = "-"
+if hundreds < 0:
     str3 = "-"
 else:
     if ones < 0:
@@ -53,10 +51,11 @@ if str2 == "":
     str2 = str(tens1)
 if str1 == "":
     str1 = str(ones1)
-if str3 == "-" and str2 == "-" and str1 == "-":
-    str3 = str(-(hundreds2-hundreds1))
-    str2 = str(tens2-tens1)
-    str1 = str(ones2-ones1)
+if str3 == "-":
+    str3 = str(hundreds1)
+    str2 = str(tens1)
+    str1 = str(ones1)
+    print("haho!")
 if int(str3) != hundreds1:
     canvas.create_text(224, 170, text=str3, font=("helvetica", 15), fill="tomato")
 else:
@@ -73,8 +72,9 @@ canvas.create_text(250, 200, text=str(hundreds1)+" "+str(tens1)+" "+str(ones1), 
 canvas.create_text(250, 240, text=str(hundreds2)+" "+str(tens2)+" "+str(ones2), font=("helvetica", 25), fill="tomato")
 canvas.create_line(200, 260, 300, 260, width=4, fill="tomato")
 canvas.create_line(195, 245, 205, 245, width=3, fill="tomato")
+# negative hundreds
 if int(str1) == ones1 and int(str2) == tens1 and int(str3) == hundreds1:
-    canvas.create_text(250, 280, text=str(hundreds1-hundreds2)+" "+str(tens1-tens2)+" "+str(ones1-ones2), font=("helvetica", 25), fill="tomato")
+    canvas.create_text(250, 280, text=str(-abs(hundreds1-hundreds2))+" "+str(abs(tens1-tens2))+" "+str(abs(ones1-ones2)), font=("helvetica", 25), fill="tomato")
 else:
-    canvas.create_text(250, 280, text=str(int(str3)-hundreds2)+" "+str(int(str2)-tens2)+" "+str(int(str1)-ones2), font=("helvetica", 25), fill="tomato")
+    canvas.create_text(250, 200, text=str(int(str3)-hundreds2+" "+str(int(str2)-tens2)+" "+str(int(str1)-ones2), font=("helvetica", 25), fill="tomato")
 canvas.mainloop()
