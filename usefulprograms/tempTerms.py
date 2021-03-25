@@ -2,9 +2,13 @@
 
 import random
 
-x = ["allargando", "allarg.", "arco", "attacca", "bewegt", "calando", "broadening, becoming slower", "on a bowed string instrument, resume bowing after a pizzicato passage", "proceed without a break", "moving", "becoming slower and softer", "cedez", "comodo", "con sordino", "langsam", "largamente", "leger", "lentement", "l'istesso tempo", "massig", "yeild; hold the tempo back", "at a comfortable, easy tempo", "with mute", "slow, slowly", "broadly", "light, lightly", "slowly", "the same tempo", "moderate", "mit Ausdruck", "modere", "with expression", "at a moderate tempo", "mouvement", "tempo, motion", "pizzicato", "on a bowed string instrument, pluck the string instead of bowing", "ritenuto", "riten", "suddenly slower, held back"]
+a = ["allargando", "allarg", "arco", "attacca", "bewegt", "calando", "cedez", "comodo", "con sordino", "fp", "fortepiano", "langsam", "largamente", "leger", "lentement", "l'istesso tempo", "massig", "mit ausdruck", "modere", "mouvement", "pizzicato", "ritenuto", "riten", "schnell", "sehr", "sfz", "stringendo", "vite"]
+b = ["broadening, becoming slower", "broadening becoming slower", "on a bowed string instrument, resume bowing after a pizzicato passage", "proceed without a break", "moving", "becoming slower and softer", "yield; hold the tempo back", "at a comfortable, easy tempo", "with mute", "loud, then suddenly soft", "fortepiano", "langsam", "largamente", "leger", "lentement", "l'istesso tempo", "massig", "mit ausdruck", "modere", "mouvement", "pizzicato", "ritenuto", "riten", "schnell", "sehr", "sfz", "stringendo", "vite"]
 
-y = int(input("Enter number of terms to memorize: "))
+for x in range(len(a)):
+    print(a[x], b[x])
 
-while True:
-	z = input(random.choice(x[:y]) + ": ")
+#y = int(input("Enter number of terms to memorize: "))
+
+#while True:
+#    z = input(x[a] + ": ")
