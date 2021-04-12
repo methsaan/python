@@ -31,6 +31,15 @@ hourHand = canvas.create_polygon(390, 300, 410, 300, 410, 400, 390, 400)
 minuteHand = canvas.create_polygon(395, 180, 405, 180, 405, 400, 395, 400)
 secondHand = canvas.create_polygon(399, 180, 401, 180, 401, 400, 399, 400, fill="red")
 
+x = 300
+y = 200
+
+canvas.create_rectangle(x, y, x+10, y+10, outline="black", width=2, fill="#ADD8E6")
+canvas.create_rectangle(rotatePoint(x, y, 400, 400, 90)[0], rotatePoint(x, y, 400, 400, 90)[1], rotatePoint(x, y, 400, 400, 90)[0]+10, rotatePoint(x, y, 400, 400, 90)[1]+10, outline="black", width=2, fill="#ADD8E6")
+canvas.create_rectangle(rotatePoint(x, y, 400, 400, 180)[0], rotatePoint(x, y, 400, 400, 180)[1], rotatePoint(x, y, 400, 400, 180)[0]+10, rotatePoint(x, y, 400, 400, 180)[1]+10, outline="black", width=2, fill="#ADD8E6")
+canvas.create_rectangle(rotatePoint(x, y, 400, 400, 270)[0], rotatePoint(x, y, 400, 400, 270)[1], rotatePoint(x, y, 400, 400, 270)[0]+10, rotatePoint(x, y, 400, 400, 270)[1]+10, outline="black", width=2, fill="#ADD8E6")
+
+
 # test out rotate points
 
 canvas.mainloop()
