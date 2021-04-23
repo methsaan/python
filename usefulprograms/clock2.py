@@ -34,10 +34,8 @@ secondHand = canvas.create_polygon(399, 180, 401, 180, 401, 400, 399, 400, fill=
 x = 300
 y = 200
 
-canvas.create_rectangle(x, y, x+10, y+10, outline="black", width=2, fill="#ADD8E6")
-canvas.create_rectangle(rotatePoint(x, y, 400, 400, 90)[0], rotatePoint(x, y, 400, 400, 90)[1], rotatePoint(x, y, 400, 400, 90)[0]+10, rotatePoint(x, y, 400, 400, 90)[1]+10, outline="black", width=2, fill="#ADD8E6")
-canvas.create_rectangle(rotatePoint(x, y, 400, 400, 180)[0], rotatePoint(x, y, 400, 400, 180)[1], rotatePoint(x, y, 400, 400, 180)[0]+10, rotatePoint(x, y, 400, 400, 180)[1]+10, outline="black", width=2, fill="#ADD8E6")
-canvas.create_rectangle(rotatePoint(x, y, 400, 400, 270)[0], rotatePoint(x, y, 400, 400, 270)[1], rotatePoint(x, y, 400, 400, 270)[0]+10, rotatePoint(x, y, 400, 400, 270)[1]+10, outline="black", width=2, fill="#ADD8E6")
+canvas.create_rectangle(x, y, x+100, y+100, outline="black", width=2, fill="#ADD8E6")
+canvas.create_rectangle(x, y, rotatePoint(x+100, y+100, 400, 400, 90)[0], rotatePoint(x+100, y+100, 400, 400, 90)[0], outline="black", width=2, fill="#ADD8E6")
 
 
 # test out rotate points
