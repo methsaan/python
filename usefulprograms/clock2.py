@@ -33,7 +33,8 @@ secondHand = canvas.create_polygon(399, 180, 401, 180, 401, 400, 399, 400, fill=
 
 canvas.create_polygon(350, 350, 450, 350, 450, 450, 350, 450, outline="black", width=5, fill="")
 print(rotatePoint(350, 450, 400, 400, 10))
-canvas.create_polygon(350, 350, 450, 350, 450, 450, rotatePoint(350, 450, 400, 400, 10)[0], rotatePoint(350, 450, 400, 400, 10)[1], outline="black", width=5, fill="")
+
+canvas.create_polygon(rotatePoint(350, 350, 400, 400, 10)[0], rotatePoint(350, 350, 400, 400, 10)[1], rotatePoint(450, 350, 400, 400, 10)[0], rotatePoint(450, 350, 400, 400, 10)[1], rotatePoint(450, 450, 400, 400, 10)[0], rotatePoint(450, 450, 400, 400, 10)[1], rotatePoint(350, 450, 400, 400, 10)[0], rotatePoint(350, 450, 400, 400, 10)[1], width=5, fill="")
 
 # test out rotate points
 
