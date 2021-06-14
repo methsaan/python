@@ -10,8 +10,12 @@ canvas = Canvas(tk, width=800, height=800, bg="tan3")
 canvas.pack()
 
 def rotatePoint(x, y, xRot, yRot, angle):
-    x1 = math.cos(angle * (math.pi / 180)) * (x - xRot) - math.sin(angle * (math.pi / 180)) * (y - yRot) + xRot
-    y1 = math.sin(angle * (math.pi / 180)) * (x - xRot) - math.cos(angle * (math.pi / 180)) * (y - yRot) + yRot
+    angle2 = (angle)*(math.pi/180)
+    x1 = math.cos(angle2) * (x - xRot) - math.sin(angle) * (y - yRot) + xRot
+    y1 = math.sin(angle2) * (x - xRot) - math.cos(angle) * (y - yRot) + yRot
+
+    #x1 = math.cos(angle * (math.pi / 180)) * (x - xRot) - math.sin(angle * (math.pi / 180)) * (y - yRot) + xRot
+    #y1 = math.sin(angle * (math.pi / 180)) * (x - xRot) - math.cos(angle * (math.pi / 180)) * (y - yRot) + yRot
     return [x1, y1]
 
 def rotatePoints(coordsList, rotationPointCoords, angle):
@@ -31,11 +35,45 @@ hourHand = canvas.create_polygon(390, 300, 410, 300, 410, 400, 390, 400)
 minuteHand = canvas.create_polygon(395, 180, 405, 180, 405, 400, 395, 400)
 secondHand = canvas.create_polygon(399, 180, 401, 180, 401, 400, 399, 400, fill="red")
 
-canvas.create_polygon(350, 350, 450, 350, 450, 450, 350, 450, outline="black", width=5, fill="")
-print(rotatePoint(350, 450, 400, 400, 10))
+coordx = 200
+coordy = 200
+rotPoints = rotatePoint(200, 200, 400, 400, 30)
+rotPoints2 = rotatePoint(200, 200, 400, 400, 60)
+rotPoints3 = rotatePoint(200, 200, 400, 400, 90)
+rotPoints4 = rotatePoint(200, 200, 400, 400, 120)
+rotPoints5 = rotatePoint(200, 200, 400, 400, 150)
+rotPoints6 = rotatePoint(200, 200, 400, 400, 180)
+rotPoints7 = rotatePoint(200, 200, 400, 400, 210)
+rotPoints8 = rotatePoint(200, 200, 400, 400, 240)
 
-canvas.create_polygon(rotatePoint(350, 350, 400, 400, 10)[0], rotatePoint(350, 350, 400, 400, 10)[1], rotatePoint(450, 350, 400, 400, 10)[0], rotatePoint(450, 350, 400, 400, 10)[1], rotatePoint(450, 450, 400, 400, 10)[0], rotatePoint(450, 450, 400, 400, 10)[1], rotatePoint(350, 450, 400, 400, 10)[0], rotatePoint(350, 450, 400, 400, 10)[1], width=5, fill="")
+canvas.create_oval(coordx-10, coordy-10, coordx+10, coordy+10, fill="green")
+time.sleep(1)
+tk.update()
+canvas.create_oval(rotPoints[0]-10, rotPoints[1]-10, rotPoints[0]+10, rotPoints[1]+10, fill="green")
+time.sleep(1)
+tk.update()
+canvas.create_oval(rotPoints2[0]-10, rotPoints2[1]-10, rotPoints2[0]+10, rotPoints2[1]+10, fill="green")
+time.sleep(1)
+tk.update()
+canvas.create_oval(rotPoints3[0]-10, rotPoints3[1]-10, rotPoints3[0]+10, rotPoints3[1]+10, fill="green")
+time.sleep(1)
+tk.update()
+canvas.create_oval(rotPoints4[0]-10, rotPoints4[1]-10, rotPoints4[0]+10, rotPoints4[1]+10, fill="green")
+time.sleep(1)
+tk.update()
+canvas.create_oval(rotPoints5[0]-10, rotPoints5[1]-10, rotPoints5[0]+10, rotPoints5[1]+10, fill="green")
+time.sleep(1)
+tk.update()
+canvas.create_oval(rotPoints6[0]-10, rotPoints6[1]-10, rotPoints6[0]+10, rotPoints6[1]+10, fill="green")
+time.sleep(1)
+tk.update()
+canvas.create_oval(rotPoints7[0]-10, rotPoints7[1]-10, rotPoints7[0]+10, rotPoints7[1]+10, fill="green")
+time.sleep(1)
+tk.update()
+canvas.create_oval(rotPoints8[0]-10, rotPoints8[1]-10, rotPoints8[0]+10, rotPoints8[1]+10, fill="green")
+time.sleep(1)
+tk.update()
 
-# test out rotate points
+# rewrite rotatepoint function
 
 canvas.mainloop()
