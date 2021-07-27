@@ -41,7 +41,7 @@ player = Man()
 destination = canvas.create_rectangle(695, 695, 795, 795, width=10, outline="blue")
 tk.update()
 boxes = []
-for x in range(15):
+for x in range(10):
     boxSize = random.randrange(46, 92)
     if random.choice([True, False]):
         xCoord = random.randrange(boxSize+75, 695-boxSize)

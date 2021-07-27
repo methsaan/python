@@ -1,28 +1,27 @@
 #! /usr/bin/python3
 
-import random
-import time
 from tkinter import *
 tk = Tk()
-canvas = Canvas(tk, width=700, height=700)
+canvas = Canvas(tk, width=600, height=600)
 canvas.pack()
-secs = int(input("How long? "))
-x = "springgreen"
-running = True
-while running:
+
+import time
+
+def _from_rgb(rgb):
+    return "#%02x%02x%02x" % rgb
+
+seconds = int(input("How long (seconds)? "))
+startTime = time.time()*1000
+secondsPassed = 0
+cnt = 0
+
+while True:
+    currentTimeTemp = time.time()*1000
+    secondsPassed = round((currentTimeTemp-startTime)/1000)
+    canvas.create_text(300, 300, text=str(seconds-secondsPassed), font=("helvetica", 60))
     tk.update()
-    timestr = str(secs)
-    secs -= 1
-    if secs <= 9:
-        if secs <= 4:
-            x = "red"
-        else:
-            x = "orangered"
-    if secs < 0:
-        running = False
-    time.sleep(1)
-    canvas.create_rectangle(0, 0, 700, 700, fill=x, outline=x)
-    canvas.create_text(350, 350, text=timestr, font=('tahoma', 105), fill="white")
-canvas.create_rectangle(0, 0, 700, 700, fill="black", outline="orange")
-canvas.create_text(350, 350, text="Time's up", font=('tahoma', 105), fill="white")
+    cnt += 1
+    canvas.create_rectangle(0, 0, 600, 600, fill=_from_rgb((0, 50, 100)))
+
+
 canvas.mainloop()

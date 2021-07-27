@@ -30,6 +30,9 @@ def printTime(s, m, h):
 secs = [0]
 hrs = [0]
 mins = [0]
+
+startTime = time.time()*1000
+
 while True:
     def lap(h, m, s):
         if h < 10:
@@ -56,7 +59,9 @@ while True:
     canvas.bind_all("<KeyPress-l>", OPTIONS)
     canvas.bind_all("<KeyPress-r>", OPTIONS)
     printTime(secs[0], mins[0], hrs[0])
-    time.sleep(1)
+
+    currentTime = time.time()*1000
+
     secs[0] = secs[0] + 1
     if secs[0] == 60:
         secs[0] = 0
