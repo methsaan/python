@@ -11,8 +11,8 @@ canvas.pack()
 
 def rotatePoint(x, y, xRot, yRot, angle):
     angle2 = (angle)*(math.pi/180)
-    x1 = math.cos(angle2) * (x - xRot) - math.sin(angle) * (y - yRot) + xRot
-    y1 = math.sin(angle2) * (x - xRot) - math.cos(angle) * (y - yRot) + yRot
+    x1 = math.cos(angle2) * (x - xRot) - math.sin(angle2) * (y - yRot) + xRot
+    y1 = math.sin(angle2) * (x - xRot) - math.cos(angle2) * (y - yRot) + yRot
 
     #x1 = math.cos(angle * (math.pi / 180)) * (x - xRot) - math.sin(angle * (math.pi / 180)) * (y - yRot) + xRot
     #y1 = math.sin(angle * (math.pi / 180)) * (x - xRot) - math.cos(angle * (math.pi / 180)) * (y - yRot) + yRot
@@ -37,42 +37,12 @@ secondHand = canvas.create_polygon(399, 180, 401, 180, 401, 400, 399, 400, fill=
 
 coordx = 200
 coordy = 200
-rotPoints = rotatePoint(200, 200, 400, 400, 30)
-rotPoints2 = rotatePoint(200, 200, 400, 400, 60)
-rotPoints3 = rotatePoint(200, 200, 400, 400, 90)
-rotPoints4 = rotatePoint(200, 200, 400, 400, 120)
-rotPoints5 = rotatePoint(200, 200, 400, 400, 150)
-rotPoints6 = rotatePoint(200, 200, 400, 400, 180)
-rotPoints7 = rotatePoint(200, 200, 400, 400, 210)
-rotPoints8 = rotatePoint(200, 200, 400, 400, 240)
 
-canvas.create_oval(coordx-10, coordy-10, coordx+10, coordy+10, fill="green")
-time.sleep(1)
-tk.update()
-canvas.create_oval(rotPoints[0]-10, rotPoints[1]-10, rotPoints[0]+10, rotPoints[1]+10, fill="green")
-time.sleep(1)
-tk.update()
-canvas.create_oval(rotPoints2[0]-10, rotPoints2[1]-10, rotPoints2[0]+10, rotPoints2[1]+10, fill="green")
-time.sleep(1)
-tk.update()
-canvas.create_oval(rotPoints3[0]-10, rotPoints3[1]-10, rotPoints3[0]+10, rotPoints3[1]+10, fill="green")
-time.sleep(1)
-tk.update()
-canvas.create_oval(rotPoints4[0]-10, rotPoints4[1]-10, rotPoints4[0]+10, rotPoints4[1]+10, fill="green")
-time.sleep(1)
-tk.update()
-canvas.create_oval(rotPoints5[0]-10, rotPoints5[1]-10, rotPoints5[0]+10, rotPoints5[1]+10, fill="green")
-time.sleep(1)
-tk.update()
-canvas.create_oval(rotPoints6[0]-10, rotPoints6[1]-10, rotPoints6[0]+10, rotPoints6[1]+10, fill="green")
-time.sleep(1)
-tk.update()
-canvas.create_oval(rotPoints7[0]-10, rotPoints7[1]-10, rotPoints7[0]+10, rotPoints7[1]+10, fill="green")
-time.sleep(1)
-tk.update()
-canvas.create_oval(rotPoints8[0]-10, rotPoints8[1]-10, rotPoints8[0]+10, rotPoints8[1]+10, fill="green")
-time.sleep(1)
-tk.update()
+for x in range(0, 360, 4):
+    rotPoints = rotatePoint(200, 200, 400, 400, x)
+    canvas.create_oval(rotPoints[0]-10, rotPoints[1]-10, rotPoints[0]+10, rotPoints[1]+10, fill="green")
+    time.sleep(1)
+    tk.update()
 
 # rewrite rotatepoint function
 
