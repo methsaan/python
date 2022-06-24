@@ -26,8 +26,8 @@ canvas.create_line(0, 250, 400, 250, width=2)
 canvas.create_line(0, 300, 400, 300, width=2)
 canvas.create_line(0, 350, 400, 350, width=2)
 canvas.create_line(0, 400, 400, 400, width=2)
+print("Welcome to the quadrilateral plotter. Type -1 for the coordinate x1 to quit.")
 while True:
-    print("Welcome to the quadrilateral plotter. Type -1 for the coordinate x1 to quit.")
     color = input("Enter band color: ")
     plotx1 = float(input("Enter coordinate x1: ")) * 50
     ploty1 = 400-float(input("Enter coordinate y1: ")) * 50
@@ -37,8 +37,6 @@ while True:
     ploty3 = 400-float(input("Enter coordinate y3: ")) * 50
     plotx4 = float(input("Enter coordinate x4: ")) * 50
     ploty4 = 400-float(input("Enter coordinate y4: ")) * 50
-    print("loading quadrilateral ...      ", end="", flush=True)
-    time.sleep(1)
-    print("[DONE]")
     canvas.create_polygon(plotx1, ploty1, plotx2, ploty2, plotx3, ploty3, plotx4, ploty4, fill="",outline=color, width=5)
+    print("Next polygon... Type -1 for the coordinate x1 to quit.")
 canvas.mainloop()
