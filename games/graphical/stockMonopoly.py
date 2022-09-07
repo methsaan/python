@@ -6,134 +6,30 @@ import time
 from tkinter import *
 from tkinter import ttk
 
-formTk = Tk()
-formTk.geometry("500x800")
-
-pStr = [[], [], [], []]
-players = []
-locations = []
-
-for x in range(15):
-    locations.append((1550-(x*100), 950))
-
-for x in range(10):
-    locations.append((50, 950-(x*100)))
-
-for x in range(15):
-    locations.append((50+(x*100), 50))
-
-for x in range(10):
-    locations.append((1550, 50+(x*100)))
-
-def display_text():
-    global entry, entry2, entry3, entry4
-    global pStr
-    global players
-    string = entry.get()
-    string2 = entry2.get()
-    string3 = entry3.get()
-    string4 = entry4.get()
-    pStr[0] = string.split()
-    pStr[1] = string2.split()
-    pStr[2] = string3.split()
-    pStr[3] = string4.split()
-    for x in range(4):
-        if len(pStr[x]) >= 3:
-            players.append(player(pStr[x][0], pStr[x][1], 1500, None, locations[0], pStr[x][2]))
-    tk.update()
-    formTk.destroy()
-
-nameInp = Label(formTk, text="Enter Players (format: \"(name) (icon) (color)\")", font=("Courier 10 bold"))
-nameInp.pack()
-
-entry = Entry(formTk, width=40)
-entry.focus_set()
-entry.pack()
-
-entry2 = Entry(formTk, width=40)
-entry2.focus_set()
-entry2.pack()
-
-entry3 = Entry(formTk, width=40)
-entry3.focus_set()
-entry3.pack()
-
-entry4 = Entry(formTk, width=40)
-entry4.focus_set()
-entry4.pack()
-
-ttk.Button(formTk, text="Submit", width=20, command=display_text).pack(pady=20)
-formTk.mainloop()
-
 tk = Tk()
 canvas = Canvas(tk, width=2000, height=1000)
 canvas.pack()
 
-class dice:
-    def __init__(self):
-        self.num = 0
-        self.cube = [canvas.create_rectangle(1650, 100, 1750, 200, fill="white", outline="black", width=3), canvas.create_polygon(1650, 100, 1750, 100, 1800, 50, 1700, 50, fill="white", outline="black", width=3), canvas.create_polygon(1750, 100, 1800, 50, 1800, 150, 1750, 200, fill="white", outline="black", width=3)]
-        self.dots = [canvas.create_oval(1650, 100, 1660, 110, fill="black", outline="black")]*6
-        self.roll()
-    def roll(self):
-        self.num = random.randrange(1, 7)
-        if self.num == 1:
-            self.__one()
-        elif self.num == 2:
-            self.__two()
-        elif self.num == 3:
-            self.__three()
-        elif self.num == 4:
-            self.__four()
-        elif self.num == 5:
-            self.__five()
-        else:
-            self.__six()
-    def __one(self):
-        canvas.coords(self.dots[0], 1695, 145, 1705, 155, fill="black", outline="black")
-        canvas.itemconfigure(self.dots[1], state="hidden")
-        canvas.itemconfigure(self.dots[2], state="hidden")
-        canvas.itemconfigure(self.dots[3], state="hidden")
-        canvas.itemconfigure(self.dots[4], state="hidden")
-        canvas.itemconfigure(self.dots[5], state="hidden")
-    def __two(self):
-        canvas.coords(self.dots[0], 1635, 85, 1645, 95, fill="black", outline="black")
-        canvas.coords(self.dots[1], 1755, 205, 1765, 105, fill="black", outline="black")
-        canvas.itemconfigure(self.dots[2], state="hidden")
-        canvas.itemconfigure(self.dots[3], state="hidden")
-        canvas.itemconfigure(self.dots[4], state="hidden")
-        canvas.itemconfigure(self.dots[5], state="hidden")
-    def __three(self):
-        canvas.coords(self.dots[0], 1635, 85, 1645, 95, fill="black", outline="black")
-        canvas.coords(self.dots[1], 1695, 145, 1705, 155, fill="black", outline="black")
-        canvas.coords(self.dots[2], 1755, 205, 1765, 105, fill="black", outline="black")
-        canvas.itemconfigure(self.dots[3], state="hidden")
-        canvas.itemconfigure(self.dots[4], state="hidden")
-        canvas.itemconfigure(self.dots[5], state="hidden")
-    def __four(self):
-        canvas.coords(self.dots[0], 1670, 120, 1680, 130, fill="black", outline="black")
-        canvas.coords(self.dots[1], 1670, 170, 1680, 180, fill="black", outline="black")
-        canvas.coords(self.dots[2], 1720, 120, 1730, 130, fill="black", outline="black")
-        canvas.coords(self.dots[3], 1720, 170, 1730, 180, fill="black", outline="black")
-        canvas.itemconfigure(self.dots[4], state="hidden")
-        canvas.itemconfigure(self.dots[5], state="hidden")
-    def __five(self):
-        canvas.coords(self.dots[0], 1670, 120, 1680, 130, fill="black", outline="black")
-        canvas.coords(self.dots[1], 1670, 170, 1680, 180, fill="black", outline="black")
-        canvas.coords(self.dots[2], 1720, 120, 1730, 130, fill="black", outline="black")
-        canvas.coords(self.dots[3], 1720, 170, 1730, 180, fill="black", outline="black")
-        canvas.coords(self.dots[4], 1695, 145, 1705, 155, fill="black", outline="black")
-        canvas.itemconfigure(self.dots[5], state="hidden")
-    def __six(self):
-        canvas.coords(self.dots[0], 1670, 120, 1680, 130, fill="black", outline="black")
-        canvas.coords(self.dots[1], 1670, 170, 1680, 180, fill="black", outline="black")
-        canvas.coords(self.dots[2], 1720, 120, 1730, 130, fill="black", outline="black")
-        canvas.coords(self.dots[3], 1720, 170, 1730, 180, fill="black", outline="black")
-        canvas.coords(self.dots[2], 1695, 120, 1705, 130, fill="black", outline="black")
-        canvas.coords(self.dots[3], 1695, 170, 1705, 180, fill="black", outline="black")
+canvas.create_line(0, 100, 1600, 100, width=2)
+canvas.create_line(0, 900, 1600, 900, width=2)
+canvas.create_line(100, 0, 100, 1000, width=2)
+canvas.create_line(1500, 0, 1500, 1000, width=2)
+canvas.create_line(1600, 0, 1600, 1000, width=2)
+
+for x in range(13):
+    canvas.create_line(100*(x+2), 0, 100*(x+2), 100, width=2)
+
+for x in range(13):
+    canvas.create_line(100*(x+2), 900, 100*(x+2), 1000, width=2)
+
+for x in range(7):
+    canvas.create_line(0, 100*(x+2), 100, 100*(x+2), width=2)
+
+for x in range(7):
+    canvas.create_line(1500, 100*(x+2), 1600, 100*(x+2), width=2)
 
 class stock:
-    def __init__(self, dividend, name, ticker, companyDesc, price, priceLow, priceHigh, gamePos):
+    def __init__(self, dividend, name, ticker, companyDesc, price, priceLow, priceHigh, activeSeason, industries):
         self.dividend = dividend
         self.name = name
         self.ticker = ticker
@@ -141,8 +37,8 @@ class stock:
         self.price = price
         self.priceLow = priceLow
         self.priceHigh = priceHigh
-        self.gamePos = gamePos
-        self.display = [canvas.create_text(self.gamePos[0], self.gamePos[1]-20, text=self.ticker, font=("helvetica", 15)), canvas.create_text(self.gamePos[0], self.gamePos[1], text=self.name, font=("helvetica", 10))]
+        self.activeSeason = activeSeason
+        self.industries = industries
 
 class player:
     def __init__(self, characterName, playerSymbolName, totIncome, stocksOwned, gamePos, symbolColor):
@@ -171,49 +67,186 @@ class player:
             self.playerSymbol.append(canvas.create_rectangle(gamePos[0]-30, gamePos[1], gamePos[0], gamePos[1]+10, fill=symbolColor, outline=symbolColor))
             self.playerSymbol.append(canvas.create_oval(gamePos[0]-30, gamePos[1]-10, gamePos[0]+30, gamePos[1]+10, fill=symbolColor, outline=symbolColor))
 
-canvas.create_line(0, 100, 1600, 100, width=2)
-canvas.create_line(0, 900, 1600, 900, width=2)
-canvas.create_line(100, 0, 100, 1000, width=2)
-canvas.create_line(1500, 0, 1500, 1000, width=2)
-canvas.create_line(1600, 0, 1600, 1000, width=2)
+class dice:
+    def __init__(self):
+        self.num = 0
+        self.cube = [canvas.create_rectangle(1650, 100, 1750, 200, fill="white", outline="black", width=3), canvas.create_polygon(1650, 100, 1750, 100, 1800, 50, 1700, 50, fill="white", outline="black", width=3), canvas.create_polygon(1750, 100, 1800, 50, 1800, 150, 1750, 200, fill="white", outline="black", width=3)]
+        self.dots = []
+        for x in range(6):
+            x = random.randrange(90)
+            self.dots.append(canvas.create_oval(1650, 100+x, 1660, 110+x, fill="black", outline="black"))
+        tk.update()
+        self.roll()
+    def roll(self):
+        self.num = random.randrange(1, 7)
+        if self.num == 1:
+            self.__one()
+        elif self.num == 2:
+            self.__two()
+        elif self.num == 3:
+            self.__three()
+        elif self.num == 4:
+            self.__four()
+        elif self.num == 5:
+            self.__five()
+        else:
+            self.__six()
+    def __one(self):
+        canvas.coords(self.dots[0], 1695, 145, 1705, 155)
+        canvas.itemconfigure(self.dots[0], state="normal")
+        canvas.itemconfigure(self.dots[1], state="hidden")
+        canvas.itemconfigure(self.dots[2], state="hidden")
+        canvas.itemconfigure(self.dots[3], state="hidden")
+        canvas.itemconfigure(self.dots[4], state="hidden")
+        canvas.itemconfigure(self.dots[5], state="hidden")
+        tk.update()
+    def __two(self):
+        canvas.coords(self.dots[0], 1660, 110, 1670, 120)
+        canvas.coords(self.dots[1], 1730, 180, 1740, 190)
+        canvas.itemconfigure(self.dots[0], state="normal")
+        canvas.itemconfigure(self.dots[1], state="normal")
+        canvas.itemconfigure(self.dots[2], state="hidden")
+        canvas.itemconfigure(self.dots[3], state="hidden")
+        canvas.itemconfigure(self.dots[4], state="hidden")
+        canvas.itemconfigure(self.dots[5], state="hidden")
+        tk.update()
+    def __three(self):
+        canvas.coords(self.dots[0], 1660, 110, 1670, 120)
+        canvas.coords(self.dots[1], 1695, 145, 1705, 155)
+        canvas.coords(self.dots[2], 1730, 180, 1740, 190)
+        canvas.itemconfigure(self.dots[0], state="normal")
+        canvas.itemconfigure(self.dots[1], state="normal")
+        canvas.itemconfigure(self.dots[2], state="normal")
+        canvas.itemconfigure(self.dots[3], state="hidden")
+        canvas.itemconfigure(self.dots[4], state="hidden")
+        canvas.itemconfigure(self.dots[5], state="hidden")
+        tk.update()
+    def __four(self):
+        canvas.coords(self.dots[0], 1670, 120, 1680, 130)
+        canvas.coords(self.dots[1], 1670, 170, 1680, 180)
+        canvas.coords(self.dots[2], 1720, 120, 1730, 130)
+        canvas.coords(self.dots[3], 1720, 170, 1730, 180)
+        canvas.itemconfigure(self.dots[0], state="normal")
+        canvas.itemconfigure(self.dots[1], state="normal")
+        canvas.itemconfigure(self.dots[2], state="normal")
+        canvas.itemconfigure(self.dots[3], state="normal")
+        canvas.itemconfigure(self.dots[4], state="hidden")
+        canvas.itemconfigure(self.dots[5], state="hidden")
+        tk.update()
+    def __five(self):
+        canvas.coords(self.dots[0], 1670, 120, 1680, 130)
+        canvas.coords(self.dots[1], 1670, 170, 1680, 180)
+        canvas.coords(self.dots[2], 1720, 120, 1730, 130)
+        canvas.coords(self.dots[3], 1720, 170, 1730, 180)
+        canvas.coords(self.dots[4], 1695, 145, 1705, 155)
+        canvas.itemconfigure(self.dots[0], state="normal")
+        canvas.itemconfigure(self.dots[1], state="normal")
+        canvas.itemconfigure(self.dots[2], state="normal")
+        canvas.itemconfigure(self.dots[3], state="normal")
+        canvas.itemconfigure(self.dots[4], state="normal")
+        canvas.itemconfigure(self.dots[5], state="hidden")
+        tk.update()
+    def __six(self):
+        canvas.coords(self.dots[0], 1670, 120, 1680, 130)
+        canvas.coords(self.dots[1], 1670, 170, 1680, 180)
+        canvas.coords(self.dots[2], 1720, 120, 1730, 130)
+        canvas.coords(self.dots[3], 1720, 170, 1730, 180)
+        canvas.coords(self.dots[4], 1695, 120, 1705, 130)
+        canvas.coords(self.dots[5], 1695, 170, 1705, 180)
+        canvas.itemconfigure(self.dots[0], state="normal")
+        canvas.itemconfigure(self.dots[1], state="normal")
+        canvas.itemconfigure(self.dots[2], state="normal")
+        canvas.itemconfigure(self.dots[3], state="normal")
+        canvas.itemconfigure(self.dots[4], state="normal")
+        canvas.itemconfigure(self.dots[5], state="normal")
+        tk.update()
 
-for x in range(13):
-    canvas.create_line(100*(x+2), 0, 100*(x+2), 100, width=2)
+formTk = Tk()
+formTk.geometry("500x800")
 
-for x in range(13):
-    canvas.create_line(100*(x+2), 900, 100*(x+2), 1000, width=2)
+pStr = [[], [], [], []]
+players = []
+locations = []
 
-for x in range(7):
-    canvas.create_line(0, 100*(x+2), 100, 100*(x+2), width=2)
+for x in range(15):
+    locations.append((1550-(x*100), 950))
 
-for x in range(7):
-    canvas.create_line(1500, 100*(x+2), 1600, 100*(x+2), width=2)
+for x in range(10):
+    locations.append((50, 950-(x*100)))
 
+for x in range(15):
+    locations.append((50+(x*100), 50))
 
-print("------------")
+for x in range(10):
+    locations.append((1550, 50+(x*100)))
 
-c = stock(23, "poopoapsda", "rpgk", "sdofsodifo", 23, 100, -100, locations[3])
+def submitPlayers():
+    global entry, entry2, entry3, entry4
+    global pStr
+    global players
+    string = entry.get()
+    string2 = entry2.get()
+    string3 = entry3.get()
+    string4 = entry4.get()
+    pStr[0] = string.split()
+    pStr[1] = string2.split()
+    pStr[2] = string3.split()
+    pStr[3] = string4.split()
+    for x in range(4):
+        if len(pStr[x]) >= 3:
+            players.append(player(pStr[x][0], pStr[x][1], 1500, None, locations[0], pStr[x][2]))
+    tk.update()
+    formTk.quit()
+
+nameInp = Label(formTk, text="Enter Players (format: \"(name) (icon) (color)\")", font=("Courier 10 bold"))
+nameInp.pack()
+
+entry = Entry(formTk, width=40)
+entry.focus_set()
+entry.pack()
+
+entry2 = Entry(formTk, width=40)
+entry2.focus_set()
+entry2.pack()
+
+entry3 = Entry(formTk, width=40)
+entry3.focus_set()
+entry3.pack()
+
+entry4 = Entry(formTk, width=40)
+entry4.focus_set()
+entry4.pack()
+
+ttk.Button(formTk, text="Submit", width=20, command=submitPlayers).pack(pady=20)
+formTk.mainloop()
+
+# 3M (MMM), Caterpillar (Cat), Unilever (ULVR), Procter & Gamble (PG), Tesla (TSLA), McDonalds (MCD), Walmart (WMT), Nike (NKE), Coca-Cola Co (KO) Apple (APPL), Exxon Mobile (XOM), Nikola (NKLA), IBM (IBM), Samsung (SSNLF), Walt Disney Co (DIS), Netflix Inc (NFLX), Amazon (AMZN), Microsoft (MFST), Manulife (MFC), Johnson & Johnson (JNJ), Pfizer (PFE), Raytheon (RTX), Wells Fargo (WFC), Meta Platforms Inc (META), Intel (INTC), Boeing (BA), Lululemon Athletica Inc (LULU), Apple Inc (AAPL), Alphabet Inc (GOOGL), Ford Motor Company (F), American Airlines Group Inc (AAL), Alibaba Group Holding Limited (BABA) 
+
+c = stock(23, "3M", "MMM", "A company that sells manufacturing equipment and household items", 23, 100, -100)
 tk.update()
+c2 = stock(23, "Caterpillar", "Cat", "A company that mainly sells equipment for the construction, transportation and energy industries", 23, 100, -100)
+tk.update()
+c3 = stock(23, "Unilever", "ULVR", "A company known for construction", 23, 100, -100)
+tk.update()
+c4 = stock(23, "")
 
 d = dice()
-tk.update()
 d.roll()
 time.sleep(1)
-tk.update()
 d.roll()
 time.sleep(1)
-tk.update()
 d.roll()
 time.sleep(1)
-tk.update()
 d.roll()
 time.sleep(1)
-tk.update()
 d.roll()
 time.sleep(1)
-tk.update()
 d.roll()
 time.sleep(1)
-tk.update()
+d.roll()
+time.sleep(1)
+d.roll()
+time.sleep(1)
+d.roll()
 
 canvas.mainloop()
