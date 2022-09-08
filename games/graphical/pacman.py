@@ -2,8 +2,8 @@
 
 import random
 import time
-
 from tkinter import *
+
 tk = Tk()
 canvas = Canvas(tk, width=700, height=800)
 canvas.pack()
@@ -53,12 +53,13 @@ l = line([2, 2], [2, 3])
 f = line([2, 2], [2, 3])
 d = line([2, 3], [2, 4])
 
-print(f.getCoords())
-print(l.getCoords())
-print(f.getCoords() == l.getCoords())
-print(f.getCoords() == d.getCoords())
+for x in tempLinesCoords:
+    print(x)
 
-for x in range(100):
+print()
+print()
+
+for x in range(200):
     while True:
         startCoords = [random.randrange(2, 10), random.randrange(2, 10)]
         endCoords = random.choice([[startCoords[0], startCoords[1]+1], [startCoords[0], startCoords[1]-1], [startCoords[0]+1, startCoords[1]], [startCoords[0]-1, startCoords[1]]])
@@ -66,12 +67,11 @@ for x in range(100):
         if l.getCoords() not in tempLinesCoords:
             tempLinesCoords.append(l.getCoords())
             lines.append(l)
-            print(tempLinesCoords.index(l.getCoords()))
-            break
+            print(l.getCoords())
 
-for x in range(110):
-    canvas.create_line(lines[x].getCanvasCoords()[0][0], lines[x].getCanvasCoords()[0][1], lines[x].getCanvasCoords()[1][0], lines[x].getCanvasCoords()[1][1], fill=random.choice(["red", "orange", "yellow", "green", "blue", "purple", "black", "brown", "white", "pink"]))
+for x in range(200):
+    canvas.create_line(lines[x].getCanvasCoords()[0][0], lines[x].getCanvasCoords()[0][1], lines[x].getCanvasCoords()[1][0], lines[x].getCanvasCoords()[1][1])
     tk.update()
-    time.sleep(0.5)
+    time.sleep(0.05)
 
 canvas.mainloop()

@@ -29,7 +29,7 @@ for x in range(7):
     canvas.create_line(1500, 100*(x+2), 1600, 100*(x+2), width=2)
 
 class stock:
-    def __init__(self, dividend, name, ticker, companyDesc, price, priceLow, priceHigh, activeSeason, industries):
+    def __init__(self, dividend, name, ticker, price, priceLow, priceHigh, activeSeason, industries):
         self.dividend = dividend
         self.name = name
         self.ticker = ticker
@@ -219,16 +219,6 @@ entry4.pack()
 
 ttk.Button(formTk, text="Submit", width=20, command=submitPlayers).pack(pady=20)
 formTk.mainloop()
-
-# 3M (MMM), Caterpillar (Cat), Unilever (ULVR), Procter & Gamble (PG), Tesla (TSLA), McDonalds (MCD), Walmart (WMT), Nike (NKE), Coca-Cola Co (KO) Apple (APPL), Exxon Mobile (XOM), Nikola (NKLA), IBM (IBM), Samsung (SSNLF), Walt Disney Co (DIS), Netflix Inc (NFLX), Amazon (AMZN), Microsoft (MFST), Manulife (MFC), Johnson & Johnson (JNJ), Pfizer (PFE), Raytheon (RTX), Wells Fargo (WFC), Meta Platforms Inc (META), Intel (INTC), Boeing (BA), Lululemon Athletica Inc (LULU), Apple Inc (AAPL), Alphabet Inc (GOOGL), Ford Motor Company (F), American Airlines Group Inc (AAL), Alibaba Group Holding Limited (BABA) 
-
-c = stock(23, "3M", "MMM", "A company that sells manufacturing equipment and household items", 23, 100, -100)
-tk.update()
-c2 = stock(23, "Caterpillar", "Cat", "A company that mainly sells equipment for the construction, transportation and energy industries", 23, 100, -100)
-tk.update()
-c3 = stock(23, "Unilever", "ULVR", "A company known for construction", 23, 100, -100)
-tk.update()
-c4 = stock(23, "")
 
 d = dice()
 d.roll()
