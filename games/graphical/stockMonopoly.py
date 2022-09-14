@@ -33,7 +33,6 @@ class stock:
         self.dividend = dividend
         self.name = name
         self.ticker = ticker
-        self.companyDesc = companyDesc
         self.price = price
         self.priceLow = priceLow
         self.priceHigh = priceHigh
@@ -219,6 +218,9 @@ entry4.pack()
 
 ttk.Button(formTk, text="Submit", width=20, command=submitPlayers).pack(pady=20)
 formTk.mainloop()
+
+c = stock(23, "wegweogijo", "oij", 200, 180, 220, "summer", "machinery")
+print("woiweogimwo")
 
 d = dice()
 d.roll()
