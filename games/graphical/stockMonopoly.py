@@ -6,27 +6,29 @@ import time
 from tkinter import *
 from tkinter import ttk
 
+scale = 0.3
+
 tk = Tk()
-canvas = Canvas(tk, width=2000, height=1000)
+canvas = Canvas(tk, width=2000*scale, height=1000*scale)
 canvas.pack()
 
-canvas.create_line(0, 100, 1600, 100, width=2)
-canvas.create_line(0, 900, 1600, 900, width=2)
-canvas.create_line(100, 0, 100, 1000, width=2)
-canvas.create_line(1500, 0, 1500, 1000, width=2)
-canvas.create_line(1600, 0, 1600, 1000, width=2)
+canvas.create_line(0, 100*scale, 1600*scale, 100*scale, width=2)
+canvas.create_line(0, 900*scale, 1600*scale, 900*scale, width=2)
+canvas.create_line(100*scale, 0, 100*scale, 1000*scale, width=2)
+canvas.create_line(1500*scale, 0, 1500*scale, 1000*scale, width=2)
+canvas.create_line(1600*scale, 0, 1600*scale, 1000*scale, width=2)
 
 for x in range(13):
-    canvas.create_line(100*(x+2), 0, 100*(x+2), 100, width=2)
+    canvas.create_line(100*(x+2)*scale, 0, 100*(x+2)*scale, 100*scale, width=2)
 
 for x in range(13):
-    canvas.create_line(100*(x+2), 900, 100*(x+2), 1000, width=2)
+    canvas.create_line(100*(x+2)*scale, 900*scale, 100*(x+2)*scale, 1000*scale, width=2)
 
 for x in range(7):
-    canvas.create_line(0, 100*(x+2), 100, 100*(x+2), width=2)
+    canvas.create_line(0, 100*(x+2)*scale, 100*scale, 100*(x+2)*scale, width=2)
 
 for x in range(7):
-    canvas.create_line(1500, 100*(x+2), 1600, 100*(x+2), width=2)
+    canvas.create_line(1500*scale, 100*(x+2)*scale, 1600*scale, 100*(x+2)*scale, width=2)
 
 class stock:
     def __init__(self, dividend, name, ticker, price, priceLow, priceHigh, activeSeason, industries):
@@ -47,33 +49,33 @@ class player:
         self.gamePos = gamePos
         self.playerSymbol = []
         if playerSymbolName == "car":
-            self.playerSymbol.append(canvas.create_rectangle(gamePos[0]-30, gamePos[1], gamePos[0]+30, gamePos[1]+20, fill=symbolColor, outline=symbolColor))
-            self.playerSymbol.append(canvas.create_oval(gamePos[0]-15, gamePos[1]-15, gamePos[0]+15, gamePos[1]+15, fill=symbolColor, outline=symbolColor))
-            self.playerSymbol.append(canvas.create_oval(gamePos[0]-18, gamePos[1]+20, gamePos[0]-12, gamePos[1]+26, fill=symbolColor, outline=symbolColor))
-            self.playerSymbol.append(canvas.create_oval(gamePos[0]+12, gamePos[1]+20, gamePos[0]+18, gamePos[1]+26, fill=symbolColor, outline=symbolColor))
+            self.playerSymbol.append(canvas.create_rectangle(gamePos[0]-30*scale, gamePos[1], gamePos[0]+30*scale, gamePos[1]+20*scale, fill=symbolColor, outline=symbolColor))
+            self.playerSymbol.append(canvas.create_oval(gamePos[0]-15*scale, gamePos[1]-15*scale, gamePos[0]+15*scale, gamePos[1]+15*scale, fill=symbolColor, outline=symbolColor))
+            self.playerSymbol.append(canvas.create_oval(gamePos[0]-18*scale, gamePos[1]+20*scale, gamePos[0]-12*scale, gamePos[1]+26*scale, fill=symbolColor, outline=symbolColor))
+            self.playerSymbol.append(canvas.create_oval(gamePos[0]+12*scale, gamePos[1]+20*scale, gamePos[0]+18*scale, gamePos[1]+26*scale, fill=symbolColor, outline=symbolColor))
         elif playerSymbolName == "suitcase":
-            self.playerSymbol.append(canvas.create_rectangle(gamePos[0]-30, gamePos[1]-20, gamePos[0]+30, gamePos[1]+20, fill=symbolColor, outline=symbolColor))
-            self.playerSymbol.append(canvas.create_rectangle(gamePos[0]-40, gamePos[1]-10, gamePos[0]+40, gamePos[1]+10, fill=symbolColor, outline=symbolColor))
-            self.playerSymbol.append(canvas.create_oval(gamePos[0]-40, gamePos[1]-20, gamePos[0]-20, gamePos[1], fill=symbolColor, outline=symbolColor))
-            self.playerSymbol.append(canvas.create_oval(gamePos[0]-40, gamePos[1], gamePos[0]-20, gamePos[1]+20, fill=symbolColor, outline=symbolColor))
-            self.playerSymbol.append(canvas.create_oval(gamePos[0]+20, gamePos[1], gamePos[0]+40, gamePos[1]+20, fill=symbolColor, outline=symbolColor))
-            self.playerSymbol.append(canvas.create_oval(gamePos[0]+20, gamePos[1]-20, gamePos[0]+40, gamePos[1], fill=symbolColor, outline=symbolColor))
-            self.playerSymbol.append(canvas.create_rectangle(gamePos[0]-25, gamePos[1]-30, gamePos[0]-20, gamePos[1]-20, fill=symbolColor, outline=symbolColor))
-            self.playerSymbol.append(canvas.create_rectangle(gamePos[0]+20, gamePos[1]-30, gamePos[0]+25, gamePos[1]-20, fill=symbolColor, outline=symbolColor))
-            self.playerSymbol.append(canvas.create_rectangle(gamePos[0]-25, gamePos[1]-35, gamePos[0]+25, gamePos[1]-30, fill=symbolColor, outline=symbolColor))
+            self.playerSymbol.append(canvas.create_rectangle(gamePos[0]-30*scale, gamePos[1]-20*scale, gamePos[0]+30*scale, gamePos[1]+20*scale, fill=symbolColor, outline=symbolColor))
+            self.playerSymbol.append(canvas.create_rectangle(gamePos[0]-40*scale, gamePos[1]-10*scale, gamePos[0]+40*scale, gamePos[1]+10*scale, fill=symbolColor, outline=symbolColor))
+            self.playerSymbol.append(canvas.create_oval(gamePos[0]-40*scale, gamePos[1]-20*scale, gamePos[0]-20*scale, gamePos[1]*scale, fill=symbolColor, outline=symbolColor))
+            self.playerSymbol.append(canvas.create_oval(gamePos[0]-40*scale, gamePos[1], gamePos[0]-20*scale, gamePos[1]+20*scale, fill=symbolColor, outline=symbolColor))
+            self.playerSymbol.append(canvas.create_oval(gamePos[0]+20*scale, gamePos[1], gamePos[0]+40*scale, gamePos[1]+20*scale, fill=symbolColor, outline=symbolColor))
+            self.playerSymbol.append(canvas.create_oval(gamePos[0]+20*scale, gamePos[1]-20*scale, gamePos[0]+40*scale, gamePos[1], fill=symbolColor, outline=symbolColor))
+            self.playerSymbol.append(canvas.create_rectangle(gamePos[0]-25*scale, gamePos[1]-30*scale, gamePos[0]-20*scale, gamePos[1]-20*scale, fill=symbolColor, outline=symbolColor))
+            self.playerSymbol.append(canvas.create_rectangle(gamePos[0]+20*scale, gamePos[1]-30*scale, gamePos[0]+25*scale, gamePos[1]-20*scale, fill=symbolColor, outline=symbolColor))
+            self.playerSymbol.append(canvas.create_rectangle(gamePos[0]-25*scale, gamePos[1]-35*scale, gamePos[0]+25*scale, gamePos[1]-30*scale, fill=symbolColor, outline=symbolColor))
         elif playerSymbolName == "shoe":
-            self.playerSymbol.append(canvas.create_rectangle(gamePos[0], gamePos[1]-20, gamePos[0]+30, gamePos[1]+10, fill=symbolColor, outline=symbolColor))
-            self.playerSymbol.append(canvas.create_rectangle(gamePos[0]-30, gamePos[1], gamePos[0], gamePos[1]+10, fill=symbolColor, outline=symbolColor))
-            self.playerSymbol.append(canvas.create_oval(gamePos[0]-30, gamePos[1]-10, gamePos[0]+30, gamePos[1]+10, fill=symbolColor, outline=symbolColor))
+            self.playerSymbol.append(canvas.create_rectangle(gamePos[0], gamePos[1]-20*scale, gamePos[0]+30*scale, gamePos[1]+10*scale, fill=symbolColor, outline=symbolColor))
+            self.playerSymbol.append(canvas.create_rectangle(gamePos[0]-30*scale, gamePos[1], gamePos[0], gamePos[1]+10*scale, fill=symbolColor, outline=symbolColor))
+            self.playerSymbol.append(canvas.create_oval(gamePos[0]-30*scale, gamePos[1]-10*scale, gamePos[0]+30*scale, gamePos[1]+10*scale, fill=symbolColor, outline=symbolColor))
 
 class dice:
     def __init__(self):
         self.num = 0
-        self.cube = [canvas.create_rectangle(1650, 100, 1750, 200, fill="white", outline="black", width=3), canvas.create_polygon(1650, 100, 1750, 100, 1800, 50, 1700, 50, fill="white", outline="black", width=3), canvas.create_polygon(1750, 100, 1800, 50, 1800, 150, 1750, 200, fill="white", outline="black", width=3)]
+        self.cube = [canvas.create_rectangle(1650*scale, 100*scale, 1750*scale, 200*scale, fill="white", outline="black", width=3), canvas.create_polygon(1650*scale, 100*scale, 1750*scale, 100*scale, 1800*scale, 50*scale, 1700*scale, 50*scale, fill="white", outline="black", width=3), canvas.create_polygon(1750*scale, 100*scale, 1800*scale, 50*scale, 1800*scale, 150*scale, 1750*scale, 200*scale, fill="white", outline="black", width=3)]
         self.dots = []
         for x in range(6):
             x = random.randrange(90)
-            self.dots.append(canvas.create_oval(1650, 100+x, 1660, 110+x, fill="black", outline="black"))
+            self.dots.append(canvas.create_oval(1650*scale, 100*scale+x, 1660*scale, 110*scale+x, fill="black", outline="black"))
         tk.update()
         self.roll()
     def roll(self):
@@ -91,7 +93,7 @@ class dice:
         else:
             self.__six()
     def __one(self):
-        canvas.coords(self.dots[0], 1695, 145, 1705, 155)
+        canvas.coords(self.dots[0], 1695*scale, 145*scale, 1705*scale, 155*scale)
         canvas.itemconfigure(self.dots[0], state="normal")
         canvas.itemconfigure(self.dots[1], state="hidden")
         canvas.itemconfigure(self.dots[2], state="hidden")
@@ -100,8 +102,8 @@ class dice:
         canvas.itemconfigure(self.dots[5], state="hidden")
         tk.update()
     def __two(self):
-        canvas.coords(self.dots[0], 1660, 110, 1670, 120)
-        canvas.coords(self.dots[1], 1730, 180, 1740, 190)
+        canvas.coords(self.dots[0], 1660*scale, 110*scale, 1670*scale, 120*scale)
+        canvas.coords(self.dots[1], 1730*scale, 180*scale, 1740*scale, 190*scale)
         canvas.itemconfigure(self.dots[0], state="normal")
         canvas.itemconfigure(self.dots[1], state="normal")
         canvas.itemconfigure(self.dots[2], state="hidden")
@@ -110,9 +112,9 @@ class dice:
         canvas.itemconfigure(self.dots[5], state="hidden")
         tk.update()
     def __three(self):
-        canvas.coords(self.dots[0], 1660, 110, 1670, 120)
-        canvas.coords(self.dots[1], 1695, 145, 1705, 155)
-        canvas.coords(self.dots[2], 1730, 180, 1740, 190)
+        canvas.coords(self.dots[0], 1660*scale, 110*scale, 1670*scale, 120*scale)
+        canvas.coords(self.dots[1], 1695*scale, 145*scale, 1705*scale, 155*scale)
+        canvas.coords(self.dots[2], 1730*scale, 180*scale, 1740*scale, 190*scale)
         canvas.itemconfigure(self.dots[0], state="normal")
         canvas.itemconfigure(self.dots[1], state="normal")
         canvas.itemconfigure(self.dots[2], state="normal")
@@ -121,10 +123,10 @@ class dice:
         canvas.itemconfigure(self.dots[5], state="hidden")
         tk.update()
     def __four(self):
-        canvas.coords(self.dots[0], 1670, 120, 1680, 130)
-        canvas.coords(self.dots[1], 1670, 170, 1680, 180)
-        canvas.coords(self.dots[2], 1720, 120, 1730, 130)
-        canvas.coords(self.dots[3], 1720, 170, 1730, 180)
+        canvas.coords(self.dots[0], 1670*scale, 120*scale, 1680*scale, 130*scale)
+        canvas.coords(self.dots[1], 1670*scale, 170*scale, 1680*scale, 180*scale)
+        canvas.coords(self.dots[2], 1720*scale, 120*scale, 1730*scale, 130*scale)
+        canvas.coords(self.dots[3], 1720*scale, 170*scale, 1730*scale, 180*scale)
         canvas.itemconfigure(self.dots[0], state="normal")
         canvas.itemconfigure(self.dots[1], state="normal")
         canvas.itemconfigure(self.dots[2], state="normal")
@@ -133,11 +135,11 @@ class dice:
         canvas.itemconfigure(self.dots[5], state="hidden")
         tk.update()
     def __five(self):
-        canvas.coords(self.dots[0], 1670, 120, 1680, 130)
-        canvas.coords(self.dots[1], 1670, 170, 1680, 180)
-        canvas.coords(self.dots[2], 1720, 120, 1730, 130)
-        canvas.coords(self.dots[3], 1720, 170, 1730, 180)
-        canvas.coords(self.dots[4], 1695, 145, 1705, 155)
+        canvas.coords(self.dots[0], 1670*scale, 120*scale, 1680*scale, 130*scale)
+        canvas.coords(self.dots[1], 1670*scale, 170*scale, 1680*scale, 180*scale)
+        canvas.coords(self.dots[2], 1720*scale, 120*scale, 1730*scale, 130*scale)
+        canvas.coords(self.dots[3], 1720*scale, 170*scale, 1730*scale, 180*scale)
+        canvas.coords(self.dots[4], 1695*scale, 145*scale, 1705*scale, 155*scale)
         canvas.itemconfigure(self.dots[0], state="normal")
         canvas.itemconfigure(self.dots[1], state="normal")
         canvas.itemconfigure(self.dots[2], state="normal")
@@ -146,12 +148,12 @@ class dice:
         canvas.itemconfigure(self.dots[5], state="hidden")
         tk.update()
     def __six(self):
-        canvas.coords(self.dots[0], 1670, 120, 1680, 130)
-        canvas.coords(self.dots[1], 1670, 170, 1680, 180)
-        canvas.coords(self.dots[2], 1720, 120, 1730, 130)
-        canvas.coords(self.dots[3], 1720, 170, 1730, 180)
-        canvas.coords(self.dots[4], 1695, 120, 1705, 130)
-        canvas.coords(self.dots[5], 1695, 170, 1705, 180)
+        canvas.coords(self.dots[0], 1670*scale, 120*scale, 1680*scale, 130*scale)
+        canvas.coords(self.dots[1], 1670*scale, 170*scale, 1680*scale, 180*scale)
+        canvas.coords(self.dots[2], 1720*scale, 120*scale, 1730*scale, 130*scale)
+        canvas.coords(self.dots[3], 1720*scale, 170*scale, 1730*scale, 180*scale)
+        canvas.coords(self.dots[4], 1695*scale, 120*scale, 1705*scale, 130*scale)
+        canvas.coords(self.dots[5], 1695*scale, 170*scale, 1705*scale, 180*scale)
         canvas.itemconfigure(self.dots[0], state="normal")
         canvas.itemconfigure(self.dots[1], state="normal")
         canvas.itemconfigure(self.dots[2], state="normal")
@@ -161,23 +163,23 @@ class dice:
         tk.update()
 
 formTk = Tk()
-formTk.geometry("500x800")
+formTk.geometry(str(int(scale*500)) + "x" + str(int(scale*800)))
 
 pStr = [[], [], [], []]
 players = []
 locations = []
 
 for x in range(15):
-    locations.append((1550-(x*100), 950))
+    locations.append((1550*scale-(x*100*scale), 950*scale))
 
 for x in range(10):
-    locations.append((50, 950-(x*100)))
+    locations.append((50*scale, 950*scale-(x*100*scale)))
 
 for x in range(15):
-    locations.append((50+(x*100), 50))
+    locations.append((50*scale+(x*100*scale), 50*scale))
 
 for x in range(10):
-    locations.append((1550, 50+(x*100)))
+    locations.append((1550*scale, 50*scale+(x*100*scale)))
 
 def submitPlayers():
     global entry, entry2, entry3, entry4
@@ -193,7 +195,7 @@ def submitPlayers():
     pStr[3] = string4.split()
     for x in range(4):
         if len(pStr[x]) >= 3:
-            players.append(player(pStr[x][0], pStr[x][1], 1500, None, locations[0], pStr[x][2]))
+            players.append(player(pStr[x][0], pStr[x][1], 1500*scale, None, locations[0], pStr[x][2]))
     tk.update()
     formTk.quit()
 

@@ -4,20 +4,22 @@ import random
 import time
 from tkinter import *
 
+scale = 1
+
 tk = Tk()
-canvas = Canvas(tk, width=700, height=800)
+canvas = Canvas(tk, width=350*scale, height=400*scale)
 canvas.pack()
 
-GRID_SIZE = 5
+GRID_SIZE = 6
 
-print(100+5*(500/(GRID_SIZE)))
+print((50*scale)+6*((250*scale)/(GRID_SIZE)))
 
 class point:
     def __init__(self, coords):
         self.x = coords[0]
         self.y = coords[1]
-        self.canvasX = 100+(coords[0]-1)*(500/GRID_SIZE)
-        self.canvasY = 100+(coords[1]-1)*(500/GRID_SIZE)
+        self.canvasX = (50*scale)+(coords[0]-1)*((250*scale)/GRID_SIZE)
+        self.canvasY = (50*scale)+(coords[1]-1)*((250*scale)/GRID_SIZE)
     def getCanvasCoords(self):
         return [self.canvasX, self.canvasY]
     def getCoords(self):
@@ -29,10 +31,10 @@ class line:
         self.y = startCoords[1]
         self.x2 = endCoords[0]
         self.y2 = endCoords[1]
-        self.canvasX = 100+(startCoords[0]-1)*(500/GRID_SIZE)
-        self.canvasY = 100+(startCoords[1]-1)*(500/GRID_SIZE)
-        self.canvasX2 = 100+(endCoords[0]-1)*(500/GRID_SIZE)
-        self.canvasY2 = 100+(endCoords[1]-1)*(500/GRID_SIZE)
+        self.canvasX = (50*scale)+(startCoords[0]-1)*((250*scale)/GRID_SIZE)
+        self.canvasY = (50*scale)+(startCoords[1]-1)*((250*scale)/GRID_SIZE)
+        self.canvasX2 = (50*scale)+(endCoords[0]-1)*((250*scale)/GRID_SIZE)
+        self.canvasY2 = (50*scale)+(endCoords[1]-1)*((250*scale)/GRID_SIZE)
     def getCanvasCoords(self):
         return [[self.canvasX, self.canvasY], [self.canvasX2, self.canvasY2]]
     def getCanvasReverseCoords(self):
@@ -44,8 +46,8 @@ class gridSpot:
     def __init__(self, x, y):
         self.x = x
         self.y = y
-        self.canvasX = 100+(x+0.5)*(500/GRID_SIZE)
-        self.canvasY = 100+(y+0.5)*(500/GRID_SIZE)
+        self.canvasX = (50*scale)+(x+0.5)*((250*scale)/GRID_SIZE)
+        self.canvasY = (50*scale)+(y+0.5)*((250*scale)/GRID_SIZE)
         self.spotsAttached = []
     def getCanvasCoords(self):
         return [self.canvasX, self.canvasY]
@@ -53,13 +55,13 @@ class gridSpot:
         return [self.x, self.y]
     def lineCoords(self, position):
         if position == "left":
-            return [[self.canvasX-(250/GRID_SIZE), self.canvasY-(250/GRID_SIZE)], [self.canvasX-(250/GRID_SIZE), self.canvasY+(250/GRID_SIZE)]]
+            return [[self.canvasX-((scale*125)/GRID_SIZE), self.canvasY-((scale*125)/GRID_SIZE)], [self.canvasX-((scale*125)/GRID_SIZE), self.canvasY+((scale*125)/GRID_SIZE)]]
         elif position == "right":
-            return [[self.canvasX+(250/GRID_SIZE), self.canvasY-(250/GRID_SIZE)], [self.canvasX+(250/GRID_SIZE), self.canvasY+(250/GRID_SIZE)]]
+            return [[self.canvasX+((scale*125)/GRID_SIZE), self.canvasY-((scale*125)/GRID_SIZE)], [self.canvasX+((scale*125)/GRID_SIZE), self.canvasY+((scale*125)/GRID_SIZE)]]
         elif position == "up":
-            return [[self.canvasX-(250/GRID_SIZE), self.canvasY-(250/GRID_SIZE)], [self.canvasX+(250/GRID_SIZE), self.canvasY-(250/GRID_SIZE)]]
+            return [[self.canvasX-((scale*125)/GRID_SIZE), self.canvasY-((scale*125)/GRID_SIZE)], [self.canvasX+((scale*125)/GRID_SIZE), self.canvasY-((scale*125)/GRID_SIZE)]]
         elif position == "down":
-            return [[self.canvasX-(250/GRID_SIZE), self.canvasY+(250/GRID_SIZE)], [self.canvasX+(250/GRID_SIZE), self.canvasY+(250/GRID_SIZE)]]
+            return [[self.canvasX-((scale*125)/GRID_SIZE), self.canvasY+((scale*125)/GRID_SIZE)], [self.canvasX+((scale*125)/GRID_SIZE), self.canvasY+((scale*125)/GRID_SIZE)]]
     def addSpotsAttached(self, spotsAttached):
         self.spotsAttached.append(spotsAttached)
     def getSpotsAttached(self):
@@ -122,11 +124,16 @@ for x in range(len(tempLines)):
 
 gridSpots = []
 
+print(lineCoords)
+print(reverseLineCoords)
+
 for x in range(GRID_SIZE):
     for y in range(GRID_SIZE):
         g = gridSpot(x, y)
         canvas.create_oval(g.getCanvasCoords()[0]-2, g.getCanvasCoords()[1]-2, g.getCanvasCoords()[0]+2, g.getCanvasCoords()[1]+2, fill="black")
         tk.update()
+        print("left, right, up, down", g.lineCoords("left"), g.lineCoords("right"), g.lineCoords("up"), g.lineCoords("down"))
+        print(g.getCoords())
         if g.lineCoords("left") not in lineCoords and g.lineCoords("left") not in reverseLineCoords:
             g.addSpotsAttached([x-1, y])
         if g.lineCoords("up") not in lineCoords and g.lineCoords("up") not in reverseLineCoords:
@@ -136,9 +143,9 @@ for x in range(GRID_SIZE):
         if g.lineCoords("down") not in lineCoords and g.lineCoords("down") not in reverseLineCoords:
             g.addSpotsAttached([x, y+1])
         gridSpots.append(g)
+        f = input(":")
 
 for x in gridSpots:
     print(x.getCoords(), x.getSpotsAttached())
     
-
 canvas.mainloop()
