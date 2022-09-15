@@ -3,5 +3,5 @@
 from tkinter import *
 
 class player:
-    def __init__(self):
+    def __init__(self, ):
         
