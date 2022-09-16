@@ -55,13 +55,13 @@ class gridSpot:
         return [self.x, self.y]
     def lineCoords(self, position):
         if position == "left":
-            return [[self.canvasX-((scale*125)/GRID_SIZE), self.canvasY-((scale*125)/GRID_SIZE)], [self.canvasX-((scale*125)/GRID_SIZE), self.canvasY+((scale*125)/GRID_SIZE)]]
+            return [[round(self.canvasX-((scale*125)/GRID_SIZE), 2), round(self.canvasY-((scale*125)/GRID_SIZE), 2)], [round(self.canvasX-((scale*125)/GRID_SIZE), 2), round(self.canvasY+((scale*125)/GRID_SIZE), 2)]]
         elif position == "right":
-            return [[self.canvasX+((scale*125)/GRID_SIZE), self.canvasY-((scale*125)/GRID_SIZE)], [self.canvasX+((scale*125)/GRID_SIZE), self.canvasY+((scale*125)/GRID_SIZE)]]
+            return [[round(self.canvasX+((scale*125)/GRID_SIZE), 2), round(self.canvasY-((scale*125)/GRID_SIZE), 2)], [round(self.canvasX+((scale*125)/GRID_SIZE), 2), round(self.canvasY+((scale*125)/GRID_SIZE), 2)]]
         elif position == "up":
-            return [[self.canvasX-((scale*125)/GRID_SIZE), self.canvasY-((scale*125)/GRID_SIZE)], [self.canvasX+((scale*125)/GRID_SIZE), self.canvasY-((scale*125)/GRID_SIZE)]]
+            return [[round(self.canvasX-((scale*125)/GRID_SIZE), 2), round(self.canvasY-((scale*125)/GRID_SIZE), 2)], [round(self.canvasX+((scale*125)/GRID_SIZE), 2), round(self.canvasY-((scale*125)/GRID_SIZE), 2)]]
         elif position == "down":
-            return [[self.canvasX-((scale*125)/GRID_SIZE), self.canvasY+((scale*125)/GRID_SIZE)], [self.canvasX+((scale*125)/GRID_SIZE), self.canvasY+((scale*125)/GRID_SIZE)]]
+            return [[round(self.canvasX-((scale*125)/GRID_SIZE), 2), round(self.canvasY+((scale*125)/GRID_SIZE), 2)], [round(self.canvasX+((scale*125)/GRID_SIZE), 2), round(self.canvasY+((scale*125)/GRID_SIZE), 2)]]
     def addSpotsAttached(self, spotsAttached):
         self.spotsAttached.append(spotsAttached)
     def getSpotsAttached(self):
@@ -71,7 +71,6 @@ class gridSpot:
 #    for x in gridSpot.getSpotsAttached():
 #        for y in x:
 #            for z in y:
-
 
 lines = []
 
