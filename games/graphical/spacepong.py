@@ -1,12 +1,11 @@
 #! /usr/bin/python3
 
-# Useful modules
 import random
 import time
 import math
 import subprocess as sp
 from tkinter import *
-# Constants
+
 WIDTH = 1000
 HEIGHT = 1000
 # Useful objects
