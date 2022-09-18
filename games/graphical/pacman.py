@@ -14,40 +14,39 @@ GRID_SIZE = 6
 
 print((50*scale)+6*((250*scale)/(GRID_SIZE)))
 
-class nonbinaryTree:
-    def __init__(self, root):
+#class nonbinaryTree:
+#    def __init__(self, root):
         #self.treeArr = [ [29, [[28, []], [21, []]]] ]
-        self.treeArr = [[root, []]]
-    def addChildren(self, children, row):
-        treeArr = [ [29, []] ]
+#        self.treeArr = [[root, []]]
+#    def addChildren(self, children, row):
+#        treeArr = [ [29, []] ]
         # add children to row 1, 29
-        treeArr[0][1].append([28, []])
-        treeArr[0][1].append([21, []])
+#        treeArr[0][1].append([28, []])
+#        treeArr[0][1].append([21, []])
         # add children to row 2, 29->28
-        treeArr[0][1][0][1].append([27, []])
-        treeArr[0][1][0][1].append([20, []])
+#        treeArr[0][1][0][1].append([27, []])
+#        treeArr[0][1][0][1].append([20, []])
         # add children to row 2, 29->21
-        treeArr[0][1][1][1].append([22, []])
+#        treeArr[0][1][1][1].append([22, []])
         # add children to row 2, 29->21->22
-        treeArr[0][1][1][1][1].append([30, []])
-        [[29, [[28, [[27, []], [20, [[12, [[4, []], [13, []]]]]]]], [21, [[22, [[30, []]]]]]]]]
-        29 (row 1): treeArr[0][0] 0, 0
-        28 (row 2): treeArr[0][1][0][0] 0, 1 0, 0
-        21 (row 2): treeArr[0][1][1][0] 0, 1 1, 0
-        27 (row 3): treeArr[0][1][0][1][0] 0, 1 0 1, 0
-        20 (row 3): treeArr[0][1][0][1][1] 0, 1 0 1, 1
-        22 (row 3): treeArr[0][1][1][1][0] 0, 1 1 1, 0
-        12 (row 4): treeArr[0][1][0][1][1][1][0] 0, 1 0 1 1 1, 0
-        04 (row 5): treeArr[0][1][0][1][1][1][1][0][0]
-        13 (row 5): treeArr[0][1][0][1][1][1][1][1][0]
-
-    def getRowVals(self, row):
-        arr = []
-        binCode = 
-
-        return arr
+#        treeArr[0][1][1][1][1].append([30, []])
+#        [[29, [[28, [[27, []], [20, [[12, [[4, []], [13, []]]]]]]], [21, [[22, [[30, []]]]]]]]]
+#        29 (row 1): treeArr[0][0] 0, 0
+#        28 (row 2): treeArr[0][1][0][0] 0, 1 0, 0
+#        21 (row 2): treeArr[0][1][1][0] 0, 1 1, 0
+#        27 (row 3): treeArr[0][1][0][1][0] 0, 1 0 1, 0
+#        20 (row 3): treeArr[0][1][0][1][1] 0, 1 0 1, 1
+#        22 (row 3): treeArr[0][1][1][1][0] 0, 1 1 1, 0
+#        12 (row 4): treeArr[0][1][0][1][1][1][0] 0, 1 0 1 1 1, 0
+#        04 (row 5): treeArr[0][1][0][1][1][1][1][0][0]
+#        13 (row 5): treeArr[0][1][0][1][1][1][1][1][0]
+#
+#    def getRowVals(self, row):
+#        arr = []
+#        binCode = 
+#
+#        return arr
 #        exec("self.treeArr[0]" + 
-        
         # 29: treeArr[0][0]
         # 28: treeArr[0][1][0][0]
         # 21: treeArr[0][1][1][0]
@@ -56,14 +55,14 @@ class nonbinaryTree:
         # 32: treeArr[0][1][1][1][2]
         # 22: treeArr[0][1][1][1][0]
 
-for x in gridSpots:
-    print(x.getCoords(), ">", x.getSpotsAttached())
+#for x in gridSpots:
+#    print(x.getCoords(), ">", x.getSpotsAttached())
 
-pathsTree = nonbinaryTree(gridSpots[15].getCoords())
+#pathsTree = nonbinaryTree(gridSpots[15].getCoords())
 
-while True:
+#while True:
     
-    pathsTree.addChildren(gridSpots[15].getSpotsAttached())
+#    pathsTree.addChildren(gridSpots[15].getSpotsAttached())
 
 
 class point:
