@@ -14,6 +14,58 @@ GRID_SIZE = 6
 
 print((50*scale)+6*((250*scale)/(GRID_SIZE)))
 
+class nonbinaryTree:
+    def __init__(self, root):
+        #self.treeArr = [ [29, [[28, []], [21, []]]] ]
+        self.treeArr = [[root, []]]
+    def addChildren(self, children, row):
+        treeArr = [ [29, []] ]
+        # add children to row 1, 29
+        treeArr[0][1].append([28, []])
+        treeArr[0][1].append([21, []])
+        # add children to row 2, 29->28
+        treeArr[0][1][0][1].append([27, []])
+        treeArr[0][1][0][1].append([20, []])
+        # add children to row 2, 29->21
+        treeArr[0][1][1][1].append([22, []])
+        # add children to row 2, 29->21->22
+        treeArr[0][1][1][1][1].append([30, []])
+        [[29, [[28, [[27, []], [20, [[12, [[4, []], [13, []]]]]]]], [21, [[22, [[30, []]]]]]]]]
+        29 (row 1): treeArr[0][0] 0, 0
+        28 (row 2): treeArr[0][1][0][0] 0, 1 0, 0
+        21 (row 2): treeArr[0][1][1][0] 0, 1 1, 0
+        27 (row 3): treeArr[0][1][0][1][0] 0, 1 0 1, 0
+        20 (row 3): treeArr[0][1][0][1][1] 0, 1 0 1, 1
+        22 (row 3): treeArr[0][1][1][1][0] 0, 1 1 1, 0
+        12 (row 4): treeArr[0][1][0][1][1][1][0] 0, 1 0 1 1 1, 0
+        04 (row 5): treeArr[0][1][0][1][1][1][1][0][0]
+        13 (row 5): treeArr[0][1][0][1][1][1][1][1][0]
+
+    def getRowVals(self, row):
+        arr = []
+        binCode = 
+
+        return arr
+#        exec("self.treeArr[0]" + 
+        
+        # 29: treeArr[0][0]
+        # 28: treeArr[0][1][0][0]
+        # 21: treeArr[0][1][1][0]
+        # 20: treeArr[0][1][0][1][0]
+        # 27: treeArr[0][1][0][1][1]
+        # 32: treeArr[0][1][1][1][2]
+        # 22: treeArr[0][1][1][1][0]
+
+for x in gridSpots:
+    print(x.getCoords(), ">", x.getSpotsAttached())
+
+pathsTree = nonbinaryTree(gridSpots[15].getCoords())
+
+while True:
+    
+    pathsTree.addChildren(gridSpots[15].getSpotsAttached())
+
+
 class point:
     def __init__(self, coords):
         self.x = coords[0]
@@ -21,7 +73,7 @@ class point:
         self.canvasX = (50*scale)+(coords[0]-1)*((250*scale)/GRID_SIZE)
         self.canvasY = (50*scale)+(coords[1]-1)*((250*scale)/GRID_SIZE)
     def getCanvasCoords(self):
-        return [self.canvasX, self.canvasY]
+        return [round(self.canvasX, 2), round(self.canvasY, 2)]
     def getCoords(self):
         return [coords[0], coords[1]]
 
@@ -36,9 +88,9 @@ class line:
         self.canvasX2 = (50*scale)+(endCoords[0]-1)*((250*scale)/GRID_SIZE)
         self.canvasY2 = (50*scale)+(endCoords[1]-1)*((250*scale)/GRID_SIZE)
     def getCanvasCoords(self):
-        return [[self.canvasX, self.canvasY], [self.canvasX2, self.canvasY2]]
+        return [[round(self.canvasX, 2), round(self.canvasY, 2)], [round(self.canvasX2, 2), round(self.canvasY2, 2)]]
     def getCanvasReverseCoords(self):
-        return [[self.canvasX2, self.canvasY2], [self.canvasX, self.canvasY]]
+        return [[round(self.canvasX2, 2), round(self.canvasY2, 2)], [round(self.canvasX, 2), round(self.canvasY, 2)]]
     def getCoords(self):
         return [[self.x, self.y], [self.x2, self.y2]]
 
@@ -50,7 +102,7 @@ class gridSpot:
         self.canvasY = (50*scale)+(y+0.5)*((250*scale)/GRID_SIZE)
         self.spotsAttached = []
     def getCanvasCoords(self):
-        return [self.canvasX, self.canvasY]
+        return [round(self.canvasX, 2), round(self.canvasY, 2)]
     def getCoords(self):
         return [self.x, self.y]
     def lineCoords(self, position):
@@ -66,11 +118,6 @@ class gridSpot:
         self.spotsAttached.append(spotsAttached)
     def getSpotsAttached(self):
         return self.spotsAttached
-
-#def containsTopLeft(gridSpot):
-#    for x in gridSpot.getSpotsAttached():
-#        for y in x:
-#            for z in y:
 
 lines = []
 
@@ -123,16 +170,11 @@ for x in range(len(tempLines)):
 
 gridSpots = []
 
-print(lineCoords)
-print(reverseLineCoords)
-
 for x in range(GRID_SIZE):
     for y in range(GRID_SIZE):
         g = gridSpot(x, y)
         canvas.create_oval(g.getCanvasCoords()[0]-2, g.getCanvasCoords()[1]-2, g.getCanvasCoords()[0]+2, g.getCanvasCoords()[1]+2, fill="black")
         tk.update()
-        print("left, right, up, down", g.lineCoords("left"), g.lineCoords("right"), g.lineCoords("up"), g.lineCoords("down"))
-        print(g.getCoords())
         if g.lineCoords("left") not in lineCoords and g.lineCoords("left") not in reverseLineCoords:
             g.addSpotsAttached([x-1, y])
         if g.lineCoords("up") not in lineCoords and g.lineCoords("up") not in reverseLineCoords:
@@ -142,9 +184,39 @@ for x in range(GRID_SIZE):
         if g.lineCoords("down") not in lineCoords and g.lineCoords("down") not in reverseLineCoords:
             g.addSpotsAttached([x, y+1])
         gridSpots.append(g)
-        f = input(":")
 
 for x in gridSpots:
-    print(x.getCoords(), x.getSpotsAttached())
-    
+    print(x.getCoords(), ">", x.getSpotsAttached())
+
+def containsTopLeftPath(grid, gridSpotItem, checked):
+    print(gridSpotItem.getCoords())
+    print()
+    if [0, 0] in gridSpotItem.getSpotsAttached():
+        print("True")
+        return True
+    else:
+        print("False")
+        for y in grid:
+            print("coords in grid: (y)", y.getCoords())
+            if y.getCoords() in gridSpotItem.getSpotsAttached() and y.getCoords() not in checked:
+                print("\tFound in grid spot: (y, spots attached)", y.getCoords(), y.getSpotsAttached())
+                checked.append(y.getCoords())
+                return containsTopLeftPath(grid, y, checked)
+        return False
+
+
+#def addToPath(grid, gridSpotItem, paths):
+#    paths.append(gridSpotItem.getSpotsAttached())
+#    return paths
+
+#def fullPath(grid, gridSpotItem, paths, fullPaths):
+
+
+
+
+#print(">", containsTopLeftPath(gridSpots, gridSpots[15], []))
+
+#for x in gridSpots:
+#    print(">", x.getCoords(), containsTopLeftPath(gridSpots, x))
+
 canvas.mainloop()
