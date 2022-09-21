@@ -1,69 +1,19 @@
 #! /usr/bin/python3
 
+from collections import defaultdict
 import random
 import time
 from tkinter import *
 
-scale = 1
+scale = 1.4
 
 tk = Tk()
 canvas = Canvas(tk, width=350*scale, height=400*scale)
 canvas.pack()
 
-GRID_SIZE = 6
+GRID_SIZE = 9
 
 print((50*scale)+6*((250*scale)/(GRID_SIZE)))
-
-#class nonbinaryTree:
-#    def __init__(self, root):
-        #self.treeArr = [ [29, [[28, []], [21, []]]] ]
-#        self.treeArr = [[root, []]]
-#    def addChildren(self, children, row):
-#        treeArr = [ [29, []] ]
-        # add children to row 1, 29
-#        treeArr[0][1].append([28, []])
-#        treeArr[0][1].append([21, []])
-        # add children to row 2, 29->28
-#        treeArr[0][1][0][1].append([27, []])
-#        treeArr[0][1][0][1].append([20, []])
-        # add children to row 2, 29->21
-#        treeArr[0][1][1][1].append([22, []])
-        # add children to row 2, 29->21->22
-#        treeArr[0][1][1][1][1].append([30, []])
-#        [[29, [[28, [[27, []], [20, [[12, [[4, []], [13, []]]]]]]], [21, [[22, [[30, []]]]]]]]]
-#        29 (row 1): treeArr[0][0] 0, 0
-#        28 (row 2): treeArr[0][1][0][0] 0, 1 0, 0
-#        21 (row 2): treeArr[0][1][1][0] 0, 1 1, 0
-#        27 (row 3): treeArr[0][1][0][1][0] 0, 1 0 1, 0
-#        20 (row 3): treeArr[0][1][0][1][1] 0, 1 0 1, 1
-#        22 (row 3): treeArr[0][1][1][1][0] 0, 1 1 1, 0
-#        12 (row 4): treeArr[0][1][0][1][1][1][0] 0, 1 0 1 1 1, 0
-#        04 (row 5): treeArr[0][1][0][1][1][1][1][0][0]
-#        13 (row 5): treeArr[0][1][0][1][1][1][1][1][0]
-#
-#    def getRowVals(self, row):
-#        arr = []
-#        binCode = 
-#
-#        return arr
-#        exec("self.treeArr[0]" + 
-        # 29: treeArr[0][0]
-        # 28: treeArr[0][1][0][0]
-        # 21: treeArr[0][1][1][0]
-        # 20: treeArr[0][1][0][1][0]
-        # 27: treeArr[0][1][0][1][1]
-        # 32: treeArr[0][1][1][1][2]
-        # 22: treeArr[0][1][1][1][0]
-
-#for x in gridSpots:
-#    print(x.getCoords(), ">", x.getSpotsAttached())
-
-#pathsTree = nonbinaryTree(gridSpots[15].getCoords())
-
-#while True:
-    
-#    pathsTree.addChildren(gridSpots[15].getSpotsAttached())
-
 
 class point:
     def __init__(self, coords):
@@ -76,7 +26,7 @@ class point:
     def getCoords(self):
         return [coords[0], coords[1]]
 
-class line:
+class Line:
     def __init__(self, startCoords, endCoords):
         self.x = startCoords[0]
         self.y = startCoords[1]
@@ -93,7 +43,7 @@ class line:
     def getCoords(self):
         return [[self.x, self.y], [self.x2, self.y2]]
 
-class gridSpot:
+class GridSpot:
     def __init__(self, x, y):
         self.x = x
         self.y = y
@@ -118,23 +68,48 @@ class gridSpot:
     def getSpotsAttached(self):
         return self.spotsAttached
 
+class Graph:
+    def __init__(self, vertices):
+        self.V = vertices
+        self.graph = defaultdict(list)
+        self.tempPath = []
+    def addEdge(self, u, v):
+        self.graph[u].append(v)
+    def storeAllPathsUtil(self, u, d, visited, path):
+        visited[u] = True
+        path.append(u)
+        if u == d:
+            self.tempPath.append([x for x in path])
+        else:
+            for x in self.graph[u]:
+                if visited[x] == False:
+                    self.storeAllPathsUtil(x, d, visited, path)
+        path.pop()
+        visited[u] = False
+    def storeAllPaths(self, s, d):
+        visited = [False]*self.V
+        path = []
+        self.storeAllPathsUtil(s, d, visited, path)
+    def getPaths(self):
+        return self.tempPath
+    def clearPaths(self):
+        self.tempPath = []
+
 lines = []
 
 for x in range(1, GRID_SIZE+1):
-    lines.append(line([x, 1], [x+1, 1]))
+    lines.append(Line([x, 1], [x+1, 1]))
 
 for x in range(1, GRID_SIZE+1):
-    lines.append(line([1, x], [1, x+1]))
+    lines.append(Line([1, x], [1, x+1]))
 
 for x in range(1, GRID_SIZE+1):
-    lines.append(line([x, GRID_SIZE+1], [x+1, GRID_SIZE+1]))
+    lines.append(Line([x, GRID_SIZE+1], [x+1, GRID_SIZE+1]))
 
 for x in range(1, GRID_SIZE+1):
-    lines.append(line([GRID_SIZE+1, x], [GRID_SIZE+1, x+1]))
+    lines.append(Line([GRID_SIZE+1, x], [GRID_SIZE+1, x+1]))
 
-cnt = 0
-
-linesRemaining = []
+mazeLines = []
 for x in range(2, GRID_SIZE+1):
     for y in range(2, GRID_SIZE+1):
         startCoords = [x, y]
@@ -149,30 +124,40 @@ for x in range(2, GRID_SIZE+1):
             else:
                 endCoordOptions = [[startCoords[0], startCoords[1]-1], [startCoords[0]-1, startCoords[1]]]
         for z in endCoordOptions:
-            linesRemaining.append(line(startCoords, z))
+            mazeLines.append(Line(startCoords, z))
 
-tempLines = [linesRemaining[x] for x in range(len(linesRemaining))]
-random.shuffle(tempLines)
-tempLines = tempLines[:int(len(tempLines)*0.4)]
+allLines = [mazeLines[x] for x in range(len(mazeLines))]
+random.shuffle(allLines)
+allLines = allLines[:int(len(allLines)*0.4)]
 
-lineCoords = [tempLines[x].getCanvasCoords() for x in range(len(tempLines))] + [lines[x].getCanvasCoords() for x in range(len(lines))]
-reverseLineCoords = [tempLines[x].getCanvasReverseCoords() for x in range(len(tempLines))] + [lines[x].getCanvasReverseCoords() for x in range(len(lines))]
+def gridSpotByCoords(coords):
+    for x in gridSpots:
+        if x[0].getCoords() == coords:
+            return x
+    return gridSpots[0]
 
-for x in range(len(lines)):
-    canvas.create_line(lines[x].getCanvasCoords()[0][0], lines[x].getCanvasCoords()[0][1], lines[x].getCanvasCoords()[1][0], lines[x].getCanvasCoords()[1][1], width=3)
-    tk.update()
-    time.sleep(0.01)
+def gridSpotAdjacent(a, b):
+    if abs(a-b) == 1 or abs(a-b) == GRID_SIZE:
+        return True
+    return False
 
-for x in range(len(tempLines)):
-    canvas.create_line(tempLines[x].getCanvasCoords()[0][0], tempLines[x].getCanvasCoords()[0][1], tempLines[x].getCanvasCoords()[1][0], tempLines[x].getCanvasCoords()[1][1], width=3)
-    tk.update()
+def gridSpotBlockAdjacent(a, l):
+    for x in l:
+        if gridSpotAdjacent(a, x):
+            return True
+    return False
+
+lineCoords = [allLines[x].getCanvasCoords() for x in range(len(allLines))] + [lines[x].getCanvasCoords() for x in range(len(lines))]
+reverseLineCoords = [allLines[x].getCanvasReverseCoords() for x in range(len(allLines))] + [lines[x].getCanvasReverseCoords() for x in range(len(lines))]
 
 gridSpots = []
+idxNumTemp = 0
+
+trappedSpots = []
 
 for x in range(GRID_SIZE):
     for y in range(GRID_SIZE):
-        g = gridSpot(x, y)
-        canvas.create_oval(g.getCanvasCoords()[0]-2, g.getCanvasCoords()[1]-2, g.getCanvasCoords()[0]+2, g.getCanvasCoords()[1]+2, fill="black")
+        g = GridSpot(x, y)
         tk.update()
         if g.lineCoords("left") not in lineCoords and g.lineCoords("left") not in reverseLineCoords:
             g.addSpotsAttached([x-1, y])
@@ -182,40 +167,58 @@ for x in range(GRID_SIZE):
             g.addSpotsAttached([x+1, y])
         if g.lineCoords("down") not in lineCoords and g.lineCoords("down") not in reverseLineCoords:
             g.addSpotsAttached([x, y+1])
-        gridSpots.append(g)
+        gridSpots.append((g, idxNumTemp))
+        idxNumTemp += 1
 
 for x in gridSpots:
-    print(x.getCoords(), ">", x.getSpotsAttached())
+    print(x[0].getCoords(), ">", x[0].getSpotsAttached(), ">", x[1])
 
-def containsTopLeftPath(grid, gridSpotItem, checked):
-    print(gridSpotItem.getCoords())
-    print()
-    if [0, 0] in gridSpotItem.getSpotsAttached():
-        print("True")
-        return True
-    else:
-        print("False")
-        for y in grid:
-            print("coords in grid: (y)", y.getCoords())
-            if y.getCoords() in gridSpotItem.getSpotsAttached() and y.getCoords() not in checked:
-                print("\tFound in grid spot: (y, spots attached)", y.getCoords(), y.getSpotsAttached())
-                checked.append(y.getCoords())
-                return containsTopLeftPath(grid, y, checked)
-        return False
+graph = Graph(GRID_SIZE**2)
+
+for x in gridSpots:
+    for y in x[0].getSpotsAttached():
+        graph.addEdge(x[1], gridSpotByCoords(y)[1])
+
+trappedSpots = []
+
+for x in gridSpots:
+    graph.storeAllPaths(0, x[1])
+    if len(graph.getPaths()) == 0:
+        trappedSpots.append(x[1])
+    graph.clearPaths()
+
+print("Trapped spots: ", trappedSpots)
+
+trappedGroups = [[]]
+
+cnt = 0
+
+tempTrappedSpots = list(trappedSpots)
+
+while len(tempTrappedSpots) > 0:
+    for x in range(len(trappedSpots)):
+        print(trappedSpots[x], tempTrappedSpots)
+        print(trappedSpots[x] in tempTrappedSpots)
+        print(gridSpotBlockAdjacent(trappedSpots[x], trappedGroups[cnt]))
+        if trappedSpots[x] in tempTrappedSpots and not gridSpotBlockAdjacent(trappedSpots[x], trappedGroups[cnt]):
+            trappedGroups[cnt].append(trappedSpots[x])
+            tempTrappedSpots.remove(trappedSpots[x])
+    cnt += 1
+
+print("Trapped groups: ", trappedGroups)
 
 
-#def addToPath(grid, gridSpotItem, paths):
-#    paths.append(gridSpotItem.getSpotsAttached())
-#    return paths
+for x in range(len(lines)):
+    canvas.create_line(lines[x].getCanvasCoords()[0][0], lines[x].getCanvasCoords()[0][1], lines[x].getCanvasCoords()[1][0], lines[x].getCanvasCoords()[1][1], width=3)
+    tk.update()
+    time.sleep(0.01)
 
-#def fullPath(grid, gridSpotItem, paths, fullPaths):
+for x in range(len(allLines)):
+    canvas.create_line(allLines[x].getCanvasCoords()[0][0], allLines[x].getCanvasCoords()[0][1], allLines[x].getCanvasCoords()[1][0], allLines[x].getCanvasCoords()[1][1], width=3)
+    tk.update()
 
-
-
-
-#print(">", containsTopLeftPath(gridSpots, gridSpots[15], []))
-
-#for x in gridSpots:
-#    print(">", x.getCoords(), containsTopLeftPath(gridSpots, x))
+for x in gridSpots:
+    canvas.create_oval(x[0].getCanvasCoords()[0]-2, x[0].getCanvasCoords()[1]-2, x[0].getCanvasCoords()[0]+2, x[0].getCanvasCoords()[1]+2, fill="black")
+    tk.update()
 
 canvas.mainloop()

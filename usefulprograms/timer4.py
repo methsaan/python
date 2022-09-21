@@ -133,7 +133,6 @@ while timerlist != [0, 0, 0, 0, 0, 0]:
         printnumcoord(114, 14, bignum(timerlist[4]))
         printnumcoord(128, 14, bignum(timerlist[5]))
         time.sleep(1)
-        for x 
         timerlist[5] -= 1
         if timerlist[5] < 0:
             timerlist[5] = 9
