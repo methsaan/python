@@ -207,10 +207,9 @@ for x in trappedSpots:
 
 print(trappedGroups)
 
-colors = []
-
-for x in range(len(trappedGroups)):
-    colors.append(random.choice(["red", "orange", "yellow", "green", "blue", "purple", "brown", "aqua", "purple", "pink", "magenta", "beige", "gray"]))
+colors = ["red", "orange", "yellow", "green", "blue", "purple", "brown", "aqua", "purple", "pink", "magenta", "beige", "gray"]
+random.shuffle(colors)
+colors = colors[:len(trappedGroups)]
 
 #trappedGroups = [[]]
 
@@ -241,11 +240,13 @@ for x in range(len(allLines)):
 
 for x in gridSpots:
     color = None
+    print(x[1])
     if x[1] in trappedSpots:
         for y in range(len(trappedGroups)):
+            #print(trappedGroups[y])
             if x[1] in trappedGroups[y]:
                 color = colors[y]
-    if colors == None:
+    if color == None:
         canvas.create_oval(x[0].getCanvasCoords()[0]-2, x[0].getCanvasCoords()[1]-2, x[0].getCanvasCoords()[0]+2, x[0].getCanvasCoords()[1]+2, fill="black")
     else:
         canvas.create_rectangle(x[0].getCanvasCoords()[0]-15, x[0].getCanvasCoords()[1]-15, x[0].getCanvasCoords()[0]+15, x[0].getCanvasCoords()[1]+15, fill=color, outline=color)
