@@ -137,7 +137,7 @@ def gridSpotByCoords(coords):
     return gridSpots[0]
 
 def gridSpotAdjacent(a, b):
-    if abs(a-b) == 1 or abs(a-b) == GRID_SIZE:
+    if abs(a-b) == 1 and a//GRID_SIZE == b//GRID_SIZE  or abs(a-b) == GRID_SIZE:
         return True
     return False
 
@@ -189,24 +189,46 @@ for x in gridSpots:
 
 print("Trapped spots: ", trappedSpots)
 
-trappedGroups = [[]]
+print(gridSpotAdjacent(1, 10))
+print(gridSpotAdjacent(21, 12))
+print(gridSpotAdjacent(21, 22))
+print(gridSpotAdjacent(24, 22))
 
-cnt = 0
+trappedGroups = []
 
-tempTrappedSpots = list(trappedSpots)
+for x in trappedSpots:
+    blocksAdjacent = False
+    for y in trappedGroups:
+        if gridSpotBlockAdjacent(x, y):
+            y.append(x)
+            blocksAdjacent = True
+    if not blocksAdjacent:
+        trappedGroups.append([x])
 
-while len(tempTrappedSpots) > 0:
-    for x in range(len(trappedSpots)):
-        print(trappedSpots[x], tempTrappedSpots)
-        print(trappedSpots[x] in tempTrappedSpots)
-        print(gridSpotBlockAdjacent(trappedSpots[x], trappedGroups[cnt]))
-        if trappedSpots[x] in tempTrappedSpots and not gridSpotBlockAdjacent(trappedSpots[x], trappedGroups[cnt]):
-            trappedGroups[cnt].append(trappedSpots[x])
-            tempTrappedSpots.remove(trappedSpots[x])
-    cnt += 1
+print(trappedGroups)
 
-print("Trapped groups: ", trappedGroups)
+colors = []
 
+for x in range(len(trappedGroups)):
+    colors.append(random.choice(["red", "orange", "yellow", "green", "blue", "purple", "brown", "aqua", "purple", "pink", "magenta", "beige", "gray"]))
+
+#trappedGroups = [[]]
+
+#cnt = 0
+
+#tempTrappedSpots = list(trappedSpots)
+
+#while len(tempTrappedSpots) > 0:
+#    for x in range(len(trappedSpots)):
+#        print(trappedSpots[x], tempTrappedSpots)
+#        print(trappedSpots[x] in tempTrappedSpots)
+#        print(gridSpotBlockAdjacent(trappedSpots[x], trappedGroups[cnt]))
+#        if trappedSpots[x] in tempTrappedSpots and not gridSpotBlockAdjacent(trappedSpots[x], trappedGroups[cnt]):
+#            trappedGroups[cnt].append(trappedSpots[x])
+#            tempTrappedSpots.remove(trappedSpots[x])
+#    cnt += 1
+
+#print("Trapped groups: ", trappedGroups)
 
 for x in range(len(lines)):
     canvas.create_line(lines[x].getCanvasCoords()[0][0], lines[x].getCanvasCoords()[0][1], lines[x].getCanvasCoords()[1][0], lines[x].getCanvasCoords()[1][1], width=3)
@@ -218,7 +240,15 @@ for x in range(len(allLines)):
     tk.update()
 
 for x in gridSpots:
-    canvas.create_oval(x[0].getCanvasCoords()[0]-2, x[0].getCanvasCoords()[1]-2, x[0].getCanvasCoords()[0]+2, x[0].getCanvasCoords()[1]+2, fill="black")
+    color = None
+    if x[1] in trappedSpots:
+        for y in range(len(trappedGroups)):
+            if x[1] in trappedGroups[y]:
+                color = colors[y]
+    if colors == None:
+        canvas.create_oval(x[0].getCanvasCoords()[0]-2, x[0].getCanvasCoords()[1]-2, x[0].getCanvasCoords()[0]+2, x[0].getCanvasCoords()[1]+2, fill="black")
+    else:
+        canvas.create_rectangle(x[0].getCanvasCoords()[0]-15, x[0].getCanvasCoords()[1]-15, x[0].getCanvasCoords()[0]+15, x[0].getCanvasCoords()[1]+15, fill=color, outline=color)
     tk.update()
 
 canvas.mainloop()
