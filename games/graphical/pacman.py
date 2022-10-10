@@ -205,11 +205,20 @@ for x in trappedSpots:
     if not blocksAdjacent:
         trappedGroups.append([x])
 
-print(trappedGroups)
+for x in trappedGroups:
+    print(x)
+
+for x in range(len(trappedGroups)):
+    for y in range(len(trappedGroups)):
+        
+
+for x in trappedGroups:
+    print(x)
 
 colors = ["red", "orange", "yellow", "green", "blue", "purple", "brown", "aqua", "purple", "pink", "magenta", "beige", "gray"]
 random.shuffle(colors)
 colors = colors[:len(trappedGroups)]
+print(colors)
 
 #trappedGroups = [[]]
 
@@ -240,7 +249,6 @@ for x in range(len(allLines)):
 
 for x in gridSpots:
     color = None
-    print(x[1])
     if x[1] in trappedSpots:
         for y in range(len(trappedGroups)):
             #print(trappedGroups[y])
