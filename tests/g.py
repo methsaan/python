@@ -7,21 +7,21 @@ def isSubset(l, subset):
             result = False
     return result
 
-numOfSameConstraints = input()
+numOfSameConstraints = int(input())
 
 sameConstraints = []
 
 for x in range(numOfSameConstraints):
     sameConstraints.append(input().split())
 
-numOfDiffConstraints = input()
+numOfDiffConstraints = int(input())
 
 diffConstraints = []
 
 for x in range(numOfDiffConstraints):
     diffConstraints.append(input().split())
 
-numOfTestGroups = input()
+numOfTestGroups = int(input())
 
 testGroups = []
 
