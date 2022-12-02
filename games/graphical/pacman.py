@@ -11,7 +11,7 @@ tk = Tk()
 canvas = Canvas(tk, width=350*scale, height=400*scale)
 canvas.pack()
 
-GRID_SIZE = 9
+GRID_SIZE = 6
 
 print((50*scale)+6*((250*scale)/(GRID_SIZE)))
 
@@ -128,7 +128,7 @@ for x in range(2, GRID_SIZE+1):
 
 allLines = [mazeLines[x] for x in range(len(mazeLines))]
 random.shuffle(allLines)
-allLines = allLines[:int(len(allLines)*0.4)]
+#allLines = allLines[:int(len(allLines)*0.4)]
 
 def gridSpotByCoords(coords):
     for x in gridSpots:
@@ -137,8 +137,14 @@ def gridSpotByCoords(coords):
     return gridSpots[0]
 
 def gridSpotAdjacent(a, b):
-    if abs(a-b) == 1 and a//GRID_SIZE == b//GRID_SIZE  or abs(a-b) == GRID_SIZE:
-        return True
+    if abs(a-b) == 1 and a//GRID_SIZE == b//GRID_SIZE:
+        lineBetween = (gridSpots[a][0].lineCoords("up") if b < a else gridSpots[a][0].lineCoords("down"))
+        if lineBetween not in lineCoords and lineBetween not in reverseLineCoords:
+            return True
+    elif abs(a-b) == GRID_SIZE:
+        lineBetween = (gridSpots[a][0].lineCoords("left") if b < a else gridSpots[a][0].lineCoords("right"))
+        if lineBetween not in lineCoords and lineBetween not in reverseLineCoords:
+            return True
     return False
 
 def gridSpotBlockAdjacent(a, l):
@@ -147,96 +153,85 @@ def gridSpotBlockAdjacent(a, l):
             return True
     return False
 
-lineCoords = [allLines[x].getCanvasCoords() for x in range(len(allLines))] + [lines[x].getCanvasCoords() for x in range(len(lines))]
-reverseLineCoords = [allLines[x].getCanvasReverseCoords() for x in range(len(allLines))] + [lines[x].getCanvasReverseCoords() for x in range(len(lines))]
 
-gridSpots = []
-idxNumTemp = 0
+# --------------------------------
+for v in range(2):
+    allLines = allLines[:int(len(allLines)*0.4)]
 
-trappedSpots = []
+    lineCoords = [allLines[x].getCanvasCoords() for x in range(len(allLines))] + [lines[x].getCanvasCoords() for x in range(len(lines))]
+    reverseLineCoords = [allLines[x].getCanvasReverseCoords() for x in range(len(allLines))] + [lines[x].getCanvasReverseCoords() for x in range(len(lines))]
 
-for x in range(GRID_SIZE):
-    for y in range(GRID_SIZE):
-        g = GridSpot(x, y)
-        tk.update()
-        if g.lineCoords("left") not in lineCoords and g.lineCoords("left") not in reverseLineCoords:
-            g.addSpotsAttached([x-1, y])
-        if g.lineCoords("up") not in lineCoords and g.lineCoords("up") not in reverseLineCoords:
-            g.addSpotsAttached([x, y-1])
-        if g.lineCoords("right") not in lineCoords and g.lineCoords("right") not in reverseLineCoords:
-            g.addSpotsAttached([x+1, y])
-        if g.lineCoords("down") not in lineCoords and g.lineCoords("down") not in reverseLineCoords:
-            g.addSpotsAttached([x, y+1])
-        gridSpots.append((g, idxNumTemp))
-        idxNumTemp += 1
+    gridSpots = []
+    idxNumTemp = 0
 
-for x in gridSpots:
-    print(x[0].getCoords(), ">", x[0].getSpotsAttached(), ">", x[1])
+    trappedSpots = []
 
-graph = Graph(GRID_SIZE**2)
+    for x in range(GRID_SIZE):
+        for y in range(GRID_SIZE):
+            g = GridSpot(x, y)
+            tk.update()
+            if g.lineCoords("left") not in lineCoords and g.lineCoords("left") not in reverseLineCoords:
+                g.addSpotsAttached([x-1, y])
+            if g.lineCoords("up") not in lineCoords and g.lineCoords("up") not in reverseLineCoords:
+                g.addSpotsAttached([x, y-1])
+            if g.lineCoords("right") not in lineCoords and g.lineCoords("right") not in reverseLineCoords:
+                g.addSpotsAttached([x+1, y])
+            if g.lineCoords("down") not in lineCoords and g.lineCoords("down") not in reverseLineCoords:
+                g.addSpotsAttached([x, y+1])
+            gridSpots.append((g, idxNumTemp))
+            idxNumTemp += 1
 
-for x in gridSpots:
-    for y in x[0].getSpotsAttached():
-        graph.addEdge(x[1], gridSpotByCoords(y)[1])
+    for x in gridSpots:
+        print(x[0].getCoords(), ">", x[0].getSpotsAttached(), ">", x[1])
 
-trappedSpots = []
+    graph = Graph(GRID_SIZE**2)
 
-for x in gridSpots:
-    graph.storeAllPaths(0, x[1])
-    if len(graph.getPaths()) == 0:
-        trappedSpots.append(x[1])
-    graph.clearPaths()
+    for x in gridSpots:
+        for y in x[0].getSpotsAttached():
+            graph.addEdge(x[1], gridSpotByCoords(y)[1])
 
-print("Trapped spots: ", trappedSpots)
+    trappedSpots = []
 
-print(gridSpotAdjacent(1, 10))
-print(gridSpotAdjacent(21, 12))
-print(gridSpotAdjacent(21, 22))
-print(gridSpotAdjacent(24, 22))
+    for x in gridSpots:
+        graph.storeAllPaths(0, x[1])
+        if len(graph.getPaths()) == 0:
+            trappedSpots.append(x[1])
+        graph.clearPaths()
 
-trappedGroups = []
+    print("Trapped spots: ", trappedSpots)
 
-for x in trappedSpots:
-    blocksAdjacent = False
-    for y in trappedGroups:
-        if gridSpotBlockAdjacent(x, y):
-            y.append(x)
-            blocksAdjacent = True
-    if not blocksAdjacent:
-        trappedGroups.append([x])
+    trappedGroups = []
 
-for x in trappedGroups:
-    print(x)
+    for x in trappedSpots:
+        blocksAdjacent = False
+        for y in trappedGroups:
+            if gridSpotBlockAdjacent(x, y):
+                y.append(x)
+                blocksAdjacent = True
+        print(x, blocksAdjacent)
+        if blocksAdjacent == False:
+            trappedGroups.append([x])
+            print(trappedGroups)
 
-for x in range(len(trappedGroups)):
-    for y in range(len(trappedGroups)):
-        
+    for x in trappedGroups:
+        for y in x:
+            for z in trappedGroups:
+                if z != x and y in z:
+                    z.remove(y)
+                    x += z
+                    trappedGroups.remove(z)
 
-for x in trappedGroups:
-    print(x)
+    print("Trapped groups:")
+    for x in trappedGroups:
+        print(x)
+
+    r = input("Fart: ")
+# --------------------------------
 
 colors = ["red", "orange", "yellow", "green", "blue", "purple", "brown", "aqua", "purple", "pink", "magenta", "beige", "gray"]
 random.shuffle(colors)
 colors = colors[:len(trappedGroups)]
 print(colors)
-
-#trappedGroups = [[]]
-
-#cnt = 0
-
-#tempTrappedSpots = list(trappedSpots)
-
-#while len(tempTrappedSpots) > 0:
-#    for x in range(len(trappedSpots)):
-#        print(trappedSpots[x], tempTrappedSpots)
-#        print(trappedSpots[x] in tempTrappedSpots)
-#        print(gridSpotBlockAdjacent(trappedSpots[x], trappedGroups[cnt]))
-#        if trappedSpots[x] in tempTrappedSpots and not gridSpotBlockAdjacent(trappedSpots[x], trappedGroups[cnt]):
-#            trappedGroups[cnt].append(trappedSpots[x])
-#            tempTrappedSpots.remove(trappedSpots[x])
-#    cnt += 1
-
-#print("Trapped groups: ", trappedGroups)
 
 for x in range(len(lines)):
     canvas.create_line(lines[x].getCanvasCoords()[0][0], lines[x].getCanvasCoords()[0][1], lines[x].getCanvasCoords()[1][0], lines[x].getCanvasCoords()[1][1], width=3)
@@ -251,7 +246,6 @@ for x in gridSpots:
     color = None
     if x[1] in trappedSpots:
         for y in range(len(trappedGroups)):
-            #print(trappedGroups[y])
             if x[1] in trappedGroups[y]:
                 color = colors[y]
     if color == None:
