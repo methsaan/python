@@ -216,8 +216,9 @@ for x in trappedGroups:
 print("trapped groups individual")
 for x in trappedGroups:
     for y in x:
-        print(y, end=" ->\n")
-    
+        adjacentSpotNums = [y-GRID_SIZE if y-GRID_SIZE >= 0 else None, y+GRID_SIZE if y+GRID_SIZE <= GRID_SIZE**2-1 else None, y-1 if (y-1)%GRID_SIZE != GRID_SIZE-1 else None, y+1 if (y+1)%GRID_SIZE != 0 else None]
+        print(y, end=" -> ")
+        print(adjacentSpotNums)
     print()
 
 colors = ["red", "orange", "yellow", "green", "blue", "white", "brown", "aqua", "purple", "pink", "magenta", "beige", "gray"]
