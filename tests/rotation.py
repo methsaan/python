@@ -3,6 +3,7 @@
 import math
 import time
 from tkinter import *
+from itertools import chain
 
 tk = Tk()
 canvas = Canvas(tk, width=600, height=600)
@@ -10,15 +11,20 @@ canvas.pack()
 
 def rotatePoint(x, y, rotatex, rotatey, angle):
     lengthFromRotPoint = math.sqrt(abs(x-rotatex)**2 + abs(y-rotatey)**2)
+    if lengthFromRotPoint == 0:
+        return [x, y]
+    print("x, y", x, y)
+    print("length", lengthFromRotPoint)
     angleStart = math.asin(abs(y-rotatey) / lengthFromRotPoint) * (180 / math.pi)
+    print("angleStart", angleStart)
     if x < rotatex and y < rotatey:
         pass
     elif x > rotatex and y < rotatey:
-        angleStart += 90
+        angleStart = 180-angleStart
     elif x > rotatex and y > rotatey:
-        angleStart += 180
+        angleStart = 180+angleStart
     elif x < rotatex and y > rotatey:
-        angleStart += 270
+        angleStart = 360-angleStart
     elif x == rotatex and y > rotatey:
         angleStart = 270
     elif x == rotatex and y < rotatey:
@@ -27,7 +33,9 @@ def rotatePoint(x, y, rotatex, rotatey, angle):
         angleStart = 180
     else:
         angleStart = 0
+    print("angleStart", angleStart)
     terminatingAngle = (angleStart + angle) % 360
+    print("terminatingAngle", terminatingAngle)
     angleEnd = None
     if terminatingAngle >= 90 and terminatingAngle < 180:
         angleEnd = 180-terminatingAngle
@@ -37,8 +45,10 @@ def rotatePoint(x, y, rotatex, rotatey, angle):
         angleEnd = 360-terminatingAngle
     else:
         angleEnd = terminatingAngle
+    print("angleEnd", angleEnd)
     yFromRotPoint = abs(lengthFromRotPoint * math.sin(math.radians(angleEnd)))
     xFromRotPoint = abs(lengthFromRotPoint * math.cos(math.radians(angleEnd)))
+    print("yFrom, xFrom", yFromRotPoint, xFromRotPoint)
     newCoordx = 0
     newCoordy = 0
     if terminatingAngle >= 90 and terminatingAngle < 180:
@@ -61,66 +71,50 @@ def rotate(obj, rotatex, rotatey, angle):
         oldCoords.append([canvas.coords(obj)[x], canvas.coords(obj)[x+1]])
     print(oldCoords)
     newCoords = []
+    for x in oldCoords:
+        newCoords.append([rotatePoint(x[0], x[1], rotatex, rotatey, angle)[0], rotatePoint(x[0], x[1], rotatex, rotatey, angle)[1]])
+    print(list(chain.from_iterable(newCoords)))
+    print()
+    canvas.coords(obj, *list(chain.from_iterable(newCoords)))
 
-box = canvas.create_polygon(200, 200, 300, 200, 300, 290, 200, 290, fill="red", outline="red")
+box = canvas.create_polygon(200, 200, 300, 200, 300, 300, 200, 300, fill="red", outline="red")
 
-rotate(box, 300, 300, 80)
+print("10")
+rotate(box, 300, 300, 10)
+tk.update()
+time.sleep(0.5)
+print("20")
+rotate(box, 300, 300, 10)
+tk.update()
+time.sleep(0.5)
+print("30")
+rotate(box, 300, 300, 10)
+tk.update()
+time.sleep(0.5)
+print("40")
+rotate(box, 300, 300, 10)
+tk.update()
+time.sleep(0.5)
+print("50")
+rotate(box, 300, 300, 10)
+tk.update()
+time.sleep(0.5)
+print("60")
+rotate(box, 300, 300, 10)
+tk.update()
+time.sleep(0.5)
+print("70")
+rotate(box, 300, 300, 10)
+tk.update()
+time.sleep(0.5)
+print("80")
+rotate(box, 300, 300, 10)
+tk.update()
+time.sleep(0.5)
+print("90")
+rotate(box, 300, 300, 10)
+tk.update()
 
-canvas.create_line(200, 200, 300, 300, width=3)
-tk.update()
-time.sleep(0.5)
-canvas.create_line(rotatePoint(200, 200, 300, 300, 10)[0], rotatePoint(200, 200, 300, 300, 10)[1], 300, 300, width=3)
-tk.update()
-time.sleep(0.5)
-canvas.create_line(rotatePoint(200, 200, 300, 300, 20)[0], rotatePoint(200, 200, 300, 300, 20)[1], 300, 300, width=3)
-tk.update()
-time.sleep(0.5)
-canvas.create_line(rotatePoint(200, 200, 300, 300, 30)[0], rotatePoint(200, 200, 300, 300, 30)[1], 300, 300, width=3)
-tk.update()
-time.sleep(0.5)
-canvas.create_line(rotatePoint(200, 200, 300, 300, 40)[0], rotatePoint(200, 200, 300, 300, 40)[1], 300, 300, width=3)
-tk.update()
-time.sleep(0.5)
-canvas.create_line(rotatePoint(200, 200, 300, 300, 50)[0], rotatePoint(200, 200, 300, 300, 50)[1], 300, 300, width=3)
-tk.update()
-time.sleep(0.5)
-canvas.create_line(rotatePoint(200, 200, 300, 300, 60)[0], rotatePoint(200, 200, 300, 300, 60)[1], 300, 300, width=3)
-tk.update()
-time.sleep(0.5)
-canvas.create_line(rotatePoint(200, 200, 300, 300, 70)[0], rotatePoint(200, 200, 300, 300, 70)[1], 300, 300, width=3)
-tk.update()
-time.sleep(0.5)
-canvas.create_line(rotatePoint(200, 200, 300, 300, 80)[0], rotatePoint(200, 200, 300, 300, 80)[1], 300, 300, width=3)
-tk.update()
-time.sleep(0.5)
-canvas.create_line(rotatePoint(200, 200, 300, 300, 90)[0], rotatePoint(200, 200, 300, 300, 90)[1], 300, 300, width=3)
-tk.update()
-time.sleep(0.5)
-canvas.create_line(rotatePoint(200, 200, 300, 300, 100)[0], rotatePoint(200, 200, 300, 300, 100)[1], 300, 300, width=3)
-tk.update()
-time.sleep(0.5)
-canvas.create_line(rotatePoint(200, 200, 300, 300, 110)[0], rotatePoint(200, 200, 300, 300, 110)[1], 300, 300, width=3)
-tk.update()
-time.sleep(0.5)
-canvas.create_line(rotatePoint(200, 200, 300, 300, 120)[0], rotatePoint(200, 200, 300, 300, 120)[1], 300, 300, width=3)
-tk.update()
-time.sleep(0.5)
-canvas.create_line(rotatePoint(200, 200, 300, 300, 130)[0], rotatePoint(200, 200, 300, 300, 130)[1], 300, 300, width=3)
-tk.update()
-time.sleep(0.5)
-canvas.create_line(rotatePoint(200, 200, 300, 300, 140)[0], rotatePoint(200, 200, 300, 300, 140)[1], 300, 300, width=3)
-tk.update()
-time.sleep(0.5)
-canvas.create_line(rotatePoint(200, 200, 300, 300, 150)[0], rotatePoint(200, 200, 300, 300, 150)[1], 300, 300, width=3)
-tk.update()
-time.sleep(0.5)
-canvas.create_line(rotatePoint(200, 200, 300, 300, 160)[0], rotatePoint(200, 200, 300, 300, 160)[1], 300, 300, width=3)
-tk.update()
-time.sleep(0.5)
-canvas.create_line(rotatePoint(200, 200, 300, 300, 170)[0], rotatePoint(200, 200, 300, 300, 170)[1], 300, 300, width=3)
-tk.update()
-time.sleep(0.5)
-canvas.create_line(rotatePoint(300, 400, 300, 300, 150)[0], rotatePoint(300, 400, 300, 300, 150)[1], 300, 300, width=3)
-tk.update()
+print(rotatePoint(317.364817766693, 201.5192246987792, 300, 300, 10))
 
 canvas.mainloop()
