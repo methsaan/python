@@ -7,7 +7,7 @@ from tkinter import *
 from itertools import chain
 
 tk = Tk()
-canvas = Canvas(tk, width=800, height=800)
+canvas = Canvas(tk, width=800, height=800, bg="#6699CC")
 canvas.pack()
 
 def rotatePoint(x, y, rotatex, rotatey, angle):
@@ -68,6 +68,11 @@ def rotate(obj, rotatex, rotatey, angle):
         newCoords.append([rotatePoint(x[0], x[1], rotatex, rotatey, angle)[0], rotatePoint(x[0], x[1], rotatex, rotatey, angle)[1]])
     canvas.coords(obj, *list(chain.from_iterable(newCoords)))
 
+canvas.create_oval(50, 50, 750, 750, fill="white", outline="black", width=40)
+
+for x in range(12):
+    canvas.create_text(rotatePoint(400, 120, 400, 400, 30*(x+1))[0], rotatePoint(400, 100, 400, 400, 30*(x+1))[1], text=str(x+1), font=("tahoma", 40))
+
 hourHand = canvas.create_polygon(390, 240, 410, 240, 410, 410, 390, 410, fill="black")
 minuteHand = canvas.create_polygon(395, 130, 405, 130, 405, 405, 395, 405, fill="black")
 secondHand = canvas.create_polygon(399, 130, 401, 130, 401, 401, 399, 401, fill="red")
@@ -76,10 +81,9 @@ while True:
     canvas.coords(hourHand, 390, 240, 410, 240, 410, 410, 390, 410)
     canvas.coords(minuteHand, 395, 130, 405, 130, 405, 405, 395, 405)
     canvas.coords(secondHand, 399, 130, 401, 130, 401, 401, 399, 401)
-    rotate(minuteHand, 400, 400, datetime.datetime.now().minute*6)
-    rotate(secondHand, 400, 400, datetime.datetime.now().second*6)
-    #rotate(hourHand, 400, 400, 3)
+    rotate(hourHand, 400, 400, datetime.datetime.now().hour%12*30 + datetime.datetime.now().minute*0.5)
+    rotate(minuteHand, 400, 400, datetime.datetime.now().minute*6 + datetime.datetime.now().second*0.1)
+    rotate(secondHand, 400, 400, datetime.datetime.now().second*6 + datetime.datetime.now().microsecond//10000*0.06)
     tk.update()
-    #time.sleep(0.03)
 
 canvas.mainloop()
