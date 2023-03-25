@@ -71,16 +71,16 @@ def rotate(obj, rotatex, rotatey, angle):
 canvas.create_oval(50, 50, 750, 750, fill="white", outline="black", width=40)
 
 for x in range(12):
-    canvas.create_text(rotatePoint(400, 120, 400, 400, 30*(x+1))[0], rotatePoint(400, 100, 400, 400, 30*(x+1))[1], text=str(x+1), font=("tahoma", 40))
+    canvas.create_text(rotatePoint(400, 120, 400, 400, 30*(x+1))[0], rotatePoint(400, 100, 400, 400, 30*(x+1))[1], text=str(x+1), font=("times new roman", 40))
 
 hourHand = canvas.create_polygon(390, 240, 410, 240, 410, 410, 390, 410, fill="black")
-minuteHand = canvas.create_polygon(395, 130, 405, 130, 405, 405, 395, 405, fill="black")
-secondHand = canvas.create_polygon(399, 130, 401, 130, 401, 401, 399, 401, fill="red")
+minuteHand = canvas.create_polygon(395, 150, 405, 150, 405, 405, 395, 405, fill="black")
+secondHand = canvas.create_polygon(399, 150, 401, 150, 401, 401, 399, 401, fill="red")
 
 while True:
     canvas.coords(hourHand, 390, 240, 410, 240, 410, 410, 390, 410)
-    canvas.coords(minuteHand, 395, 130, 405, 130, 405, 405, 395, 405)
-    canvas.coords(secondHand, 399, 130, 401, 130, 401, 401, 399, 401)
+    canvas.coords(minuteHand, 395, 150, 405, 150, 405, 405, 395, 405)
+    canvas.coords(secondHand, 399, 150, 401, 150, 401, 401, 399, 401)
     rotate(hourHand, 400, 400, datetime.datetime.now().hour%12*30 + datetime.datetime.now().minute*0.5)
     rotate(minuteHand, 400, 400, datetime.datetime.now().minute*6 + datetime.datetime.now().second*0.1)
     rotate(secondHand, 400, 400, datetime.datetime.now().second*6 + datetime.datetime.now().microsecond//10000*0.06)
