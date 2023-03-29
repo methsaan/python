@@ -76,20 +76,86 @@ def rotate(obj, rotatex, rotatey, angle): # rotate a polygon object
     # change coordinates of polygon object
     canvas.coords(obj, *list(chain.from_iterable(newCoords)))
 
-# Test 1:
+def makeOval(xRadius, yRadius, centerx, centery, color, outlineColor, outlineWidth, smoothnessFactor): # draw oval using tkinter polygon given 2 radii and a center
+    circumference = 2*math.pi * math.sqrt((xRadius**2 + yRadius**2) / 2)
+    angleInterval = 360/circumference
+    points = []
+    print(circumference)
+    for i in range(math.floor(circumference/smoothnessFactor)):
+        angle = angleInterval*i*smoothnessFactor
+        x = (xRadius*yRadius)/(math.sqrt(yRadius**2 + xRadius**2*math.tan(math.radians(angle))**2))
+        y = (xRadius*yRadius)/(math.sqrt(xRadius**2 + (yRadius**2 / math.tan(math.radians(angle))**2))) if angle != 0 else 0
+        xCoord = 0
+        yCoord = 0
+        if angle >= 0 and angle < 90:
+            xCoord = centerx - x
+            yCoord = centery - y
+        elif angle >= 90 and angle < 180:
+            xCoord = centerx + x
+            yCoord = centery - y
+        elif angle >= 180 and angle < 270:
+            xCoord = centerx + x
+            yCoord = centery + y
+        else:
+            xCoord = centerx - x
+            yCoord = centery + y
+        points.append(xCoord)
+        points.append(yCoord)
+    return canvas.create_polygon(*points, fill=color, outline=outlineColor)
+
+# Test 1 - triangle:
 
 triangle = canvas.create_polygon(150, 350, 350, 350, 250, 100, fill="red", outline="red")
 
-for x in range(3600):
-    rotate(triangle, 250, 200, 3)
+for x in range(720):
+    rotate(triangle, 250, 200, 1)
     tk.update()
+    time.sleep(0.005)
 
-# Test 2:
+# Test 2 - square:
 
 square = canvas.create_polygon(100, 100, 300, 100, 300, 300, 100, 300, fill="blue", outline="blue")
 
-for x in range(3600):
-    rotate(triangle, 300, 300, 3)
+for x in range(720):
+    rotate(square, 300, 300, 3)
     tk.update()
+    time.sleep(0.01)
+
+# Test 3 - oval: 
+
+oval = makeOval(200, 100, 400, 400, "orange", "green", 12, 180)
+
+for x in range(40):
+    rotate(oval, 400, 400, 3)
+    tk.update()
+    time.sleep(0.01)
+
+oval = makeOval(200, 100, 400, 400, "orange", "green", 12, 120)
+
+for x in range(40):
+    rotate(oval, 400, 400, 3)
+    tk.update()
+    time.sleep(0.01)
+
+oval = makeOval(200, 100, 400, 400, "orange", "green", 12, 90)
+
+for x in range(40):
+    rotate(oval, 400, 400, 3)
+    tk.update()
+    time.sleep(0.01)
+
+oval = makeOval(200, 100, 400, 400, "orange", "green", 12, 40)
+
+for x in range(40):
+    rotate(oval, 400, 400, 3)
+    tk.update()
+    time.sleep(0.01)
+
+oval = makeOval(200, 100, 400, 400, "orange", "green", 12, 10)
+
+for x in range(40):
+    rotate(oval, 400, 400, 3)
+    tk.update()
+    time.sleep(0.01)
 
 canvas.mainloop()
