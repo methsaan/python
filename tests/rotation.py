@@ -123,35 +123,7 @@ for x in range(720):
 
 # Test 3 - oval: 
 
-oval = makeOval(200, 100, 400, 400, "orange", "green", 12, 180)
-
-for x in range(40):
-    rotate(oval, 400, 400, 3)
-    tk.update()
-    time.sleep(0.01)
-
-oval = makeOval(200, 100, 400, 400, "orange", "green", 12, 120)
-
-for x in range(40):
-    rotate(oval, 400, 400, 3)
-    tk.update()
-    time.sleep(0.01)
-
-oval = makeOval(200, 100, 400, 400, "orange", "green", 12, 90)
-
-for x in range(40):
-    rotate(oval, 400, 400, 3)
-    tk.update()
-    time.sleep(0.01)
-
-oval = makeOval(200, 100, 400, 400, "orange", "green", 12, 40)
-
-for x in range(40):
-    rotate(oval, 400, 400, 3)
-    tk.update()
-    time.sleep(0.01)
-
-oval = makeOval(200, 100, 400, 400, "orange", "green", 12, 10)
+oval = makeOval(200, 100, 400, 400, "orange", "green", 12, 5)
 
 for x in range(40):
     rotate(oval, 400, 400, 3)
