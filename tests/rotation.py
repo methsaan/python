@@ -56,7 +56,7 @@ def rotatePoint(x, y, rotatex, rotatey, angle): # x of point to rotate, y of poi
         newCoordy = rotatey - yFromRotPoint
     elif terminatingAngle >= 180 and terminatingAngle < 270:
         newCoordx = rotatex + xFromRotPoint
-        newCoordy = rotatey + yFromRotPoint
+        newCoordy = rotatex + yFromRotPoint
     elif terminatingAngle >= 270 and terminatingAngle < 360:
         newCoordx = rotatex - xFromRotPoint
         newCoordy = rotatey + yFromRotPoint
