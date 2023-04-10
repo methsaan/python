@@ -8,7 +8,10 @@ from tkinter import *
 
 tk = Tk()
 tk.title("Combat")
-canvas = Canvas(tk, height=600, width=1080, bg="white", bd=0, highlightbackground="white")
+
+scale = 1
+
+canvas = Canvas(tk, height=850*scale, width=1700*scale, bg="white", bd=0, highlightbackground="white")
 canvas.pack()
 
 def rotatePoint(x, y, rotatex, rotatey, angle): # x of point to rotate, y of point to rotate, x of center of rotation, y of center of rotation, angle
@@ -119,40 +122,86 @@ def makeOval(xRadius, yRadius, centerx, centery, color, outlineColor, outlineWid
     return canvas.create_polygon(*points, fill=color, outline=outlineColor)
 
 class character():
-    def __init__(self, x, y, maskColor, jointColor, partsColor, extra, forwardDir):
-        self.head = makeOval(30, 30, x, y-75, jointColor, "black", 1, 10)
+    def __init__(self, x, y, maskColor, extraColor, headColor, jointColor, partsColor, extra, forwardDir):
+        self.x = x
+        self.y = y
+        self.head = makeOval(12*scale, 12*scale, x*0.5*scale, (y-75)*0.5*scale, headColor, "black", 1, 5*scale)
         if extra:
-            self.extra = canvas.create_polygon(x+5, y-50, x-25, y-90, x+28, y-90,fill=partsColor, outline="black")
-        self.mask = makeOval(21,5,x+7,y-80, maskColor,"black",2,10)
-        self.body = canvas.create_polygon(x-30, y-50, x+30, y-50, x+30, y+50, x-30, y+50, fill=partsColor, outline="black")
-        self.bicep = makeOval(50,15,x+50,y-20,partsColor,"black",2,10)
-        self.forearm = makeOval(30,10,x+100,y-20,partsColor,"black",2,10)
-        self.hand = makeOval(15,15,x+130,y-20,jointColor,"black",2,10)
-        self.shoulder = makeOval(18,18,x+30,y-20,jointColor,"black",2,10)
+            self.extra = canvas.create_polygon(x*0.5*scale, (y-55)*0.5*scale, (x-20)*0.5*scale, (y-90)*0.5*scale, (x+20)*0.5*scale, (y-90)*0.5*scale, fill=extraColor, outline="black")
+        self.mask = makeOval(10.5*scale, 2.5*scale, (x+7)*0.5*scale, (y-80)*0.5*scale, maskColor, "black", 2, 5*scale)
+        self.bicep = makeOval(25*scale, 7.5*scale, (x+50)*0.5*scale, (y-20)*0.5*scale, partsColor, "black", 2, 5*scale)
+        self.forearm = makeOval(15*scale, 5*scale, (x+100)*0.5*scale, (y-20)*0.5*scale, partsColor, "black", 2, 5*scale)
+        self.hand = makeOval(7.5*scale, 7.5*scale, (x+130)*0.5*scale, (y-20)*0.5*scale, jointColor, "black", 2, 5*scale)
+        self.shoulder = makeOval(9*scale, 9*scale, (x+30)*0.5*scale, (y-20)*0.5*scale, jointColor, "black", 2, 5*scale)
         self.arm = [self.bicep, self.forearm, self.hand, self.shoulder] # All arm parts
         for i in self.arm: # Rotate all arm parts 45 degrees clockwise accross center of shoulder
-            rotate(i, x+30, y-20, 45)
-        self.bicep2 = makeOval(50,15,x,y-20,partsColor,"black",2,10)
-        self.forearm2 = makeOval(30,10,x+50,y-20,partsColor,"black",2,10)
-        self.hand2 = makeOval(15,15,x+80,y-20,jointColor,"black",2,10)
-        self.shoulder2 = makeOval(18,18,x-20,y-20,jointColor,"black",2,10)
+            rotate(i, (x+30)*0.5*scale, (y-20)*0.5*scale, 45)
+        self.body = canvas.create_polygon((x-30)*0.5*scale, (y-50)*0.5*scale, (x+30)*0.5*scale, (y-50)*0.5*scale, (x+30)*0.5*scale, (y+50)*0.5*scale, (x-30)*0.5*scale, (y+50)*0.5*scale, fill=partsColor, outline="black")
+        self.leg1 = makeOval(6.5*scale, 20*scale, (x+15)*0.5*scale, (y+70)*0.5*scale, partsColor, "black", 10, 5*scale)
+        self.leg2 = makeOval(6.5*scale, 20*scale, (x-18)*0.5*scale, (y+70)*0.5*scale, partsColor, "black", 10, 5*scale)
+        self.lowerleg = makeOval(5*scale, 15*scale, (x+15)*0.5*scale, (y+120)*0.5*scale, partsColor, "black", 1, 5*scale)
+        self.lowerleg2 = makeOval(5*scale, 15*scale, (x-20)*0.5*scale, (y+120)*0.5*scale, partsColor, "black", 1, 5*scale)
+        self.knee = makeOval(5*scale, 5*scale, (x+15)*0.5*scale, (y+95)*0.5*scale, jointColor, "black", 10, 5*scale)
+        self.knee2 = makeOval(5*scale, 5*scale, (x-20)*0.5*scale, (y+95)*0.5*scale, jointColor, "black", 10, 5*scale)
+        self.feet = canvas.create_polygon((x+10)*0.5*scale, (y+145)*0.5*scale, (x+40)*0.5*scale, (y+145)*0.5*scale, (x+40)*0.5*scale, (y+160)*0.5*scale, (x+10)*0.5*scale, (y+160)*0.5*scale, fill=jointColor, outline="black")
+        self.feet2 = canvas.create_polygon((x-25)*0.5*scale, (y+145)*0.5*scale, (x+5)*0.5*scale, (y+145)*0.5*scale, (x+5)*0.5*scale, (y+160)*0.5*scale, (x-25)*0.5*scale, (y+160)*0.5*scale, fill=jointColor, outline="black")
+        self.bicep2 = makeOval(25*scale, 7.5*scale, x*0.5*scale, (y-20)*0.5*scale, partsColor, "black", 2, 10*scale)
+        self.forearm2 = makeOval(15*scale, 5*scale, (x+50)*0.5*scale, (y-20)*0.5*scale, partsColor, "black", 2, 5*scale)
+        self.hand2 = makeOval(7.5*scale, 7.5*scale, (x+80)*0.5*scale, (y-20)*0.5*scale, jointColor, "black", 2, 5*scale)
+        self.shoulder2 = makeOval(9*scale, 9*scale, (x-20)*0.5*scale, (y-20)*0.5*scale, jointColor, "black", 2, 5*scale)
         self.arm2 = [self.bicep2, self.forearm2, self.hand2, self.shoulder2] # All arm parts
-        for i in self.arm2: # Rotate all arm parts 45 degrees clockwise accross center of shoulder
-            rotate(i, x-30, y-20, 110)
-        self.leg1 = makeOval(13,40,x+15,y+70,partsColor,"black",10,10)
-        self.leg2 = makeOval(13,40,x-18,y+70,partsColor,"black",10,10)
-        self.lowerleg = makeOval(10,30,x-20,y+120,partsColor,"black",1,10)
-        self.lowerleg2 = makeOval(10,30,x+15,y+120,partsColor,"black",1,10)
-        self.knee = makeOval(10,10,x-20,y+95,jointColor,"black",10,10)
-        self.knee2 = makeOval(10,10,x+15,y+95,jointColor,"black",10,10)
-        self.feet = canvas.create_polygon(x+10, y+145, x+40, y+145, x+40, y+160, x+10, y+160, fill=jointColor, outline="black")
-        self.feet2 = canvas.create_polygon(x-25, y+145, x+5, y+145, x+5, y+160, x-25, y+160, fill=jointColor, outline="black")
-        self.fullBody = [self.head, self.mask, self.body, *self.arm, *self.arm2, self.leg1, self.leg2, self.lowerleg, self.lowerleg2, self.knee, self.knee2, self.feet, self.feet2]
+        for i in self.arm2: # Rotate all arm parts 110 degrees clockwise accross center of shoulder
+            rotate(i, (x-20)*0.5*scale, (y-20)*0.5*scale, 110)
+        self.fullBody = [self.head, self.extra if extra else -1, self.mask, self.body, *self.arm, *self.arm2, self.leg1, self.leg2, self.lowerleg, self.lowerleg2, self.knee, self.knee2, self.feet, self.feet2]
         if forwardDir == "left":
             for i in self.fullBody:
-                reflect(i, x, None)
+                reflect(i, x*0.5*scale, None)
+    def move(self, direction, distance):
+        cnt = 0
+        while True:
+            # First arm and leg movement
+            rotate(self.forearm, rotatePoint((self.x+100)*0.5*scale - 8*scale, (self.y-20)*0.5*scale, (self.x+30)*0.5*scale, (self.y-20)*0.5*scale, 45)[0], rotatePoint((self.x+100)*0.5*scale - 8*scale, (self.y-20)*0.5*scale, (self.x+30)*0.5*scale, (self.y-20)*0.5*scale, 45)[1], 270)
+            rotate(self.hand, rotatePoint((self.x+100)*0.5*scale - 8*scale, (self.y-20)*0.5*scale, (self.x+30)*0.5*scale, (self.y-20)*0.5*scale, 45)[0], rotatePoint((self.x+100)*0.5*scale - 8*scale, (self.y-20)*0.5*scale, (self.x+30)*0.5*scale, (self.y-20)*0.5*scale, 45)[1], 270)
+            for i in self.arm:
+                rotate(i, (self.x+30)*0.5*scale, (self.y-20)*0.5*scale, 330)
 
-offensep1 = character(100, 300, "orange", "navy", "silver", False, "right")
-offensep2 = character(400, 300, "orange", "gold", "silver", True, "left")
+            rotate(self.forearm2, rotatePoint((self.x+50)*0.5*scale - 8*scale, (self.y-20)*0.5*scale, (self.x-20)*0.5*scale, (self.y-20)*0.5*scale, 110)[0], rotatePoint((self.x+50)*0.5*scale - 8*scale, (self.y-20)*0.5*scale, (self.x-20)*0.5*scale, (self.y-20)*0.5*scale, 110)[1], 270)
+            rotate(self.hand2, rotatePoint((self.x+50)*0.5*scale - 8*scale, (self.y-20)*0.5*scale, (self.x-20)*0.5*scale, (self.y-20)*0.5*scale, 110)[0], rotatePoint((self.x+50)*0.5*scale - 8*scale, (self.y-20)*0.5*scale, (self.x-20)*0.5*scale, (self.y-20)*0.5*scale, 110)[1], 270)
+            for i in self.arm2:
+                rotate(i, (self.x-20)*0.5*scale, (self.y-20)*0.5*scale, 20)
+
+            rotate(self.lowerleg, (self.x+15)*0.5*scale, (self.y+95)*0.5*scale, 90)
+            rotate(self.knee, (self.x+15)*0.5*scale, (self.y+95)*0.5*scale, 90)
+            rotate(self.feet, (self.x+15)*0.5*scale, (self.y+95)*0.5*scale, 90)
+
+            rotate(self.leg1, (self.x+15)*0.5*scale, (self.y+70)*0.5*scale - 16*scale, 330)
+            rotate(self.lowerleg, (self.x+15)*0.5*scale, (self.y+70)*0.5*scale - 16*scale, 330)
+            rotate(self.knee, (self.x+15)*0.5*scale, (self.y+70)*0.5*scale - 16*scale, 330)
+            rotate(self.feet, (self.x+15)*0.5*scale, (self.y+70)*0.5*scale - 16*scale, 330)
+
+
+            cnt += 1
+            if cnt >= distance:
+                break
+            # -------------------------------------- 222222222222222222222222222 ---------------------------------------------
+
+            cnt += 1
+            if cnt >= distance:
+                break
+            # -------------------------------------- 333333333333333333333333333 ---------------------------------------------
+
+            cnt += 1
+            if cnt >= distance:
+                break
+            # -------------------------------------- 444444444444444444444444444 ---------------------------------------------
+
+            cnt += 1
+            if cnt >= distance:
+                break
+
+offenseP1 = character(1700*(1/12)*2, 850*(1/2)*2, "orange", "gold", "gray", "gold", "silver", True, "right")
+offenseP2 = character(1700*(11/12)*2, 850*(1/2)*2, "orange", None, "black", "gray", "black", False, "left")
+
+offenseP1.move("forward", 1)
 
 canvas.mainloop()
