@@ -162,16 +162,13 @@ class character():
             self.fullBodyOrigCoords[i] = canvas.coords(i)
     def leftRotate(self, obj, rotatex, rotatey, angle):
         rotate(obj, 2*(self.x*0.5*scale)-rotatex, rotatey, 360-angle)
-    def resetNewPos(self, x, y):
+    def resetPos(self, x, y):
         for i in self.fullBody:
-            origCoords = self.fullBodyOrigCoords[i]
-            for j in range(0, len(origCoords)-1, 2):
-                self.fullBodyOrigCoords[i][j] = origCoords[j] + x
-                self.fullBodyOrigCoords[i][j+1] = origCoords[j+1] + y
-            for j in self.fullBody:
-                canvas.coords(j, self.fullBodyOrigCoords[j])
-        self.x += x
-        self.y += y
+            origCoords = canvas.coords(i)
+            for j in range(0, len(origCoords), 2):
+                self.fullBodyOrigCoords[i][j] = self.fullBodyOrigCoords[i][j] + x
+                self.fullBodyOrigCoords[i][j+1] = self.fullBodyOrigCoords[i][j+1] + y
+            canvas.coords(i, self.fullBodyOrigCoords[i])
     def move(self, direction, distance):
         rotateFunctions = [self.leftRotate, rotate]
         cnt = 0
@@ -192,7 +189,6 @@ class character():
                 
                 for i in [self.lowerleg, self.leg1, self.knee, self.feet]:
                     rotateFunctions[0 if self.forwardDir == "left" else 1](i, (self.x+15)*0.5*scale, (self.y+70)*0.5*scale - 16*scale, 330)
-                time.sleep(0.1)
                 tk.update()
                 cnt += 1
                 if cnt >= distance:
@@ -212,7 +208,6 @@ class character():
 
                 for i in self.arm2:
                     rotateFunctions[0 if self.forwardDir == "left" else 1](i, (self.x-20)*0.5*scale, (self.y-20)*0.5*scale, 280)
-                time.sleep(0.1)
                 tk.update()
 
                 cnt += 1
@@ -236,7 +231,6 @@ class character():
                     canvas.move(i, 15*scale*0.5 if direction == "forward" else -15*scale*0.5, 0)
                 self.x += 15 if direction == "forward" else -15
 
-                time.sleep(0.1)
                 tk.update()
                 cnt += 1
                 if cnt >= distance:
@@ -256,16 +250,16 @@ class character():
                 for i in self.fullBody:
                     canvas.move(i, 15*scale*0.5 if direction == "forward" else -15*scale*0.5, 0)
                 self.x += 15 if direction == "forward" else -15
-                time.sleep(0.1)
                 tk.update()
                 cnt += 1
                 if cnt >= distance:
                     break
+        self.resetPos(cnt*15*scale*0.5 if direction == "forward" else cnt*-15*scale*0.5, 0)
 
 offenseP1 = character(1700*(1/12)*2, 850*(1/2)*2, "orange", "gold", "gray", "gold", "silver", True, "right")
 offenseP2 = character(1700*(11/12)*2, 850*(1/2)*2, "orange", None, "black", "gray", "black", False, "left")
 
-offenseP1.move("forward", 46)
+offenseP1.move("forward", 12)
 offenseP2.move("backwards", 47)
 
 canvas.mainloop()
