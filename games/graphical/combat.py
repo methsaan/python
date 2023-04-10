@@ -9,7 +9,7 @@ from tkinter import *
 tk = Tk()
 tk.title("Combat")
 
-scale = 1.2
+scale = 1
 
 canvas = Canvas(tk, height=850*scale, width=1700*scale, bg="white", bd=0, highlightbackground="white")
 canvas.pack()
@@ -261,5 +261,9 @@ offenseP2 = character(1700*(11/12)*2, 850*(1/2)*2, "orange", None, "black", "gra
 
 offenseP1.move("forward", 12)
 offenseP2.move("backwards", 47)
+offenseP1.move("forward", 47)
+offenseP2.move("backwards", 12)
+offenseP1.move("forward", 10)
+offenseP2.move("backwards", 10)
 
 canvas.mainloop()
