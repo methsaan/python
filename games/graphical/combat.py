@@ -209,7 +209,6 @@ class character():
                 for i in self.arm2:
                     rotateFunctions[0 if self.forwardDir == "left" else 1](i, (self.x-20)*0.5*scale, (self.y-20)*0.5*scale, 280)
                 tk.update()
-
                 cnt += 1
                 if cnt >= distance:
                     break
@@ -230,7 +229,6 @@ class character():
                 for i in self.fullBody:
                     canvas.move(i, 15*scale*0.5 if direction == "forward" else -15*scale*0.5, 0)
                 self.x += 15 if direction == "forward" else -15
-
                 tk.update()
                 cnt += 1
                 if cnt >= distance:
@@ -255,15 +253,35 @@ class character():
                 if cnt >= distance:
                     break
         self.resetPos(cnt*15*scale*0.5 if direction == "forward" else cnt*-15*scale*0.5, 0)
+        self.x += 30 if direction == "forward" else -30
 
 offenseP1 = character(1700*(1/12)*2, 850*(1/2)*2, "orange", "gold", "gray", "gold", "silver", True, "right")
 offenseP2 = character(1700*(11/12)*2, 850*(1/2)*2, "orange", None, "black", "gray", "black", False, "left")
 
-offenseP1.move("forward", 12)
-offenseP2.move("backwards", 47)
-offenseP1.move("forward", 47)
-offenseP2.move("backwards", 12)
+s = time.time()
+offenseP1.move("forward", 2)
+offenseP2.move("backwards", 2)
+print("2:", time.time()-s)
+s = time.time()
+offenseP1.move("forward", 4)
+offenseP2.move("backwards", 4)
+print("4:", time.time()-s)
+s = time.time()
+offenseP1.move("forward", 6)
+offenseP2.move("backwards", 6)
+print("6:", time.time()-s)
+s = time.time()
+offenseP1.move("forward", 8)
+offenseP2.move("backwards", 8)
+print("8:", time.time()-s)
+s = time.time()
 offenseP1.move("forward", 10)
 offenseP2.move("backwards", 10)
+print("10:", time.time()-s)
+s = time.time()
+offenseP1.move("forward", 12)
+offenseP2.move("backwards", 12)
+print("12:", time.time()-s)
+s = time.time()
 
 canvas.mainloop()
