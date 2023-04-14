@@ -190,6 +190,7 @@ class character():
                 for i in [self.lowerleg, self.leg1, self.knee, self.feet]:
                     rotateFunctions[0 if self.forwardDir == "left" else 1](i, (self.x+15)*0.5*scale, (self.y+70)*0.5*scale - 16*scale, 330)
                 tk.update()
+                time.sleep(0.5)
                 cnt += 1
                 if cnt >= distance:
                     break
@@ -209,6 +210,7 @@ class character():
                 for i in self.arm2:
                     rotateFunctions[0 if self.forwardDir == "left" else 1](i, (self.x-20)*0.5*scale, (self.y-20)*0.5*scale, 280)
                 tk.update()
+                time.sleep(0.5)
                 cnt += 1
                 if cnt >= distance:
                     break
@@ -230,6 +232,7 @@ class character():
                     canvas.move(i, 30*scale*0.5 if direction == "forward" else -30*scale*0.5, 0)
                 self.x += 30 if direction == "forward" else -30
                 tk.update()
+                time.sleep(0.5)
                 cnt += 1
                 if cnt >= distance:
                     break
@@ -249,6 +252,7 @@ class character():
                     canvas.move(i, 30*scale*0.5 if direction == "forward" else -30*scale*0.5, 0)
                 self.x += 30 if direction == "forward" else -30
                 tk.update()
+                time.sleep(0.5)
                 cnt += 1
                 if cnt >= distance:
                     break
@@ -273,33 +277,5 @@ canvas.bind_all("<KeyPress-Up>", keys)
 canvas.bind_all("<KeyPress-Down>", keys)
 canvas.bind_all("<KeyPress-w>", keys)
 canvas.bind_all("<KeyPress-s>", keys)
-
-#s = time.time()
-#offenseP1.move("forward", 10)
-#offenseP2.move("backwards", 10)
-#offenseP1.move("backwards", 10)
-#offenseP2.move("forward", 10)
-#print("10:", time.time()-s)
-#s = time.time()
-#offenseP1.move("forward", 4)
-#offenseP2.move("backwards", 4)
-#print("4:", time.time()-s)
-#s = time.time()
-#offenseP1.move("forward", 6)
-#offenseP2.move("backwards", 6)
-#print("6:", time.time()-s)
-#s = time.time()
-#offenseP1.move("forward", 8)
-#offenseP2.move("backwards", 8)
-#print("8:", time.time()-s)
-#s = time.time()
-#offenseP1.move("forward", 10)
-#offenseP2.move("backwards", 10)
-#print("10:", time.time()-s)
-#s = time.time()
-#offenseP1.move("forward", 58)
-#offenseP2.move("backwards", 58)
-#print("58:", time.time()-s)
-#s = time.time()
 
 canvas.mainloop()
