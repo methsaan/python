@@ -172,6 +172,7 @@ class character():
     def move(self, direction, distance):
         rotateFunctions = [self.leftRotate, rotate]
         cnt = 0
+        hasPrevKeyRelease = None
         while True:
             if cnt < 2:
                 # First arm and leg movement
