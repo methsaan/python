@@ -235,8 +235,8 @@ class character():
         self.x += 30 if direction == "forward" else -30
 
     def mvt5(self, direction, distance):
-        self.resetPos(4*30*scale*0.5 if direction == "forward" else 4*-30*scale*0.5, 0)
-        self.x += 60 if direction == "forward" else -60
+        self.resetPos(distance*30*scale*0.5 if direction == "forward" else distance*-30*scale*0.5, 0)
+        self.x += 15*distance if direction == "forward" else -15*distance
 
     #def move(self, direction, distance):
     #    cnt = 0
@@ -359,6 +359,8 @@ def on_key_release(event): # runs once key is let go
     has_prev_key_release = None
     global holdCnt
     holdCnt = 0
+    print(holdCnt, "*", repr(event.char))
+    offenseP1.mvt5("forward" if event.keysym == "Up" else "backwards", 1)
 
 def on_key_press(event): # runs when key is pressed
     global holdCnt
@@ -379,7 +381,7 @@ def on_key_press_repeat(event): # runs while key is held
         has_prev_key_release = None
         print(holdCnt, "on_key_press_repeat", repr(event.char))
         if (holdCnt-1) % 3 == 0:
-            p1mvts[((holdCnt-1)//3)%5-1]("forward" if event.keysym == "Up" else "backwards", 16)
+            p1mvts[((holdCnt-1)//3)%5-1]("forward" if event.keysym == "Up" else "backwards", 4)
             print("--------------->", ((holdCnt-1)//3)%5-1)
     else:
         on_key_press(event)
