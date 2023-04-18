@@ -359,7 +359,6 @@ def on_key_release(event): # runs once key is let go
     has_prev_key_release = None
     global holdCnt
     holdCnt = 0
-    print(holdCnt, "*", repr(event.char))
 
 def on_key_press(event): # runs when key is pressed
     global holdCnt
@@ -379,13 +378,16 @@ def on_key_press_repeat(event): # runs while key is held
         tk.after_cancel(has_prev_key_release)
         has_prev_key_release = None
         print(holdCnt, "on_key_press_repeat", repr(event.char))
-        if (holdCnt-1) % 4 == 0:
-            p1mvts[((holdCnt-1)//4)%5-1]("forward", 4)
-            print("--------------->", ((holdCnt-1)//4)%5-1)
+        if (holdCnt-1) % 3 == 0:
+            p1mvts[((holdCnt-1)//3)%5-1]("forward" if event.keysym == "Up" else "backwards", 16)
+            print("--------------->", ((holdCnt-1)//3)%5-1)
     else:
         on_key_press(event)
 
 canvas.bind_all("<KeyPress-Up>", on_key_press_repeat)
 canvas.bind_all("<KeyRelease-Up>", on_key_release_repeat)
+
+canvas.bind_all("<KeyPress-Down>", on_key_press_repeat)
+canvas.bind_all("<KeyRelease-Down>", on_key_release_repeat)
 
 canvas.mainloop()
