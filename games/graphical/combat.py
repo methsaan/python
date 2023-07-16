@@ -13,6 +13,33 @@ scale = 1
 
 canvas = Canvas(tk, height=850*scale, width=1700*scale, bg="white", bd=0, highlightbackground="white")
 canvas.pack()
+# Define building class - draw building given the coordinate pairs of all points of top of the building and the vanishing point
+class Building:
+  def __init__(self, coordPairs, vanishingPointx, vanishingPointy, fillCol, outlineCol):
+    self.triangles = []
+    for i in range(len(coordPairs)):
+        for j in range(len(coordPairs[i])):
+            coordPairs[i][j] *= scale
+    coordPairs = [coordPairs[-1]] + coordPairs
+    for i in range(len(coordPairs)-1):
+      self.triangles.append(canvas.create_polygon(*list(chain.from_iterable([coordPairs[i], coordPairs[i+1], [vanishingPointx, vanishingPointy]])), fill=fillCol, outline=outlineCol, width=4))
+    self.rect = canvas.create_polygon(*list(chain.from_iterable(coordPairs)), fill=fillCol, outline=outlineCol, width=4)
+
+#Create buildings and store in list containing all buildings
+buildings = []
+
+buildings.append(Building([[50, 50], [200, 50], [200, 250], [50, 250]], 850*scale, 425*scale, "lightgreen", "green"))
+buildings.append(Building([[300, 50], [500, 50], [500, 200], [300, 200]], 850*scale, 425*scale, "orange", "red"))
+buildings.append(Building([[100, 750], [180, 750], [180, 600], [100, 600]], 850*scale, 425*scale, "gray", "black"))
+buildings.append(Building([[400, 700], [560, 700], [560, 550], [400, 550]], 850*scale, 425*scale, "lightgray", "black"))
+buildings.append(Building([[1250, 650], [1430, 650], [1430, 530], [1300, 530], [1300, 600], [1250, 600]], 850*scale, 425*scale, "brown", "maroon"))
+buildings.append(Building([[1600, 20], [1300, 20], [1300, 200], [1600, 200]], 850*scale, 425*scale, "blue", "navy"))
+buildings.append(Building([[1570, 170], [1570, 300], [1470, 300], [1470, 170]], 850*scale, 425*scale, "aqua", "teal"))
+buildings.append(Building([[1200, 750], [1200, 600], [1100, 600], [1100, 750]], 850*scale, 425*scale, "pink", "magenta"))
+buildings.append(Building([[1200, 50], [1100, 50], [1100, 200], [1200, 200]], 850*scale, 425*scale, "teal", "black"))
+
+canvas.create_rectangle(800*scale, -100*scale, 900*scale, 900*scale, fill="darkgray", outline="black", width=10)
+canvas.create_rectangle(-100*scale, 350*scale, 1800*scale, 500*scale, fill="darkgray", outline="black", width=10)
 
 def rotatePoint(x, y, rotatex, rotatey, angle): # x of point to rotate, y of point to rotate, x of center of rotation, y of center of rotation, angle
     lengthFromRotPoint = math.sqrt(abs(x-rotatex)**2 + abs(y-rotatey)**2) # length from rotation point to rotated point
@@ -185,6 +212,7 @@ class character():
 
         for i in [self.lowerleg, self.leg1, self.knee, self.feet]:
             self.rotateFunctions[0 if self.forwardDir == "left" else 1](i, (self.x+15)*0.5*scale, (self.y+70)*0.5*scale - 16*scale, 330)
+        tk.update()
 
     def mvt2(self, direction, distance):
         for i in [self.lowerleg2, self.knee2, self.feet2]:
@@ -201,6 +229,7 @@ class character():
 
         for i in self.arm2:
             self.rotateFunctions[0 if self.forwardDir == "left" else 1](i, (self.x-20)*0.5*scale, (self.y-20)*0.5*scale, 280)
+        tk.update()
 
     def mvt3(self, direction, distance):
         for i in [self.leg2, self.lowerleg2, self.knee2, self.feet2]:
@@ -214,9 +243,10 @@ class character():
 
         for i in self.arm2:
             self.rotateFunctions[0 if self.forwardDir == "left" else 1](i, (self.x-20)*0.5*scale, (self.y-20)*0.5*scale, 160)
-        for i in self.fullBody:
-            canvas.move(i, 30*scale*0.5 if direction == "forward" else -30*scale*0.5, 0)
-        self.x += 30 if direction == "forward" else -30
+        #for i in self.fullBody:
+        #    canvas.move(i, 30*scale*0.5 if direction == "forward" else -30*scale*0.5, 0)
+        #tk.update()
+        #self.x += 30 if direction == "forward" else -30
 
     def mvt4(self, direction, distance):
         for i in [self.leg2, self.lowerleg2, self.knee2, self.feet2]:
@@ -230,124 +260,19 @@ class character():
 
         for i in self.arm2:
             self.rotateFunctions[0 if self.forwardDir == "left" else 1](i, (self.x-20)*0.5*scale, (self.y-20)*0.5*scale, 200)
-        for i in self.fullBody:
-            canvas.move(i, 30*scale*0.5 if direction == "forward" else -30*scale*0.5, 0)
-        self.x += 30 if direction == "forward" else -30
+        #for i in self.fullBody:
+        #    canvas.move(i, 30*scale*0.5 if direction == "forward" else -30*scale*0.5, 0)
+        #tk.update()
+        #self.x += 30 if direction == "forward" else -30
 
     def mvt5(self, direction, distance):
-        self.resetPos(distance*30*scale*0.5 if direction == "forward" else distance*-30*scale*0.5, 0)
-        self.x += 15*distance if direction == "forward" else -15*distance
+        self.resetPos(10*scale, 0)
+        tk.update()
+        self.x += 10 if direction == "forward" else -10
+        print("x:", self.x)
 
-    #def move(self, direction, distance):
-    #    cnt = 0
-    #    while True:
-    #        if cnt < 2:
-    #            # First arm and leg movement
-    #            self.rotateFunctions[0 if self.forwardDir == "left" else 1](self.forearm, rotatePoint((self.x+100)*0.5*scale - 8*scale, (self.y-20)*0.5*scale, (self.x+30)*0.5*scale, (self.y-20)*0.5*scale, 45)[0], rotatePoint((self.x+100)*0.5*scale - 8*scale, (self.y-20)*0.5*scale, (self.x+30)*0.5*scale, (self.y-20)*0.5*scale, 45)[1], 270)
-    #            self.rotateFunctions[0 if self.forwardDir == "left" else 1](self.hand, rotatePoint((self.x+100)*0.5*scale - 8*scale, (self.y-20)*0.5*scale, (self.x+30)*0.5*scale, (self.y-20)*0.5*scale, 45)[0], rotatePoint((self.x+100)*0.5*scale - 8*scale, (self.y-20)*0.5*scale, (self.x+30)*0.5*scale, (self.y-20)*0.5*scale, 45)[1], 270)
-    #            for i in self.arm:
-    #                self.rotateFunctions[0 if self.forwardDir == "left" else 1](i, (self.x+30)*0.5*scale, (self.y-20)*0.5*scale, 330)
-    #            self.rotateFunctions[0 if self.forwardDir == "left" else 1](self.forearm2, rotatePoint((self.x+50)*0.5*scale - 8*scale, (self.y-20)*0.5*scale, (self.x-20)*0.5*scale, (self.y-20)*0.5*scale, 110)[0], rotatePoint((self.x+50)*0.5*scale - 8*scale, (self.y-20)*0.5*scale, (self.x-20)*0.5*scale, (self.y-20)*0.5*scale, 110)[1], 270)
-    #            self.rotateFunctions[0 if self.forwardDir == "left" else 1](self.hand2, rotatePoint((self.x+50)*0.5*scale - 8*scale, (self.y-20)*0.5*scale, (self.x-20)*0.5*scale, (self.y-20)*0.5*scale, 110)[0], rotatePoint((self.x+50)*0.5*scale - 8*scale, (self.y-20)*0.5*scale, (self.x-20)*0.5*scale, (self.y-20)*0.5*scale, 110)[1], 270)
-    #            for i in self.arm2:
-    #                self.rotateFunctions[0 if self.forwardDir == "left" else 1](i, (self.x-20)*0.5*scale, (self.y-20)*0.5*scale, 20)
-
-    #            for i in [self.lowerleg, self.knee, self.feet]:
-    #                self.rotateFunctions[0 if self.forwardDir == "left" else 1](i, (self.x+15)*0.5*scale, (self.y+95)*0.5*scale, 90)
-                
-    #            for i in [self.lowerleg, self.leg1, self.knee, self.feet]:
-    #                self.rotateFunctions[0 if self.forwardDir == "left" else 1](i, (self.x+15)*0.5*scale, (self.y+70)*0.5*scale - 16*scale, 330)
-    #            tk.update()
-    #            time.sleep(0.5)
-    #            cnt += 1
-    #            if cnt >= distance:
-    #                break
-    #            # Second arm and leg movement
-    #            for i in [self.lowerleg2, self.knee2, self.feet2]:
-    #                self.rotateFunctions[0 if self.forwardDir == "left" else 1](i, (self.x-20)*0.5*scale, (self.y+95)*0.5*scale, 90)
-
-    #            for i in [self.leg2, self.lowerleg2, self.knee2, self.feet2]:
-    #                self.rotateFunctions[0 if self.forwardDir == "left" else 1](i, (self.x-18)*0.5*scale, (self.y+70)*0.5*scale - 16*scale, 300)
-
-    #            for i in [self.lowerleg, self.leg1, self.knee, self.feet]:
-    #                self.rotateFunctions[0 if self.forwardDir == "left" else 1](i, (self.x+15)*0.5*scale, (self.y+70)*0.5*scale - 16*scale, 30)
-
-    #            for i in self.arm:
-    #                self.rotateFunctions[0 if self.forwardDir == "left" else 1](i, (self.x+30)*0.5*scale, (self.y-20)*0.5*scale, 180)
-
-    #            for i in self.arm2:
-    #                self.rotateFunctions[0 if self.forwardDir == "left" else 1](i, (self.x-20)*0.5*scale, (self.y-20)*0.5*scale, 280)
-    #            tk.update()
-    #            time.sleep(0.5)
-    #            cnt += 1
-    #            if cnt >= distance:
-    #                break
-    #        else:
-    #            # Third arm and leg movement
-
-    #            for i in [self.leg2, self.lowerleg2, self.knee2, self.feet2]:
-    #                self.rotateFunctions[0 if self.forwardDir == "left" else 1](i, (self.x-18)*0.5*scale, (self.y+70)*0.5*scale - 16*scale, 120)
-
-    #            for i in [self.lowerleg, self.leg1, self.knee, self.feet]:
-    #                self.rotateFunctions[0 if self.forwardDir == "left" else 1](i, (self.x+15)*0.5*scale, (self.y+70)*0.5*scale - 16*scale, 300)
-
-    #            for i in self.arm:
-    #                self.rotateFunctions[0 if self.forwardDir == "left" else 1](i, (self.x+30)*0.5*scale, (self.y-20)*0.5*scale, 180)
-
-    #            for i in self.arm2:
-    #                self.rotateFunctions[0 if self.forwardDir == "left" else 1](i, (self.x-20)*0.5*scale, (self.y-20)*0.5*scale, 160)
-    #            for i in self.fullBody:
-    #                canvas.move(i, 30*scale*0.5 if direction == "forward" else -30*scale*0.5, 0)
-    #            self.x += 30 if direction == "forward" else -30
-    #            tk.update()
-    #            time.sleep(0.5)
-    #            cnt += 1
-    #            if cnt >= distance:
-    #                break
-    #            # Fourth arm and leg movement
-    #            for i in [self.leg2, self.lowerleg2, self.knee2, self.feet2]:
-    #                self.rotateFunctions[0 if self.forwardDir == "left" else 1](i, (self.x-18)*0.5*scale, (self.y+70)*0.5*scale - 16*scale, 240)
-
-    #            for i in [self.lowerleg, self.leg1, self.knee, self.feet]:
-    #                self.rotateFunctions[0 if self.forwardDir == "left" else 1](i, (self.x+15)*0.5*scale, (self.y+70)*0.5*scale - 16*scale, 60)
-
-    #            for i in self.arm:
-    #                self.rotateFunctions[0 if self.forwardDir == "left" else 1](i, (self.x+30)*0.5*scale, (self.y-20)*0.5*scale, 180)
-
-    #            for i in self.arm2:
-    #                self.rotateFunctions[0 if self.forwardDir == "left" else 1](i, (self.x-20)*0.5*scale, (self.y-20)*0.5*scale, 200)
-    #            for i in self.fullBody:
-    #                canvas.move(i, 30*scale*0.5 if direction == "forward" else -30*scale*0.5, 0)
-    #            self.x += 30 if direction == "forward" else -30
-    #            tk.update()
-    #            time.sleep(0.5)
-    #            cnt += 1
-    #            if cnt >= distance:
-    #                break
-    #    self.resetPos(cnt*30*scale*0.5 if direction == "forward" else cnt*-30*scale*0.5, 0)
-    #    tk.update()
-    #    time.sleep(0.1)
-    #    self.x += 60 if direction == "forward" else -60
-
-offenseP1 = character(1700*(1/12)*2, 850*(1/8)*2, "orange", "gold", "gray", "gold", "silver", True, "right")
-offenseP2 = character(1700*(11/12)*2, 850*(1/8)*2, "orange", None, "black", "gray", "black", False, "left")
-
-#def p1forward(event):
-#    offenseP1.move("forward", 4)
-
-#def p1backward(event):
-#    offenseP1.move("backward", 4)
-
-#def p2forward(event):
-#    offenseP2.move("backward", 4)
-
-#def p2backward(event):
-#    offenseP2.move("forward", 4)
-
-#canvas.bind_all("<Up>", p1forward)
-#canvas.bind_all("<Down>", p1backward)
-#canvas.bind_all("<w>", p2forward)
-#canvas.bind_all("<s>", p2backward)
+offenseP1 = character(1700*(1/12)*2, 850*(1/2)*2, "navy", "goldenrod", "silver", "goldenrod", "silver", True, "right")
+offenseP2 = character(1700*(11/12)*2, 850*(1/2)*2, "orange", None, "black", "gray", "black", False, "left")
 
 has_prev_key_release = None
 holdCnt = 0
@@ -370,7 +295,7 @@ def on_key_press(event): # runs when key is pressed
 def on_key_release_repeat(event): # runs while key is held
     global has_prev_key_release
     has_prev_key_release = tk.after_idle(on_key_release, event)
-    print(holdCnt, "-", repr(event.char))
+    #print(holdCnt, "-", repr(event.char))
 
 def on_key_press_repeat(event): # runs while key is held
     global has_prev_key_release
@@ -379,10 +304,10 @@ def on_key_press_repeat(event): # runs while key is held
         holdCnt += 1
         tk.after_cancel(has_prev_key_release)
         has_prev_key_release = None
-        print(holdCnt, "on_key_press_repeat", repr(event.char))
-        if (holdCnt-1) % 3 == 0:
-            p1mvts[((holdCnt-1)//3)%5-1]("forward" if event.keysym == "Up" else "backwards", 4)
-            print("--------------->", ((holdCnt-1)//3)%5-1)
+        #print(holdCnt, "on_key_press_repeat", repr(event.char))
+        if (holdCnt-1) % 2 == 0:
+            p1mvts[((holdCnt-1)//2)%5-1]("forward" if event.keysym == "Up" else "backwards", 4)
+            print(holdCnt, "--------------->", ((holdCnt-1)//2)%5-1)
     else:
         on_key_press(event)
 

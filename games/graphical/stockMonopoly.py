@@ -6,7 +6,7 @@ import time
 from tkinter import *
 from tkinter import ttk
 
-scale = 0.3
+scale = 0.9
 
 tk = Tk()
 canvas = Canvas(tk, width=2000*scale, height=1000*scale)

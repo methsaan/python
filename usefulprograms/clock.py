@@ -1,25 +1,14 @@
 #! /usr/bin/python3
 
+import math
 import time
 import datetime
-import math
-import subprocess as sp
+from tkinter import *
+from itertools import chain
 
-def print_char(x, y, char):
-    print("\033["+str(y)+";"+str(x)+"H"+char)
-
-def print_line(x1, y1, x2, y2, c):
-    if y2-y1 != 0:
-        xInc = 1 if (y2-y1) < (x2-x1) else ((x2-x1)/(y2-y1) if (y2-y1) != 0 else 1)
-        yInc = 1 if (x2-x1) < (y2-y1) else ((y2-y1)/(x2-x1) if (x2-x1) != 0 else 1)
-    else:
-        xInc = 1
-        yInc = 0
-    coords = []
-    numOfCoords = x2-x1 if (xInc == 1 or y2-y1 == 0) else y2-y1
-    for x in range(abs(numOfCoords)):
-        temp = -x if numOfCoords < 0 else x
-        print_char(x1+int(temp*xInc), y1+int(temp*yInc), c)
+tk = Tk()
+canvas = Canvas(tk, width=800, height=800, bg="#6699CC")
+canvas.pack()
 
 def rotatePoint(x, y, rotatex, rotatey, angle):
     lengthFromRotPoint = math.sqrt(abs(x-rotatex)**2 + abs(y-rotatey)**2)
@@ -70,6 +59,31 @@ def rotatePoint(x, y, rotatex, rotatey, angle):
         newCoordy = rotatey - yFromRotPoint
     return [newCoordx, newCoordy]
 
-for x in range(360):
-    print_line(int(rotatePoint(30, 10, 30, 20, x)[0]), int(rotatePoint(30, 10, 30, 20, x)[1]), 30, 20, "\\")
-    sp.call("clear", shell=True)
+def rotate(obj, rotatex, rotatey, angle):
+    oldCoords = []
+    for x in range(0, len(canvas.coords(obj)), 2):
+        oldCoords.append([canvas.coords(obj)[x], canvas.coords(obj)[x+1]])
+    newCoords = []
+    for x in oldCoords:
+        newCoords.append([rotatePoint(x[0], x[1], rotatex, rotatey, angle)[0], rotatePoint(x[0], x[1], rotatex, rotatey, angle)[1]])
+    canvas.coords(obj, *list(chain.from_iterable(newCoords)))
+
+canvas.create_oval(50, 50, 750, 750, fill="white", outline="black", width=40)
+
+for x in range(12):
+    canvas.create_text(rotatePoint(400, 120, 400, 400, 30*(x+1))[0], rotatePoint(400, 100, 400, 400, 30*(x+1))[1], text=str(x+1), font=("times new roman", 40))
+
+hourHand = canvas.create_polygon(390, 240, 410, 240, 410, 410, 390, 410, fill="black")
+minuteHand = canvas.create_polygon(395, 150, 405, 150, 405, 405, 395, 405, fill="black")
+secondHand = canvas.create_polygon(399, 150, 401, 150, 401, 401, 399, 401, fill="red")
+
+while True:
+    canvas.coords(hourHand, 390, 240, 410, 240, 410, 410, 390, 410)
+    canvas.coords(minuteHand, 395, 150, 405, 150, 405, 405, 395, 405)
+    canvas.coords(secondHand, 399, 150, 401, 150, 401, 401, 399, 401)
+    rotate(hourHand, 400, 400, datetime.datetime.now().hour%12*30 + datetime.datetime.now().minute*0.5)
+    rotate(minuteHand, 400, 400, datetime.datetime.now().minute*6 + datetime.datetime.now().second*0.1)
+    rotate(secondHand, 400, 400, datetime.datetime.now().second*6 + datetime.datetime.now().microsecond//10000*0.06)
+    tk.update()
+
+canvas.mainloop()
