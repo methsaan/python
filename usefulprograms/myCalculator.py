@@ -1,5 +1,11 @@
 #! /usr/bin/python3
 
+# Name: Methsaan Wickramasinghe
+# Date: July 26, 2023
+# File name: myCalculator.py
+# Description: ICS4U4 Summative
+# Calculator, graph identifier, data analyser and quadratics calculator
+
 import math
 import collections
 import time
@@ -53,6 +59,8 @@ def gcf(a, b):
 # Process: Calculate LCM
 def lcm(a, b):
     lcm = a
+    if b == 0:
+        return 0
     while lcm % b != 0:
         lcm += a
     return lcm
@@ -189,7 +197,8 @@ def make_histogram(histogram, xlabel, ylabel, title):
     cnt = 0
     interval = list(histogram.items())[1][0] - list(histogram.items())[0][0]
     for i in range(1, len(histogram)*2, 2):
-        canvas.create_rectangle(100+400/(len(histogram)*2+1)*i, 400-list(histogram.items())[cnt][1]*300/(max(histogram.values())+1), 100+400/(len(histogram)*2+1)*(i+1), 400, fill=random.choice(COLORS))
+        canvas.create_rectangle(100+400/(len(histogram)*2+1)*i, 400-list(histogram.items())[cnt][1]*300/(max(histogram.values())+1), 100+400/(len(histogram)
+*2+1)*(i+1), 400, fill=random.choice(COLORS))
         label = str(list(histogram.items())[cnt][0]) + "-" + str(list(histogram.items())[cnt][0]+interval)
         canvas.create_text(100+400/(len(histogram)*2+1)*(i+0.25), 410+len(label)*6.5, text=label, anchor="nw", angle=90)
         cnt += 1
@@ -288,7 +297,7 @@ def standard_to_factored(a, b, c):
     if discriminant < 0:
         x = "No real roots"
     elif discriminant == 0:
-        x = "x(x - " + str(round(-b / (2*a), 2)) + ")"
+        x = "(x - " + str(round(-b / (2*a), 2)) + ")^2"
     else:
         print((-b - math.sqrt(discriminant)) / (2*a))
         print((-b + math.sqrt(discriminant)) / (2*a))
@@ -392,7 +401,6 @@ def graph_identify():
     # Process: Add term to function given coefficient and degree
     if a != 0:
         function += ("" if a > 0 else "-") + (('%g' % abs(a)) if a != 1 else "") + "x" + ("^" + str(degree) if degree != 0 else "")
-
     # Process: Loop until all terms are added
     while not(degree == 0):
         # Process: Store y coordinates of function after added terms are removed
@@ -420,25 +428,25 @@ def data_analyser():
         # Input: Get data
         print("Enter data:")
         d = get_data()
-	# Process: Calculate mean
+        # Process: Calculate mean
         m = mean(d)
-	# Output: Print result
+        # Output: Print result
         print("Mean:", m)
     elif o == "median":
         # Input: Get data
         print("Enter data:")
         d = get_data()
-	# Process: Calculate mean
+        # Process: Calculate mean
         m = median(d)
-	# Output: Print result
+        # Output: Print result
         print("Median:", m)
     elif o == "mode":
         # Input: Get data
         print("Enter data:")
         d = get_data()
-	# Process: Calculate mean
+        # Process: Calculate mean
         m = mode(d)
-	# Output: Print result
+        # Output: Print result
         print("Mode:", m)
     elif o == "line-graph":
         # Input: Get data and graph information
