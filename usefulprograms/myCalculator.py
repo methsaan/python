@@ -293,6 +293,11 @@ def get_vertex():
 def standard_to_factored(a, b, c):
     discriminant = b**2 - 4*a*c
     print(discriminant)
+    print(-4)
+    print(-4*a)
+    print(-4*a*c)
+    print(b**2)
+    print(b**2 - 4*a*c)
     x = None
     if discriminant < 0:
         x = "No real roots"
