@@ -1,6 +1,26 @@
 #! /usr/bin/python3
 
 
+def factorial(n):
+    result = n
+    for i in range(n-1, 0, -1):
+        result *= i
+    return result
+
+def finite_differences(yvalues):
+    temp = yvalues
+    differences = []
+    degree = 0
+    while temp.count(temp[0]) != len(temp):
+        for i in range(1, len(temp)):
+            differences.append(temp[i]-temp[i-1])
+        temp = differences[:]
+        differences = []
+        degree += 1
+        if len(temp) == 1:
+            return None, 0
+    return temp[0], degree
+
 # Input: Get y-values from x=-4 to x=4
 def get_graph_y():
     yvalues = []
