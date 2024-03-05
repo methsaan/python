@@ -1,0 +1,12 @@
+#! /usr/bin/python3
+
+from tkinter import *
+tk = Tk()
+canvas = Canvas(tk, width=800, height=800)
+canvas.pack()
+
+canvas.create_line(0, 800, 800, 0)
+canvas.create_line(0, 400, 800, 400)
+canvas.create_line(400, 0, 400, 800)
+
+canvas.mainloop()
