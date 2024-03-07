@@ -36,6 +36,29 @@ class Object3d:
     def getCanvasCoords(self):
         return [x.getCanvasCoords() for x in self.vectors]
 
+class Object3dGraphic:
+    def __init__(self, edgeVectors, color):
+        self.obj = Object3d(edgeVectors)
+        self.canvEdges = []
+        for i in self.obj.getEdges():
+            aCoords, bCoords = i.getCanvasCoords()
+            self.canvEdges.append(canvas.create_line(*aCoords, *bCoords, width=2, fill=color))
+    # translate given target coordinates and velocity (ticks/second)
+    def translate(self, x, y, z, velocity):
+        dist = math.sqrt(x**2 + y**2 + z**2)
+        t = dist/velocity
+        print("t =", t, "s")
+        print("d =", dist, "ticks")
+        print("v =", velocity, "ticks/s")
+        for i in range(int(t*10)):
+            # move ticks/0.1s in direction
+            self.obj.translate(x/(t*10), y/(t*10), z/(t*10))
+            for j in range(len(self.obj.getEdges())):
+                 aCoords, bCoords = self.obj.getCanvasCoords()[j]
+                 canvas.coords(self.canvEdges[j], *aCoords, *bCoords)
+            tk.update()
+            time.sleep(0.1)
+
 import time
 import math
 
@@ -57,74 +80,50 @@ for x in range(28):
 
 for x in range(1, 28):
     canvas.create_line(390+x*(20/math.sqrt(2)), 400-x*(20/math.sqrt(2)), 410+x*(20/math.sqrt(2)), 400-x*(20/math.sqrt(2)))
-'''
+
 edges = [Vector((0, 0, 0), (0, 5, 0)), Vector((0, 0, 0), (5, 0, 0)),\
          Vector((5, 0, 0), (5, 5, 0)), Vector((5, 5, 0), (0, 5, 0)),\
          Vector((0, 0, 0), (0, 0, 5)), Vector((0, 0, 5), (0, 5, 5)),\
          Vector((0, 5, 5), (0, 5, 0)), Vector((0, 0, 5), (5, 0, 5)),\
          Vector((5, 0, 5), (5, 5, 5)), Vector((5, 5, 5), (0, 5, 5)),\
          Vector((5, 0, 0), (5, 0, 5)), Vector((5, 5, 5), (5, 5, 0))]
-'''
-edges = [Vector((0, 0, 0), (0, -5, 0)), Vector((0, 0, 0), (-5, 0, 0)),\
+
+edges2 = [Vector((0, 0, 0), (0, -5, 0)), Vector((0, 0, 0), (-5, 0, 0)),\
          Vector((-5, 0, 0), (-5, -5, 0)), Vector((-5, -5, 0), (0, -5, 0)),\
          Vector((0, 0, 0), (1, 1, -5)), Vector((1, 1, -5), (1, -6, -5)),\
          Vector((1, -6, -5), (0, -5, 0)), Vector((1, 1, -5), (-6, 1, -5)),\
          Vector((-6, 1, -5), (-6, -6, -5)), Vector((-6, -6, -5), (1, -6, -5)),\
          Vector((-5, 0, 0), (-6, 1, -5)), Vector((-6, -6, -5), (-5, -5, 0))]
 
-cube = Object3d(edges)
+frustrum = Object3dGraphic(edges2, "blue")
+cube = Object3dGraphic(edges, "green")
 
-canvEdges = []
-
-for i in cube.getEdges():
-    aCoords, bCoords = i.getCanvasCoords()
-    canvEdges.append(canvas.create_line(*aCoords, *bCoords, width=2, fill="blue"))
-
-for x in range(17):
-    cube.translate(1, 0, 0)
-    for i in range(len(cube.getEdges())):
-         aCoords, bCoords = cube.getCanvasCoords()[i]
-         canvas.coords(canvEdges[i], *aCoords, *bCoords)
-    tk.update()
-    time.sleep(0.01)
-
-for x in range(19):
-    cube.translate(0, 1, 0)
-    for i in range(len(cube.getEdges())):
-         aCoords, bCoords = cube.getCanvasCoords()[i]
-         canvas.coords(canvEdges[i], *aCoords, *bCoords)
-    tk.update()
-    time.sleep(0.01)
-
-for x in range(18):
-    cube.translate(0, 0, 1)
-    for i in range(len(cube.getEdges())):
-         aCoords, bCoords = cube.getCanvasCoords()[i]
-         canvas.coords(canvEdges[i], *aCoords, *bCoords)
-    tk.update()
-    time.sleep(0.01)
-
-for n in range(2):
-    for x in range(18):
-        cube.translate(0, 0, -1)
-        for i in range(len(cube.getEdges())):
-            aCoords, bCoords = cube.getCanvasCoords()[i]
-            canvas.coords(canvEdges[i], *aCoords, *bCoords)
-        tk.update()
-        time.sleep(0.01)
-    for x in range(19):
-        cube.translate(0, -1, 0)
-        for i in range(len(cube.getEdges())):
-            aCoords, bCoords = cube.getCanvasCoords()[i]
-            canvas.coords(canvEdges[i], *aCoords, *bCoords)
-        tk.update()
-        time.sleep(0.01)
-    for x in range(17):
-        cube.translate(-1, 0, 0)
-        for i in range(len(cube.getEdges())):
-            aCoords, bCoords = cube.getCanvasCoords()[i]
-            canvas.coords(canvEdges[i], *aCoords, *bCoords)
-        tk.update()
-        time.sleep(0.01)
+print(time.time())
+frustrum.translate(10, 0, 0, 40)
+frustrum.translate(0, 0, -10, 40)
+frustrum.translate(0, 10, 0, 40)
+frustrum.translate(-20, 0, 0, 40)
+frustrum.translate(0, -20, 0, 40)
+frustrum.translate(20, 0, 0, 40)
+frustrum.translate(0, 20, 0, 40)
+frustrum.translate(0, 0, 20, 40)
+frustrum.translate(-20, 0, 0, 40)
+frustrum.translate(0, -20, 0, 40)
+frustrum.translate(20, 0, 0, 40)
+frustrum.translate(0, 20, 0, 40)
+cube.translate(10, 0, 0, 80)
+cube.translate(0, 0, -10, 80)
+cube.translate(0, 10, 0, 80)
+cube.translate(-20, 0, 0, 80)
+cube.translate(0, -20, 0, 80)
+cube.translate(20, 0, 0, 80)
+cube.translate(0, 20, 0, 80)
+cube.translate(0, 0, 20, 80)
+cube.translate(-20, 0, 0, 80)
+cube.translate(0, -20, 0, 80)
+cube.translate(20, 0, 0, 80)
+cube.translate(0, 20, 0, 80)
+print(time.time())
+tk.update()
 
 canvas.mainloop()
