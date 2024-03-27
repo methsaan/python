@@ -46,13 +46,13 @@ boxEdges = [(0, 0, (1/3), 0), ((1/3), 0, (1/3), (1/6)), ((1/3), (1/6), 0, (1/6))
 boxes = []
 boxSprites = []
 
-colors = ["sienna4", "DarkOrange4", "coral4", "tan2", "gold4", "honeydew4", "saddle brown", "SkyBlue4", "gray50", "tomato4"] * 17
+colors = ["sienna4", "DarkOrange4", "coral4", "tan2", "gold4", "honeydew4", "saddle brown", "SkyBlue4", "gray50", "tomato4"] * 60
 random.shuffle(colors)
 
-for x in range(54):
+for x in range(70):
     laneStarts = [0, (1/3), (2/3)]
     for y in range(3):
-        box = RoadObj(boxEdges, laneStarts[y], -54+x+random.randrange(90)/100)
+        box = RoadObj(boxEdges, laneStarts[y], -70+x+random.randrange(90)/100)
         boxes.append(box)
         c = box.getCanvasCoords()
         boxSprites.append(canvas.create_polygon(c[0][0], c[0][1], c[1][0], c[1][1], c[2][0], c[2][1], c[3][0], c[3][1], fill=colors[x*3+y]))
@@ -93,8 +93,8 @@ canvas.bind_all('<KeyPress-Up>', move_paddle)
 boxesPassedCnt = 0
 boxesPassed = []
 score = 0
-for x in range(30*54):
-    for y in range(162):
+for x in range(30*70):
+    for y in range(210):
         boxes[y].yPosRef += (1/30)
         c = boxes[y].getCanvasCoords()
         canvas.coords(boxSprites[y], c[0][0], c[0][1], c[1][0], c[1][1], c[2][0], c[2][1], c[3][0], c[3][1])
@@ -124,7 +124,7 @@ for x in range(30*54):
             humanPos = canvas.coords(human[0])[2]
             if c[0][0] < humanPos and humanPos < c[1][0] and c[0][1] < HEIGHT*0.95 and HEIGHT*0.95 < c[2][1]:
                 lost = True
-    score = math.floor(x / (30*54-1) * 10000)
+    score = math.floor(x / (70*30-1) * 100000)
     canvas.itemconfig(scoreBoard, text=("Score: " + str(score)))
     tk.update()
     time.sleep(0.01)
