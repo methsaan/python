@@ -613,6 +613,9 @@ def create_scale(x, y, win, ticks):
     # Process - Returning the scale at the end
     return scale
 
+def undrawOnClick(canv, obj, event):
+    canv.itemconfigure(obj, state="hidden")
+
 #Defining the function instructions(win)
 def instructions(win):
     
@@ -620,10 +623,10 @@ def instructions(win):
     win.configure(bg="#53CDA5")
 
     # Process - Creating the text for the welcome message header with the necessary point
-    win.create_text(300, 100, "Welcome to Chest Quest!", font=("courier", 30), fill="blue")
+    win.create_text(300, 100, text="Welcome to Chest Quest!", font=("courier", 30), fill="blue")
 
     # Process - Creating the text for the instructions with the necessary point
-    win.create_text(300, 300, '''Click around to find hidden chests and earn gold.
+    win.create_text(300, 300, text='''Click around to find hidden chests and earn gold.
     Use space wisely! Moving around consumes energy.
     Healstones increase energy, but cost 140 gold.
     Wheels offer gold, energy, time and other prizes (sometimes).
