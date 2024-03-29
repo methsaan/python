@@ -25,6 +25,8 @@ class RoadObj:
             yCoord2 = HEIGHT * self.yPosRef + HEIGHT * edge[3]
             self.canvasCoords.append((xCoord1, yCoord1, xCoord2, yCoord2))
         return self.canvasCoords
+    def getRef(self):
+        return (self.xPosRef, self.yPosRef)
 
 import time
 import random
@@ -39,27 +41,34 @@ canvas.pack()
 canvas.create_polygon(2*WIDTH/5, 0, 3*WIDTH/5, 0, 3*WIDTH/4, HEIGHT, WIDTH/4, HEIGHT, fill="gray20", outline="gray20")
 
 boxEdges = [(0, 0, (1/3), 0), ((1/3), 0, (1/3), (1/6)), ((1/3), (1/6), 0, (1/6)), (0, (1/6), 0, 0)]
-#boxEdges = [((1/6), (1/24), (2/9), (1/18)), ((2/9), (1/18), (1/4), (1/12)), ((1/4), (1/12), (2/9), (1/9)),\
-#            ((2/9), (1/9), (1/6), (1/8)), ((1/6), (1/8), (1/9), (1/9)), ((1/9), (1/9), (1/12), (1/12)),\
-#            ((1/12), (1/12), (1/9), (1/18)), ((1/9), (1/18), (1/6), (1/24))]
+coinEdges = [((1/6), (1/24), (2/9), (1/18)), ((2/9), (1/18), (1/4), (1/12)), ((1/4), (1/12), (2/9), (1/9)),\
+            ((2/9), (1/9), (1/6), (1/8)), ((1/6), (1/8), (1/9), (1/9)), ((1/9), (1/9), (1/12), (1/12)),\
+            ((1/12), (1/12), (1/9), (1/18)), ((1/9), (1/18), (1/6), (1/24))]
 
 boxes = []
 boxSprites = []
+coins = []
+coinSprites = []
 
 colors = ["sienna4", "DarkOrange4", "coral4", "tan2", "gold4", "honeydew4", "saddle brown", "SkyBlue4", "gray50", "tomato4"] * 60
 random.shuffle(colors)
 
-for x in range(70):
+for x in range(54):
     laneStarts = [0, (1/3), (2/3)]
+    noCoinLane = random.randrange(3)
     for y in range(3):
-        box = RoadObj(boxEdges, laneStarts[y], -70+x+random.randrange(90)/100)
+        box = RoadObj(boxEdges, laneStarts[y], -54+x+random.randrange(90)/100)
         boxes.append(box)
         c = box.getCanvasCoords()
         boxSprites.append(canvas.create_polygon(c[0][0], c[0][1], c[1][0], c[1][1], c[2][0], c[2][1], c[3][0], c[3][1], fill=colors[x*3+y]))
-        #boxSprites.append(canvas.create_polygon(c[0][0], c[0][1], c[1][0], c[1][1], c[2][0], c[2][1], c[3][0], c[3][1], c[4][0], c[4][1], c[5][0], c[5][1], c[6][0], c[6][1], c[7][0], c[7][1],  fill=colors[x*3+y]))
+        if y != noCoinLane:
+            coinRefy = random.uniform(box.getRef()[1] + (1/6), x-53.1)
+            coin = RoadObj(coinEdges, laneStarts[y], coinRefy)
+            coins.append(coin)
+            c2 = coin.getCanvasCoords()
+            coinSprites.append(canvas.create_polygon(c2[0][0], c2[0][1], c2[1][0], c2[1][1], c2[2][0], c2[2][1], c2[3][0], c2[3][1], c2[4][0], c2[4][1], c2[5][0], c2[5][1], c2[6][0], c2[6][1], c2[7][0], c2[7][1], fill="gold3"))
 
 scoreBoard = canvas.create_text(WIDTH/2, HEIGHT/10, text="Score: 0", font=("helvetica", 20), fill="navy")
-#human = canvas.create_rectangle(WIDTH*0.485, HEIGHT*0.6, WIDTH*0.515, HEIGHT*0.95, fill="black")
 human = []
 human.append(canvas.create_line(WIDTH*0.475, HEIGHT*0.95, WIDTH*0.5, HEIGHT*0.90, fill="black", width=4))
 human.append(canvas.create_line(WIDTH*0.525, HEIGHT*0.95, WIDTH*0.5, HEIGHT*0.90, fill="black", width=4))
@@ -92,16 +101,26 @@ canvas.bind_all('<KeyPress-Up>', move_paddle)
 
 boxesPassedCnt = 0
 boxesPassed = []
+coinsPassedCnt = 0
+coinsPassed = []
+collectedCoins = []
 score = 0
-for x in range(30*70):
-    for y in range(210):
+coinScore = 0
+for x in range(30*54):
+    for y in range(162):
         boxes[y].yPosRef += (1/30)
         c = boxes[y].getCanvasCoords()
         canvas.coords(boxSprites[y], c[0][0], c[0][1], c[1][0], c[1][1], c[2][0], c[2][1], c[3][0], c[3][1])
-        #canvas.coords(boxSprites[y], c[0][0], c[0][1], c[1][0], c[1][1], c[2][0], c[2][1], c[3][0], c[3][1], c[4][0], c[4][1], c[5][0], c[5][1], c[6][0], c[6][1], c[7][0], c[7][1])
         if c[2][1] > 0 and boxes[y] not in boxesPassed:
             boxesPassedCnt += 1
             boxesPassed.append(boxes[y])
+    for y in range(108):
+        coins[y].yPosRef += (1/30)
+        c2 = coins[y].getCanvasCoords()
+        canvas.coords(coinSprites[y], c2[0][0], c2[0][1], c2[1][0], c2[1][1], c2[2][0], c2[2][1], c2[3][0], c2[3][1], c2[4][0], c2[4][1], c2[5][0], c2[5][1], c2[6][0], c2[6][1], c2[7][0], c2[7][1])
+        if c2[4][1] > 0 and coins[y] not in coinsPassed:
+            coinsPassedCnt += 1
+            coinsPassed.append(coins[y])
     canvas.coords(human[0], WIDTH*0.475+((humanLane-2)*WIDTH*(8 - 3*0.95)/20)/2, canvas.coords(human[0])[1], WIDTH*0.5+((humanLane-2)*WIDTH*(8 - 3*0.95)/20)/2, canvas.coords(human[0])[3])
     canvas.coords(human[1], WIDTH*0.525+((humanLane-2)*WIDTH*(8 - 3*0.95)/20)/2, canvas.coords(human[1])[1], WIDTH*0.5+((humanLane-2)*WIDTH*(8 - 3*0.95)/20)/2, canvas.coords(human[1])[3])
     canvas.coords(human[2], WIDTH*0.5+((humanLane-2)*WIDTH*(8 - 3*0.95)/20)/2, canvas.coords(human[2])[1], WIDTH*0.5+((humanLane-2)*WIDTH*(8 - 3*0.95)/20)/2, canvas.coords(human[2])[3])
@@ -124,8 +143,16 @@ for x in range(30*70):
             humanPos = canvas.coords(human[0])[2]
             if c[0][0] < humanPos and humanPos < c[1][0] and c[0][1] < HEIGHT*0.95 and HEIGHT*0.95 < c[2][1]:
                 lost = True
-    score = math.floor(x / (70*30-1) * 100000)
-    canvas.itemconfig(scoreBoard, text=("Score: " + str(score)))
+        visibleCoins = coinsPassed[coinsPassedCnt-6:]
+        for i in range(len(visibleCoins)):
+            c = visibleCoins[i].getCanvasCoords()
+            humanPos = canvas.coords(human[0])[2]
+            if c[6][0] < humanPos and humanPos < c[2][0] and c[0][1] < HEIGHT*0.95 and HEIGHT*0.95 < c[4][1] and visibleCoins[i] not in collectedCoins:
+                collectedCoins.append(visibleCoins[i])
+                canvas.itemconfigure(coinSprites[coins.index(visibleCoins[i])], state="hidden")
+                coinScore += 1
+    score = math.floor(x / (54*30-1) * 100000)
+    canvas.itemconfig(scoreBoard, text=("Score: " + str(score) + " Coins: " + str(coinScore)))
     tk.update()
     time.sleep(0.01)
     if lost:
