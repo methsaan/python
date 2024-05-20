@@ -152,7 +152,7 @@ for x in range(30*54):
                 canvas.itemconfigure(coinSprites[coins.index(visibleCoins[i])], state="hidden")
                 coinScore += 1
     score = math.floor(x / (54*30-1) * 100000)
-    canvas.itemconfig(scoreBoard, text=("Score: " + str(score) + " Coins: " + str(coinScore)))
+    canvas.itemconfig(scoreBoard, text=("Score: " + str(score) + " Coins: " + str(coinScore) + "/" + str(coinsPassedCnt)))
     tk.update()
     time.sleep(0.01)
     if lost:
