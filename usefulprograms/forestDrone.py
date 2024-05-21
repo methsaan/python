@@ -2,6 +2,7 @@
 
 import math
 import random
+import time
 from tkinter import *
 
 WIDTH = 900
@@ -55,25 +56,26 @@ field = canvas.create_polygon(WIDTH/10, HEIGHT/10, 9*WIDTH/10, HEIGHT/10, 9*WIDT
 
 trees = []
 
-numOfTrees = random.randrange(100, 200)
+numOfTrees = 400#random.randrange(5, 10)
 
+cnt = 0
 for x in range(numOfTrees):
     w = widthOfMeterInPx*0.2 + random.random()*(widthOfMeterInPx*0.5)
     h = widthOfMeterInPx*random.randrange(2, 8)
     locationx = (WIDTH/10 + w/2) + random.random()*(4*WIDTH/5 - w)
     locationy = (HEIGHT/10 + w/2) + random.random()*(4*HEIGHT/5 - w)
     while True:
-        overlapping = False
-        for y in trees:
-            if (((locationx + w/2) > y.leftBound and (locationx + w/2) < y.rightBound) and\
-               (((locationy + w/2) > y.upBound and (locationy + w/2) < y.downBound) or\
-               ((locationy - w/2) > y.upBound and (locationy - w/2) < y.downBound))) or\
-               (((locationx - w/2) > y.leftBound and (locationx - w/2) < y.rightBound) and\
-               (((locationy + w/2) > y.upBound and (locationy + w/2) < y.downBound) or\
-               ((locationy - w/2) > y.upBound and (locationy - w/2) < y.downBound))):
-                overlapping = True
+        inPath = False
+        for prevTree in trees:
+            print("Tree #", trees.index(prevTree), "New tree:", x)
+            if not (((locationx - w/2) > prevTree.rightBound or (locationx + w/2) < prevTree.leftBound) and\
+               ((locationy - w/2) > prevTree.downBound or (locationy + w/2) < prevTree.upBound)):
+                inPath = True
+                cnt += 1
                 break
-        if not overlapping:
+        if not inPath:
+            time.sleep(0.01)
+            tk.update()
             break
         locationx = (WIDTH/10 + w/2) + random.random()*(4*WIDTH/5 - w)
         locationy = (HEIGHT/10 + w/2) + random.random()*(4*HEIGHT/5 - w)
