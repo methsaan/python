@@ -65,20 +65,61 @@ for x in range(numOfTrees):
     locationx = (WIDTH/10 + w/2) + random.random()*(4*WIDTH/5 - w)
     locationy = (HEIGHT/10 + w/2) + random.random()*(4*HEIGHT/5 - w)
     while True:
-        inPath = False
-        for prevTree in trees:
-            print("Tree #", trees.index(prevTree), "New tree:", x)
-            if not (((locationx - w/2) > prevTree.rightBound or (locationx + w/2) < prevTree.leftBound) and\
-               ((locationy - w/2) > prevTree.downBound or (locationy + w/2) < prevTree.upBound)):
-                inPath = True
-                cnt += 1
-                break
-        if not inPath:
-            time.sleep(0.01)
-            tk.update()
-            break
+        overlapping = False
         locationx = (WIDTH/10 + w/2) + random.random()*(4*WIDTH/5 - w)
         locationy = (HEIGHT/10 + w/2) + random.random()*(4*HEIGHT/5 - w)
+        vicinityLeftBound = locationx - widthOfMeterInPx
+        vicinityRightBound = locationx + widthOfMeterInPx
+        vicinityUpBound = locationy - widthOfMeterInPx
+        vicinityDownBound = locationy + widthOfMeterInPx
+        tk.update()
+        time.sleep(1)
+        canvas.create_rectangle(vicinityLeftBound, vicinityUpBound, vicinityLeftBound+widthOfMeterInPx*2, vicinityUpBound+widthOfMeterInPx*2, width=2)
+        tk.update()
+        time.sleep(1)
+        treesInVicinity = []
+        for tree in trees:
+            canvas.itemconfig(tree.treeObjSurface, fill="blue")
+            tk.update()
+            time.sleep(1)
+            canvas.itemconfig(tree.treeObjSurface, fill="brown")
+            tk.update()
+            time.sleep(1)
+            print("#", trees.index(tree))
+            print("vicinity left", vicinityLeftBound)
+            print("tree left", tree.leftBound)
+            print("tree right", tree.rightBound)
+            print("vicinity right", vicinityRightBound)
+            print("vicinity up", vicinityUpBound)
+            print("tree up", tree.upBound)
+            print("tree down", tree.downBound)
+            print("vicinity down", vicinityDownBound)
+            temp = canvas.create_rectangle(tree.leftBound, tree.upBound, tree.rightBound, tree.downBound, fill="pink")
+            temp2 = canvas.create_rectangle(vicinityLeftBound, vicinityUpBound, vicinityRightBound, vicinityDownBound, fill="orange", width=2)
+            tk.update()
+            time.sleep(2)
+            canvas.itemconfig(temp, state="hidden")
+            canvas.itemconfig(temp2, state="hidden")
+            tk.update()
+            if tree.leftBound > vicinityLeftBound and tree.rightBound < vicinityRightBound and\
+               tree.upBound > vicinityUpBound and tree.downBound < vicinityDownBound:
+                treesInVicinity.append(tree)
+                canvas.itemconfig(tree.treeObjSurface, fill="brown")
+                tk.update()
+                time.sleep(1)
+        for tree in treesInVicinity:
+            if (((locationx + w/2) > tree.leftBound and (locationx + w/2) < tree.rightBound) and\
+               (((locationy + w/2) > tree.upBound and (locationy + w/2) < tree.downBound) or\
+               ((locationy - w/2) > tree.upBound and (locationy - w/2) < tree.downBound))) or\
+               (((locationx - w/2) > tree.leftBound and (locationx - w/2) < tree.rightBound) and\
+               (((locationy + w/2) > tree.upBound and (locationy + w/2) < tree.downBound) or\
+               ((locationy - w/2) > tree.upBound and (locationy - w/2) < tree.downBound))):
+                overlapping = True
+                break
+        if not overlapping:
+            tk.update()
+            time.sleep(1)
+            break
 
     trees.append(Tree(w, h, canvas.create_polygon(locationx-w/2, locationy-w/2, locationx+w/2, locationy-w/2, locationx+w/2, locationy+w/2, locationx-w/2, locationy+w/2, fill="brown", outline="black")))
 
