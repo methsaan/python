@@ -64,7 +64,7 @@ def linTransformRotateVec(anglex, angley, anglez):
     # transformation vector to rotate about y-axis
     yRotate = [[math.cos(-math.radians(angley)), 0, -math.sin(-math.radians(angley))], [0, 1, 0], [math.sin(-math.radians(angley)), 0, math.cos(-math.radians(angley))]]
     # transformation vector to rotate about z-axis
-    zRotate = [[math.cos(-math.radians(anglez)), -math.sin(-math.radians(anglez)), 0], [math.sin(-math.radians(anglez)), math.cos(-math.radians(anglez)), 0], [0, 0, 1]]
+    zRotate = [[math.cos(-math.radians(anglez)), math.sin(-math.radians(anglez)), 0], [-math.sin(-math.radians(anglez)), math.cos(-math.radians(anglez)), 0], [0, 0, 1]]
     return zRotate
 
 # Return 2D coordinates of point on screen given 3D point
