@@ -2,6 +2,8 @@
 
 from tkinter import *
 import random
+import math
+import time
 
 WIDTH = 900
 HEIGHT = 900
@@ -42,10 +44,21 @@ class Shape3D:
         for point in self.points:
             point.transform(sTransformVector)
 
+def vectorTransform(transformMatrix, vector):
+    matrixProductx = transformMatrix[0][0]*vector[0] + transformMatrix[1][0]*vector[1] + transformMatrix[2][0]*vector[2]
+    matrixProducty = transformMatrix[0][1]*vector[0] + transformMatrix[1][1]*vector[1] + transformMatrix[2][1]*vector[2]
+    matrixProductz = transformMatrix[0][2]*vector[0] + transformMatrix[1][2]*vector[1] + transformMatrix[2][2]*vector[2]
+    matrixProduct = [matrixProductx, matrixProducty, matrixProductz]
+    return matrixProduct
+
 # Generate 3X3 linear transformation matrix
 # given angles to rotate by
-def linTransformVec(anglex, angley, anglez):
-    print(anglex, angley, anglez)
+def linTransformRotateVec(anglex, angley, anglez):
+    # Initialize final vector
+    transformVector = [[1, 0, 0], [0, 1, 0], [0, 0, 1]]
+    # Rotate about x-axis
+    xRotate = [[1, 0, 0], [0, math.cos(math.radians(anglex)), math.sin(math.radians(anglex))], [0, math.sin(math.radians(anglex)), math.cos(math.radians(anglex))]]
+    return xRotate
 
 # Return 2D coordinates of point on screen given 3D point
 def point2D(point3D):
@@ -54,6 +67,15 @@ def point2D(point3D):
 tk = Tk()
 canvas = Canvas(tk, width=WIDTH, height=HEIGHT)
 canvas.pack()
+
+origVector = [0, 0, 8]
+print(origVector)
+for x in range(0, 361, 4):
+    newVector = vectorTransform(linTransformRotateVec(x, 0, 0), origVector)
+    print("Angle:", x, " Vector after rotating 1 degree:", newVector)
+    canvas.create_rectangle(newVector[1]*20+198, HEIGHT-(newVector[2]*20+198), newVector[1]*20+225, HEIGHT-(newVector[2]*20+225), fill="red")
+    tk.update()
+    time.sleep(0.1)
 
 print("Test")
 
