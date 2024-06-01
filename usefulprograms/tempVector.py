@@ -5,8 +5,8 @@ import random
 import math
 import time
 
-WIDTH = 900
-HEIGHT = 900
+WIDTH = 500
+HEIGHT = 500
 
 # Define quantities and units
 forestWidthInPx = 4*WIDTH/5
@@ -45,9 +45,9 @@ class Shape3D:
             point.transform(sTransformVector)
 
 def vectorTransform(transformMatrix, vector):
-    matrixProductx = transformMatrix[0][0]*vector[0] + transformMatrix[1][0]*vector[1] + transformMatrix[2][0]*vector[2]
-    matrixProducty = transformMatrix[0][1]*vector[0] + transformMatrix[1][1]*vector[1] + transformMatrix[2][1]*vector[2]
-    matrixProductz = transformMatrix[0][2]*vector[0] + transformMatrix[1][2]*vector[1] + transformMatrix[2][2]*vector[2]
+    matrixProductx = transformMatrix[0][0]*vector[0] + transformMatrix[0][1]*vector[1] + transformMatrix[0][2]*vector[2]
+    matrixProducty = transformMatrix[1][0]*vector[0] + transformMatrix[1][1]*vector[1] + transformMatrix[1][2]*vector[2]
+    matrixProductz = transformMatrix[2][0]*vector[0] + transformMatrix[2][1]*vector[1] + transformMatrix[2][2]*vector[2]
     matrixProduct = [matrixProductx, matrixProducty, matrixProductz]
     return matrixProduct
 
@@ -68,15 +68,18 @@ tk = Tk()
 canvas = Canvas(tk, width=WIDTH, height=HEIGHT)
 canvas.pack()
 
-origVector = [0, 0, 8]
+# starting point
+origVector = [0, 8*math.sin(math.radians(20)), 8*math.cos(math.radians(20))]
+#origVector = [0, 0, 8]
 print(origVector)
 for x in range(0, 361, 4):
     newVector = vectorTransform(linTransformRotateVec(x, 0, 0), origVector)
-    print("Angle:", x, " Vector after rotating 1 degree:", newVector)
+    print("Angle:", x, " Vector after rotating 4 degree:", newVector)
     canvas.create_rectangle(newVector[1]*20+198, HEIGHT-(newVector[2]*20+198), newVector[1]*20+225, HEIGHT-(newVector[2]*20+225), fill="red")
     tk.update()
     time.sleep(0.1)
 
 print("Test")
+print((origVector[1]**2 + origVector[2]**2)**0.5)
 
 canvas.mainloop()
