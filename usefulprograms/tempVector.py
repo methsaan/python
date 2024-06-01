@@ -57,7 +57,7 @@ def linTransformRotateVec(anglex, angley, anglez):
     # Initialize final vector
     transformVector = [[1, 0, 0], [0, 1, 0], [0, 0, 1]]
     # Rotate about x-axis
-    xRotate = [[1, 0, 0], [0, math.cos(math.radians(anglex)), math.sin(math.radians(anglex))], [0, math.sin(math.radians(anglex)), math.cos(math.radians(anglex))]]
+    xRotate = [[1, 0, 0], [0, math.cos(-math.radians(anglex)), -math.sin(-math.radians(anglex))], [0, math.sin(-math.radians(anglex)), math.cos(-math.radians(anglex))]]
     return xRotate
 
 # Return 2D coordinates of point on screen given 3D point
@@ -69,11 +69,11 @@ canvas = Canvas(tk, width=WIDTH, height=HEIGHT)
 canvas.pack()
 
 # starting point
-origVector = [0, 8*math.sin(math.radians(20)), 8*math.cos(math.radians(20))]
+origVector = [0, 8*math.sin(math.radians(140)), 8*math.cos(math.radians(140))]
 #origVector = [0, 0, 8]
 print(origVector)
 for x in range(0, 361, 4):
-    newVector = vectorTransform(linTransformRotateVec(x, 0, 0), origVector)
+    newVector = vectorTransform(linTransformRotateVec(-x, 0, 0), origVector)
     print("Angle:", x, " Vector after rotating 4 degree:", newVector)
     canvas.create_rectangle(newVector[1]*20+198, HEIGHT-(newVector[2]*20+198), newVector[1]*20+225, HEIGHT-(newVector[2]*20+225), fill="red")
     tk.update()
