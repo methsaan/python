@@ -5,8 +5,8 @@ import random
 import math
 import time
 
-WIDTH = 500
-HEIGHT = 500
+WIDTH = 900
+HEIGHT = 900
 
 # Define quantities and units
 forestWidthInPx = 4*WIDTH/5
@@ -51,6 +51,13 @@ def vectorTransform(transformMatrix, vector):
     matrixProduct = [matrixProductx, matrixProducty, matrixProductz]
     return matrixProduct
 
+def multiplyTransformations(transformation1, transformation2):
+    totalTransform = [[0, 0, 0], [0, 0, 0], [0, 0, 0]]
+    for x in range(3):
+        for y in range(3):
+            totalTransform[x][y] = sum(transformation1[x][z] * transformation2[z][y] for z in range(3))
+    return totalTransform
+
 # Generate 3X3 linear transformation matrix
 # given angles to rotate by
 # +anglex = clockwise
@@ -65,6 +72,8 @@ def linTransformRotateVec(anglex, angley, anglez):
     yRotate = [[math.cos(-math.radians(angley)), 0, -math.sin(-math.radians(angley))], [0, 1, 0], [math.sin(-math.radians(angley)), 0, math.cos(-math.radians(angley))]]
     # transformation vector to rotate about z-axis
     zRotate = [[math.cos(-math.radians(anglez)), math.sin(-math.radians(anglez)), 0], [-math.sin(-math.radians(anglez)), math.cos(-math.radians(anglez)), 0], [0, 0, 1]]
+    transformVector = multiplyTransformations(xRotate, yRotate)
+    transformVector = multiplyTransformations(transformVector, zRotate)
     return zRotate
 
 # Return 2D coordinates of point on screen given 3D point
@@ -76,21 +85,19 @@ canvas = Canvas(tk, width=WIDTH, height=HEIGHT)
 canvas.pack()
 
 # starting point
-#origVector = [0, 8*math.sin(math.radians(140)), 8*math.cos(math.radians(140))]
+origVector = [0, 8*math.sin(math.radians(140)), 8*math.cos(math.radians(140))]
 #origVector = [8*math.sin(math.radians(150)), 0, 8*math.cos(math.radians(150))]
-origVector = [8*math.cos(math.radians(20)), 8*math.sin(math.radians(20)), 0]
+#origVector = [8*math.cos(math.radians(20)), 8*math.sin(math.radians(20)), 0]
 print(origVector)
 for x in range(0, 361, 4):
-    #newVector = vectorTransform(linTransformRotateVec(x, 0, 0), origVector)
-    #newVector = vectorTransform(linTransformRotateVec(0, x, 0), origVector)
-    newVector = vectorTransform(linTransformRotateVec(0, 0, x), origVector)
-    print("Angle:", x, " Vector after rotating 4 degree:", newVector)
-    #canvas.create_rectangle(newVector[1]*20+198, HEIGHT-(newVector[2]*20+198), newVector[1]*20+225, HEIGHT-(newVector[2]*20+225), fill="red")
-    #canvas.create_rectangle(newVector[0]*20+198, HEIGHT-(newVector[2]*20+198), newVector[0]*20+225, HEIGHT-(newVector[2]*20+225), fill="red")
-    canvas.create_rectangle(newVector[0]*20+198, HEIGHT-(newVector[1]*20+198), newVector[0]*20+225, HEIGHT-(newVector[1]*20+225), fill="red")
+    origVector = vectorTransform(linTransformRotateVec(4, 0, 0), origVector)
+    #origVector = vectorTransform(linTransformRotateVec(0, 4, 0), origVector)
+    #origVector = vectorTransform(linTransformRotateVec(0, 0, 4), origVector)
+    print("Angle:", x, " Vector after rotating 4 degree:", origVector)
+    canvas.create_rectangle(origVector[1]*20+198, HEIGHT-(origVector[2]*20+198), origVector[1]*20+225, HEIGHT-(origVector[2]*20+225), fill="red")
+    #canvas.create_rectangle(origVector[0]*20+198, HEIGHT-(origVector[2]*20+198), origVector[0]*20+225, HEIGHT-(origVector[2]*20+225), fill="red")
+    #canvas.create_rectangle(origVector[0]*20+198, HEIGHT-(origVector[1]*20+198), origVector[0]*20+225, HEIGHT-(origVector[1]*20+225), fill="red")
     tk.update()
     time.sleep(0.1)
-
-print("Test")
 
 canvas.mainloop()
