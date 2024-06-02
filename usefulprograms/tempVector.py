@@ -68,10 +68,13 @@ def linTransformRotateVec(anglex, angley, anglez):
     transformedVector = [[1, 0, 0], [0, 1, 0], [0, 0, 1]]
     # transformation vector to rotate about x-axis
     xRotate = [[1, 0, 0], [0, math.cos(-math.radians(anglex)), -math.sin(-math.radians(anglex))], [0, math.sin(-math.radians(anglex)), math.cos(-math.radians(anglex))]]
+    #print("xRotate:", xRotate)
     # transformation vector to rotate about y-axis
     yRotate = [[math.cos(-math.radians(angley)), 0, -math.sin(-math.radians(angley))], [0, 1, 0], [math.sin(-math.radians(angley)), 0, math.cos(-math.radians(angley))]]
+    #print("yRotate:", yRotate)
     # transformation vector to rotate about z-axis
     zRotate = [[math.cos(-math.radians(anglez)), math.sin(-math.radians(anglez)), 0], [-math.sin(-math.radians(anglez)), math.cos(-math.radians(anglez)), 0], [0, 0, 1]]
+    #print("zRotate:", zRotate)
     transformMatrix = multiplyTransformations(xRotate, yRotate)
     transformMatrix = multiplyTransformations(transformMatrix, zRotate)
     return transformMatrix
@@ -102,10 +105,10 @@ for x in range(0, 361, 4):
     time.sleep(0.1)
 '''
 
-p = [0, 100, 0]
-print(p)
+p = [0, 0, 100]
+print("Original:", p)
 tMatrix = linTransformRotateVec(45, 45, 45)
 p = vectorTransform(tMatrix, p)
-print(p)
+print("Final:", p)
 
 canvas.mainloop()
