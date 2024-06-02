@@ -49,6 +49,7 @@ def vectorTransform(transformMatrix, vector):
     matrixProducty = round(transformMatrix[1][0]*vector[0] + transformMatrix[1][1]*vector[1] + transformMatrix[1][2]*vector[2], 4)
     matrixProductz = round(transformMatrix[2][0]*vector[0] + transformMatrix[2][1]*vector[1] + transformMatrix[2][2]*vector[2], 4)
     matrixProduct = [matrixProductx, matrixProducty, matrixProductz]
+    print("Resulting vector from transforming vector", vector, "by transformation vector", transformMatrix, ":", matrixProduct)
     return matrixProduct
 
 def multiplyTransformations(transformation1, transformation2):
@@ -56,6 +57,7 @@ def multiplyTransformations(transformation1, transformation2):
     for x in range(3):
         for y in range(3):
             totalTransform[x][y] = sum(transformation1[x][z] * transformation2[z][y] for z in range(3))
+    print("Multiplying", transformation1, "by", transformation2, ":", totalTransform)
     return totalTransform
 
 # Generate 3X3 linear transformation matrix
@@ -77,6 +79,7 @@ def linTransformRotateVec(anglex, angley, anglez):
     #print("zRotate:", zRotate)
     transformMatrix = multiplyTransformations(xRotate, yRotate)
     transformMatrix = multiplyTransformations(transformMatrix, zRotate)
+    print("Rotation matrix for angles", anglex, ",", angley, ",", anglez, ":", transformMatrix)
     return transformMatrix
 
 # Return 2D coordinates of point on screen given 3D point
@@ -108,6 +111,7 @@ for x in range(0, 361, 4):
 p = [0, 0, 100]
 print("Original:", p)
 tMatrix = linTransformRotateVec(45, 45, 45)
+print(tMatrix)
 p = vectorTransform(tMatrix, p)
 print("Final:", p)
 
