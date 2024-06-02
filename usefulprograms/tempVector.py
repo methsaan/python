@@ -63,7 +63,7 @@ def multiplyTransformations(transformation1, transformation2):
 # +anglex = clockwise
 # +angley = out of screen at top, into screen at bottom
 # +anglez = towards -y at -x, towards +y at +x
-def linTransformRotateVec(anglex, angley, anglez, v):
+def linTransformRotateVec(anglex, angley, anglez):
     # Initialize final vector
     transformedVector = [[1, 0, 0], [0, 1, 0], [0, 0, 1]]
     # transformation vector to rotate about x-axis
@@ -72,10 +72,9 @@ def linTransformRotateVec(anglex, angley, anglez, v):
     yRotate = [[math.cos(-math.radians(angley)), 0, -math.sin(-math.radians(angley))], [0, 1, 0], [math.sin(-math.radians(angley)), 0, math.cos(-math.radians(angley))]]
     # transformation vector to rotate about z-axis
     zRotate = [[math.cos(-math.radians(anglez)), math.sin(-math.radians(anglez)), 0], [-math.sin(-math.radians(anglez)), math.cos(-math.radians(anglez)), 0], [0, 0, 1]]
-    transformedVector = vectorTransform(xRotate, v)
-    transformedVector = vectorTransform(yRotate, transformedVector)
-    transformedVector = vectorTransform(zRotate, transformedVector)
-    return transformedVector
+    transformMatrix = multiplyTransformations(xRotate, yRotate)
+    transformMatrix = multiplyTransformations(transformMatrix, zRotate)
+    return transformMatrix
 
 # Return 2D coordinates of point on screen given 3D point
 def point2D(point3D):
@@ -105,7 +104,8 @@ for x in range(0, 361, 4):
 
 p = [0, 100, 0]
 print(p)
-p = linTransformRotateVec(45, 45, 45, p)
+tMatrix = linTransformRotateVec(45, 45, 45)
+p = vectorTransform(tMatrix, p)
 print(p)
 
 canvas.mainloop()
