@@ -48,10 +48,19 @@ class Shape3D:
     def __init__(self, *points3d):
         # Set initial coordinates of shape vertices
         self.points = list(points3d)
+        self.canvasObj = None
     def rotate(self, x, y, z):
         # Transform all points given transformation matrix
         for point in self.points:
             point.rotate(x, y, z)
+    def updateCoords(self, c):
+        coordsList = []
+        for point in self.points:
+            coordsList.append(list(point.get2DCoords()))
+        if self.canvasObj == None:
+            self.canvasObj = c.create_polygon(*sum(coordsList, []), fill="green")
+        else:
+            c.coords(self.canvasObj, *sum(coordsList, []))
 
 def vectorTransform(transformMatrix, vector):
     matrixProductx = round(transformMatrix[0][0]*vector[0] + transformMatrix[0][1]*vector[1] + transformMatrix[0][2]*vector[2], 4)
@@ -92,38 +101,16 @@ tk = Tk()
 canvas = Canvas(tk, width=WIDTH, height=HEIGHT)
 canvas.pack()
 
-canvas.create_line(0, HEIGHT, WIDTH, 0)
-canvas.create_line(0, HEIGHT/2, WIDTH, HEIGHT/2)
-canvas.create_line(WIDTH/2, 0, WIDTH/2, HEIGHT)
+fieldPoints = [Point3D(8, -8, 0), Point3D(8, 8, 0), Point3D(-8, 8, 0), Point3D(-8, -8, 0)]
+field = Shape3D(*fieldPoints)
+field.updateCoords(canvas)
 
-for x in range(int(HEIGHT/math.sqrt(WIDTH/2))):
-    canvas.create_line(x*math.sqrt(WIDTH/2), HEIGHT/2-10, x*math.sqrt(WIDTH/2), (HEIGHT/2+10))
-    canvas.create_line(WIDTH/2-10, x*math.sqrt(HEIGHT/2), (WIDTH/2+10), x*math.sqrt(HEIGHT/2))
-
-
-for x in range(28):
-    canvas.create_line((WIDTH/2-10)-x*(math.sqrt(WIDTH/2)/math.sqrt(2)), (WIDTH/2)+x*(math.sqrt(WIDTH/2)/math.sqrt(2)), (WIDTH/2+10)-x*(math.sqrt(WIDTH/2)/math.sqrt(2)), (WIDTH/2)+x*(math.sqrt(WIDTH/2)/math.sqrt(2)))
-
-for x in range(1, 28):
-    canvas.create_line((WIDTH/2-10)+x*(math.sqrt(WIDTH/2)/math.sqrt(2)), (WIDTH/2)-x*(math.sqrt(WIDTH/2)/math.sqrt(2)), (WIDTH/2+10)+x*(math.sqrt(WIDTH/2)/math.sqrt(2)), (WIDTH/2)-x*(math.sqrt(WIDTH/2)/math.sqrt(2)))
-
-fieldPoints = [Point3D(0, -8, -8), Point3D(0, -8, 8), Point3D(0, 8, 8), Point3D(0, 8, -8)]
-s1 = Shape3D(*fieldPoints)
-
-#for i in range(-1, len(field.points)-1):
-#    x1, y1 = field.points[i].get2DCoords()
-#    x2, y2 = field.points[i+1].get2DCoords()
-#    canvas.create_line(x1, y1, x2, y2, width=2)
-
-for j in range(16):
-    for i in range(-1, len(s1.points)-1):
-        x1, y1 = s1.points[i].get2DCoords()
-        x2, y2 = s1.points[i+1].get2DCoords()
-        canvas.create_line(x1, y1, x2, y2, width=2)
-    s1.rotate(0, 0, 45)
+for j in range(72):
+    field.rotate(0, 0, 5)
+    field.updateCoords(canvas)
     tk.update()
-    time.sleep(1)
-    print([p.v for p in s1.points])
+    time.sleep(0.05)
+    print([p.v for p in field.points])
 
 
 canvas.mainloop()
