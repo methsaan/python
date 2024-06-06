@@ -5,12 +5,14 @@ import random
 import math
 import time
 
-WIDTH = 900
-HEIGHT = 900
+WIDTH = 800
+HEIGHT = 800
+
+# *Redefine
 
 # Define quantities and units
-forestWidthInPx = 4*WIDTH/5
-forestHeightInPx = 4*HEIGHT/5
+forestWidthInPx = WIDTH
+forestHeightInPx = HEIGHT
 forestAreaInPx = forestWidthInPx * forestHeightInPx
 hectaresInWidth = random.randrange(3, 5)
 hectaresInHeight = hectaresInWidth
@@ -101,16 +103,33 @@ tk = Tk()
 canvas = Canvas(tk, width=WIDTH, height=HEIGHT)
 canvas.pack()
 
-fieldPoints = [Point3D(8, -8, 0), Point3D(8, 8, 0), Point3D(-8, 8, 0), Point3D(-8, -8, 0)]
+canvas.create_line(0, HEIGHT, WIDTH, 0, width=2)
+canvas.create_line(WIDTH/2, 0, WIDTH/2, HEIGHT, width=2)
+canvas.create_line(0, HEIGHT/2, WIDTH, HEIGHT/2, width=2)
+
+for x in range(int(math.sqrt(WIDTH/2))):
+    canvas.create_line(WIDTH/2-x*math.sqrt(WIDTH/2), HEIGHT*(39/80), WIDTH/2-x*math.sqrt(WIDTH/2), HEIGHT*(41/80))
+    canvas.create_line(WIDTH/2+x*math.sqrt(WIDTH/2), HEIGHT*(39/80), WIDTH/2+x*math.sqrt(WIDTH/2), HEIGHT*(41/80))
+for x in range(int(math.sqrt(HEIGHT/2))):
+    canvas.create_line(WIDTH*(39/80), HEIGHT/2+x*math.sqrt(HEIGHT/2),  WIDTH*(41/80), HEIGHT/2+x*math.sqrt(HEIGHT/2))
+    canvas.create_line(WIDTH*(39/80), HEIGHT/2-x*math.sqrt(HEIGHT/2),  WIDTH*(41/80), HEIGHT/2-x*math.sqrt(HEIGHT/2))
+for x in range(int(math.sqrt(HEIGHT))):
+    canvas.create_line(WIDTH*(39/80)-x*(math.sqrt(WIDTH/2)/math.sqrt(2)), HEIGHT/2+x*(math.sqrt(HEIGHT/2)/math.sqrt(2)), WIDTH*(41/80)-x*(math.sqrt(WIDTH/2)/math.sqrt(2)), HEIGHT/2+x*(math.sqrt(HEIGHT/2)/math.sqrt(2)))
+    canvas.create_line(WIDTH*(39/80)+x*(math.sqrt(WIDTH/2)/math.sqrt(2)), HEIGHT/2-x*(math.sqrt(HEIGHT/2)/math.sqrt(2)), WIDTH*(41/80)+x*(math.sqrt(WIDTH/2)/math.sqrt(2)), HEIGHT/2-x*(math.sqrt(HEIGHT/2)/math.sqrt(2)))
+
+fieldPoints = [Point3D(forestWidthInPx/80, -forestHeightInPx/80, 0), Point3D(forestWidthInPx/80, forestHeightInPx/80, 0), Point3D(-forestWidthInPx/80, forestHeightInPx/80, 0), Point3D(-forestWidthInPx/80, -forestHeightInPx/80, 0)]
 field = Shape3D(*fieldPoints)
 field.updateCoords(canvas)
 
-for j in range(72):
-    field.rotate(0, 0, 5)
+tk.update()
+time.sleep(1)
+for j in range(45):
+    field.rotate(0, 1, 0)
     field.updateCoords(canvas)
     tk.update()
     time.sleep(0.05)
     print([p.v for p in field.points])
+tk.update()
 
 
 canvas.mainloop()
