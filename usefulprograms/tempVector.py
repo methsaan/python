@@ -5,27 +5,14 @@ import random
 import math
 import time
 
-WIDTH = 800
-HEIGHT = 800
+WIDTH = 300
+HEIGHT = 900
 
 # *Redefine
 
-# Define quantities and units
-forestWidthInPx = WIDTH
-forestHeightInPx = HEIGHT
-forestAreaInPx = forestWidthInPx * forestHeightInPx
-hectaresInWidth = random.randrange(3, 5)
-hectaresInHeight = hectaresInWidth
-widthOfHectareInPx = forestWidthInPx/hectaresInWidth
-heightOfHectareInPx = forestHeightInPx/hectaresInHeight
-areaInHectares = hectaresInWidth * hectaresInHeight
+forestWidth = 20
+forestHeight = 20
 
-# Meter is defined unrealistically big relative to hectare for visualization purposes
-# Trees are measured in meter unit while land is measured in hectare units
-metersInWidth = hectaresInWidth*3
-metersInHeight = metersInWidth
-widthOfMeterInPx = forestWidthInPx/metersInWidth
-heightOfMeterInPx = widthOfMeterInPx
 
 class Point3D:
     def __init__(self, x, y, z):
@@ -117,13 +104,13 @@ for x in range(int(math.sqrt(HEIGHT))):
     canvas.create_line(WIDTH*(39/80)-x*(math.sqrt(WIDTH/2)/math.sqrt(2)), HEIGHT/2+x*(math.sqrt(HEIGHT/2)/math.sqrt(2)), WIDTH*(41/80)-x*(math.sqrt(WIDTH/2)/math.sqrt(2)), HEIGHT/2+x*(math.sqrt(HEIGHT/2)/math.sqrt(2)))
     canvas.create_line(WIDTH*(39/80)+x*(math.sqrt(WIDTH/2)/math.sqrt(2)), HEIGHT/2-x*(math.sqrt(HEIGHT/2)/math.sqrt(2)), WIDTH*(41/80)+x*(math.sqrt(WIDTH/2)/math.sqrt(2)), HEIGHT/2-x*(math.sqrt(HEIGHT/2)/math.sqrt(2)))
 
-fieldPoints = [Point3D(forestWidthInPx/80, -forestHeightInPx/80, 0), Point3D(forestWidthInPx/80, forestHeightInPx/80, 0), Point3D(-forestWidthInPx/80, forestHeightInPx/80, 0), Point3D(-forestWidthInPx/80, -forestHeightInPx/80, 0)]
+fieldPoints = [Point3D(10, -10, 0), Point3D(10, 10, 0), Point3D(-10, 10, 0), Point3D(-10, -10, 0)]
 field = Shape3D(*fieldPoints)
 field.updateCoords(canvas)
 
 tk.update()
 time.sleep(1)
-for j in range(45):
+for j in range(33):
     field.rotate(0, 1, 0)
     field.updateCoords(canvas)
     tk.update()
