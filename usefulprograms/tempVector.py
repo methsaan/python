@@ -61,7 +61,7 @@ class Tree:
         self.side3 = [Point3D(posx3d-width/2, posy3d-width/2, 0), Point3D(posx3d-width/2, posy3d+width/2, 0), Point3D(posx3d-width/2, posy3d+width/2, height), Point3D(posx3d-width/2, posy3d-width/2, height)]
         self.side4 = [Point3D(posx3d-width/2, posy3d+width/2, 0), Point3D(posx3d+width/2, posy3d+width/2, 0), Point3D(posx3d+width/2, posy3d+width/2, height), Point3D(posx3d-width/2, posy3d+width/2, height)]
         self.top = [Point3D(posx3d+width/2, posy3d+width/2, height), Point3D(posx3d+width/2, posy3d-width/2, height), Point3D(posx3d-width/2, posy3d-width/2, height), Point3D(posx3d-width/2, posy3d+width/2, height)]
-        self.facePoints = [self.base, self.side2, self.side3, self.side1, self.side4, self.top]
+        self.facePoints = [self.side2, self.side3, self.base, self.side1, self.side4, self.top]
         self.faces = [Shape3D(*i, color="brown", outlineWidth=2) for i in self.facePoints]
         for i in self.faces:
             i.updateCoords(c)
@@ -137,32 +137,42 @@ field.updateCoords(canvas)
 
 trees = []
 
-for x in range(5):
-    for y in range(5):
-        trees.append(Tree(-8+x*4 + random.randrange(-19, 19)/10, -8+y*4 + random.randrange(-19, 19)/10, random.randrange(3, 10)/10, random.randrange(5, 15), canvas))
-tk.update()
+trees.append(Tree(0, 0, 10, 10, canvas))
+
+#for x in range(5):
+#    for y in range(5):
+#        trees.append(Tree(-8+x*4 + random.randrange(-19, 19)/10, -8+y*4 + random.randrange(-19, 19)/10, random.randrange(3, 10)/10, random.randrange(5, 15), canvas))
+#tk.update()
+
+txt = canvas.create_text(WIDTH/2, HEIGHT*0.1, text="0", font=("helvetica", 30))
 
 while True:
-    for j in range(36):
-        field.rotate(0, 10, 0)
-        for i in range(25):
-            trees[i].rotate(0, 10, 0, canvas)
+    for j in range(360):
+        field.rotate(0, 1, 0)
+        canvas.itemconfig(txt, text=str(j))
+        for i in range(1):
+            trees[i].rotate(0, 1, 0, canvas)
+        field.updateCoords(canvas)
+        tk.update()
+        time.sleep(0.05)
+        print([p.v for p in field.points])
+    for j in range(360):
+        field.rotate(0, 0, 1)
+        canvas.itemconfig(txt, text=str(j))
+        for i in range(1):
+            trees[i].rotate(0, 0, 1, canvas)
         field.updateCoords(canvas)
         tk.update()
         print([p.v for p in field.points])
-    for j in range(36):
-        field.rotate(0, 0, 10)
-        for i in range(25):
-            trees[i].rotate(0, 0, 10, canvas)
+        time.sleep(0.05)
+    for j in range(360):
+        field.rotate(1, 0, 0)
+        canvas.itemconfig(txt, text=str(j))
+        for i in range(1):
+            trees[i].rotate(1, 0, 0, canvas)
         field.updateCoords(canvas)
         tk.update()
-        print([p.v for p in field.points])
-    for j in range(36):
-        field.rotate(10, 0, 0)
-        for i in range(25):
-            trees[i].rotate(10, 0, 0, canvas)
-        field.updateCoords(canvas)
-        tk.update()
+        time.sleep(0.05)
         print([p.v for p in field.points])
 
 
