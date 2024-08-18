@@ -81,15 +81,14 @@ for x in range(28):
 for x in range(1, 28):
     canvas.create_line(390+x*(20/math.sqrt(2)), 400-x*(20/math.sqrt(2)), 410+x*(20/math.sqrt(2)), 400-x*(20/math.sqrt(2)))
 
-
+'''
 edges = [Vector((1, 1, 1), (1, 5, 1)), Vector((1, 5, 1), (1, 5, 5)), Vector((1, 5, 5), (1, 1, 5)), Vector((1, 1, 5), (1, 1, 1))]
 edges2 = [Vector((-1, 1, 1), (-5, 1, 1)), Vector((-5, 1, 1), (-5, 1, 5)), Vector((-5, 1, 5), (-1, 1, 5)), Vector((-1, 1, 5), (-1, 1, 1))]
 
 s1 = Object3dGraphic(edges, "blue")
 s2 = Object3dGraphic(edges2, "green")
-
-
 '''
+
 edges = [Vector((0, 0, 0), (0, 5, 0)), Vector((0, 0, 0), (5, 0, 0)),\
          Vector((5, 0, 0), (5, 5, 0)), Vector((5, 5, 0), (0, 5, 0)),\
          Vector((0, 0, 0), (0, 0, 5)), Vector((0, 0, 5), (0, 5, 5)),\
@@ -134,5 +133,5 @@ cube.translate(20, 0, 0, 80)
 cube.translate(0, 20, 0, 80)
 print(time.time())
 tk.update()
-'''
+
 canvas.mainloop()
