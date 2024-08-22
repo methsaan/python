@@ -15,42 +15,56 @@ class ChessPiece:
         self.allAvailableMoves = None
     def getPosition(self):
         return (self.posx, self.posy)
+    def isLinear(self):
+        return self.linear
 
 class Pawn(ChessPiece):
     def __init__(self, color, side, posx, posy):
         super().__init__(color, side, posx, posy, False)
         self.allMoves = [(0, 1)]
         self.allAvailableMoves = None
+    def __repr__(self):
+        return "Pawn(ChessPiece)"
 
 class King(ChessPiece):
     def __init__(self, color, side, posx, posy):
         super().__init__(color, side, posx, posy, False)
         self.allMoves = [(0, 1), (0, -1), (1, 0), (-1, 0), (-1, -1), (1, 1), (1, -1), (-1, 1)]
         self.allAvailableMoves = None
+    def __repr__(self):
+        return "King(ChessPiece)"
 
 class Knight(ChessPiece):
     def __init__(self, color, side, posx, posy):
         super().__init__(color, side, posx, posy, False)
         self.allMoves = [(1, 2), (2, 1), (-2, 1), (1, -2), (-1, 2), (2, -1), (-2, -1), (-1, -2)]
         self.allAvailableMoves = None
+    def __repr__(self):
+        return "Knight(ChessPiece)"
 
 class Queen(ChessPiece):
     def __init__(self, color, side, posx, posy):
         super().__init__(color, side, posx, posy, True)
         self.directions = [(0, 1), (0, -1), (1, 0), (-1, 0), (-1, -1), (1, 1), (1, -1), (-1, 1)]
         self.allAvailableMoves = None
+    def __repr__(self):
+        return "Queen(ChessPiece)"
 
 class Castle(ChessPiece):
     def __init__(self, color, side, posx, posy):
         super().__init__(color, side, posx, posy, True)
         self.directions = [(0, 1), (0, -1), (1, 0), (-1, 0)]
         self.allAvailableMoves = None
+    def __repr__(self):
+        return "Castle(ChessPiece)"
 
 class Bishop(ChessPiece):
     def __init__(self, color, side, posx, posy):
         super().__init__(color, side, posx, posy, True)
         self.directions = [(-1, -1), (1, 1), (1, -1), (-1, 1)]
         self.allAvailableMoves = None
+    def __repr__(self):
+        return "Bishop(ChessPiece)"
 
 class OccupancyGrid:
     def __init__(self):
@@ -71,6 +85,9 @@ class OccupancyGrid:
         self.columns[x] = [0 for i in range(8)]
     def reset(self):
         self.columns = [[0 for x in range(8)] for y in range(8)]
+    def display(self):
+        for y in self.columns:
+            print(y)
 
 class Player:
     def __init__(self, side, color, opponent=None):
@@ -98,13 +115,17 @@ class Player:
         self.occupancyGridSelf.reset()
         for piece in self.pieces:
             coords = piece.getPosition()
-            self.occupancyGridSelf.occupySquare(coords[0], coords[1])
-    #def setAvailableMoves(self):
+            self.occupancyGridSelf.occupySquare(coords[0]-1, coords[1]-1)
+    def setAvailableMoves(self):
         # Set allAvailableMoves for queen, bishops and castles given directions and spaces available
         # Set allAvailableMoves for king, knights and pawns given allMoves and spaces available
         # Subtract opposing player's occupied spaces, spaces occupied by own pieces and spaces outside grid from allMoves and spaces
         # in all directions
-
+        for piece in self.pieces:
+            if piece.isLinear():
+                print("Linear", piece)
+            else:
+                print("Discrete", piece)
 
 from tkinter import *
 
@@ -120,15 +141,19 @@ user.pawns[5].posy += 2
 user.updateSelfOccupancy()
 computer.updateOppOccupancy()
 
-computer.knight[1].posx -= 1
-computer.knight[1].posy += 2
+computer.knights[1].posx -= 1
+computer.knights[1].posy += 2
 computer.updateSelfOccupancy()
 user.updateOppOccupancy()
 
-for i in user.occupancyGridSelf:
-    print(i)
+print("User: ")
+user.occupancyGridSelf.display()
+print("Computer: ")
+computer.occupancyGridSelf.display()
 
-for i in computer.occupancyGridSelf:
-    print(i)
+print("User: ")
+user.setAvailableMoves()
+print("Computer: ")
+computer.setAvailableMoves()
 
 canvas.mainloop()
