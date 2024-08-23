@@ -1,5 +1,8 @@
 #! /usr/bin/python3
 
+from tkinter import *
+import copy
+
 WIDTH = 1000
 HEIGHT = 1000
 
@@ -75,19 +78,24 @@ class OccupancyGrid:
         self.columns[x][y] = 0
     def occupyRow(self, y):
         for i in range(8):
-            self.columns[i][y] = 1
+            self.columns[i][y-1] = 1
     def unoccupyRow(self, y):
         for i in range(8):
-            self.columns[i][y] = 0
+            self.columns[i][y-1] = 0
     def occupyColumn(self, x):
-        self.columns[x] = [1 for i in range(8)]
+        self.columns[x-1] = [1 for i in range(8)]
     def unoccupyColumn(self, x):
-        self.columns[x] = [0 for i in range(8)]
+        self.columns[x-1] = [0 for i in range(8)]
     def reset(self):
         self.columns = [[0 for x in range(8)] for y in range(8)]
     def display(self):
         for y in self.columns:
             print(y)
+    def isOccupiedAt(self, x, y):
+        return self.columns[x-1][y-1] == 1 if (x in range(1, 9) and y in range(1, 9)) else False
+    def flip(self):
+        for x in range(len(self.columns)):
+            self.columns[x] = list(reversed(self.columns[x]))
 
 class Player:
     def __init__(self, side, color, opponent=None):
@@ -106,11 +114,13 @@ class Player:
         self.opponent = opponent
         self.occupancyGridOpp = OccupancyGrid()
         if opponent != None:
-            self.occupancyGridOpp = self.opponent.occupancyGridSelf
+            self.occupancyGridOpp = copy.deepcopy(self.opponent.occupancyGridSelf)
+            self.occupancyGridOpp.flip()
     def updateOppOccupancy(self, opponent=None):
         if opponent != None:
             self.opponent = opponent
-        self.occupancyGridOpp = self.opponent.occupancyGridSelf
+        self.occupancyGridOpp = copy.deepcopy(self.opponent.occupancyGridSelf)
+        self.occupancyGridOpp.flip()
     def updateSelfOccupancy(self):
         self.occupancyGridSelf.reset()
         for piece in self.pieces:
@@ -121,13 +131,33 @@ class Player:
         # Set allAvailableMoves for king, knights and pawns given allMoves and spaces available
         # Subtract opposing player's occupied spaces, spaces occupied by own pieces and spaces outside grid from allMoves and spaces
         # in all directions
+        piece = self.pieces[5]
         for piece in self.pieces:
             if piece.isLinear():
                 print("Linear", piece)
+                print("Position:", piece.getPosition())
+                print("Directions:", piece.directions)
+                piece.allAvailableMoves = []
+                for direction in piece.directions:
+                    cnt = 1
+                    move = direction
+                    posAfterMove = tuple([piece.getPosition()[i]+move[i] for i in range(len(move))])
+                    while posAfterMove[0] in range(1, 9) and posAfterMove[1] in range(1, 9)\
+                          and not self.occupancyGridOpp.isOccupiedAt(posAfterMove[0], posAfterMove[1])\
+                          and not self.occupancyGridSelf.isOccupiedAt(posAfterMove[0], posAfterMove[1]):
+                        print(move)
+                        posAfterMove = tuple([piece.getPosition()[i]+move[i] for i in range(len(move))])
+                        cnt += 1
+                        move = tuple([direction[i]*cnt for i in range(len(direction))])
             else:
-                print("Discrete", piece)
+                piece.allAvailableMoves = []
+                for move in piece.allMoves:
+                    posAfterMove = tuple([piece.getPosition()[i]+move[i] for i in range(len(move))])
+                    if posAfterMove[0] in range(1, 9) and posAfterMove[1] in range(1, 9)\
+                       and not self.occupancyGridOpp.isOccupiedAt(posAfterMove[0], posAfterMove[1])\
+                       and not self.occupancyGridSelf.isOccupiedAt(posAfterMove[0], posAfterMove[1]):
+                        piece.allAvailableMoves.append(move)
 
-from tkinter import *
 
 tk = Tk()
 canvas = Canvas(tk, width=WIDTH, height=HEIGHT)
@@ -146,14 +176,21 @@ computer.knights[1].posy += 2
 computer.updateSelfOccupancy()
 user.updateOppOccupancy()
 
-print("User: ")
+print("---------------------------------------------------Displaying after moves:")
+print("User self: ")
 user.occupancyGridSelf.display()
-print("Computer: ")
+print("User opposite: ")
+user.occupancyGridOpp.display()
+print("Computer self: ")
 computer.occupancyGridSelf.display()
+print("Computer opposite: ")
+computer.occupancyGridOpp.display()
+
 
 print("User: ")
 user.setAvailableMoves()
 print("Computer: ")
 computer.setAvailableMoves()
+
 
 canvas.mainloop()
