@@ -2,6 +2,7 @@
 
 from tkinter import *
 import copy
+import time
 
 WIDTH = 1000
 HEIGHT = 1000
@@ -97,6 +98,18 @@ class OccupancyGrid:
         for x in range(len(self.columns)):
             self.columns[x] = list(reversed(self.columns[x]))
 
+class ChessGridInterface:
+    def __init__(self, player, c):
+        self.columns = [[] for y in range(8)]
+        black = False
+        for y in range(8):
+            for x in range(8):
+                self.columns[y].append(c.create_rectangle(WIDTH*(x+1)/10, HEIGHT*(8-y)/10, WIDTH*(x+2)/10, HEIGHT*(9-y)/10, fill=("black" if black else "white")))
+                black = not black
+                tk.update()
+                time.sleep(0.1)
+            black = not black
+
 class Player:
     def __init__(self, side, color, opponent=None):
         self.side = side
@@ -134,9 +147,6 @@ class Player:
         piece = self.pieces[5]
         for piece in self.pieces:
             if piece.isLinear():
-                print("Linear", piece)
-                print("Position:", piece.getPosition())
-                print("Directions:", piece.directions)
                 piece.allAvailableMoves = []
                 for direction in piece.directions:
                     cnt = 1
@@ -145,10 +155,10 @@ class Player:
                     while posAfterMove[0] in range(1, 9) and posAfterMove[1] in range(1, 9)\
                           and not self.occupancyGridOpp.isOccupiedAt(posAfterMove[0], posAfterMove[1])\
                           and not self.occupancyGridSelf.isOccupiedAt(posAfterMove[0], posAfterMove[1]):
-                        print(move)
-                        posAfterMove = tuple([piece.getPosition()[i]+move[i] for i in range(len(move))])
+                        piece.allAvailableMoves.append(move)
                         cnt += 1
                         move = tuple([direction[i]*cnt for i in range(len(direction))])
+                        posAfterMove = tuple([piece.getPosition()[i]+move[i] for i in range(len(move))])
             else:
                 piece.allAvailableMoves = []
                 for move in piece.allMoves:
@@ -157,7 +167,6 @@ class Player:
                        and not self.occupancyGridOpp.isOccupiedAt(posAfterMove[0], posAfterMove[1])\
                        and not self.occupancyGridSelf.isOccupiedAt(posAfterMove[0], posAfterMove[1]):
                         piece.allAvailableMoves.append(move)
-
 
 tk = Tk()
 canvas = Canvas(tk, width=WIDTH, height=HEIGHT)
@@ -176,21 +185,12 @@ computer.knights[1].posy += 2
 computer.updateSelfOccupancy()
 user.updateOppOccupancy()
 
-print("---------------------------------------------------Displaying after moves:")
-print("User self: ")
-user.occupancyGridSelf.display()
-print("User opposite: ")
-user.occupancyGridOpp.display()
-print("Computer self: ")
-computer.occupancyGridSelf.display()
-print("Computer opposite: ")
-computer.occupancyGridOpp.display()
+#for x in range(9):
+#    canvas.create_line(WIDTH*(x+1)/10, HEIGHT/10, WIDTH*(x+1)/10, HEIGHT*9/10, width=3)
+#
+#for x in range(9):
+#    canvas.create_line(WIDTH/10, HEIGHT*(x+1)/10, WIDTH*9/10, HEIGHT*(x+1)/10, width=3)
 
-
-print("User: ")
-user.setAvailableMoves()
-print("Computer: ")
-computer.setAvailableMoves()
-
+a = ChessGridInterface(user, canvas)
 
 canvas.mainloop()
