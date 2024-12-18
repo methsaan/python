@@ -6,10 +6,6 @@ import re
 #canvas = Canvas(tk, width=1000, height=1000)
 #canvas.pack()
 
-"""
-(?<=\*\*)(?<=(.*\).*){0})(?<=(.*\(.*){0})\d+|(?<=\*\*)(?<=(.*\).*){1})(?<=(.*\(.*){1})\d+|(?<=\*\*)(?<=(.*\).*){2})(?<=(.*\(.*){2})\d+|(?<=\*\*)(?<=(.*\).*){3})(?<=(.*\(.*){3})\d+|(?<=\*\*)(?<=(.*\).*){4})(?<=(.*\(.*){4})\d+|(?<=\*\*)(?<=(.*\).*){5})(?<=(.*\(.*){5})\d+|(?<=\*\*)(?<=(.*\).*){6})(?<=(.*\(.*){6})\d+|(?<=\*\*)(?<=(.*\).*){7})(?<=(.*\(.*){7})\d+|(?<=\*\*)(?<=(.*\).*){8})(?<=(.*\(.*){8})\d+
-"""
-
 allowedFuncRegex = r"[x|\*{1,2}|math\.sin\(.+?\)|math\.cos\(.+?\)|\d|math.log\(.+?\)|\+| |\-|\/]+"
 
 class Function:
@@ -29,26 +25,10 @@ class Function:
         if re.search(r"\d+\*\(" + allowedFuncRegex + r"\)\*\*\d+", exp) != None:
             # power function of a function
             # 22*(x**2 + math.sin(x))**5
-            print("power function of a triangle")
-            powerRegex = ""
-            for bracketCnt in range(8):
-                powerRegexTemp = r"(?<=\*\*)"
-                powerRegexTemp += r"(?<=(.*\).*){" + str(bracketCnt) + r"})"
-                powerRegexTemp += r"(?<=(.*\(.*){" + str(bracketCnt) + r"})"
-                powerRegexTemp += "\d+"
-                powerRegex += powerRegexTemp + "|"
-            powerRegexTemp = r"(?<=\*\*)"
-            powerRegexTemp += r"(?<=(.*\).*){8})"
-            powerRegexTemp += r"(?<=(.*\(.*){8})"
-            powerRegexTemp += "\d+"
-            powerRegex += powerRegexTemp
-            
-            print(powerRegex)
-            print("power:", re.findall(powerRegex, exp))
-            print("constant:", re.findall(r"(?=\*)\d+", exp))
-            print("function:", re.findall(r"\(" + allowedFuncRegex + r"\)", exp))
-            return str(int(re.findall(r"(?<=\*\*)\d+", exp)[0]) * int(re.findall(r"(?=\*)\d+", exp)[0])) + \
-                   re.findall(r"\(" + allowedFuncRegex + r"\)")[0] + str(int(re.findall(r"(?<=\*\*)\d+", exp)[0]) - 1)
+            power = int(re.findall(r"\d+$", exp)[0])
+            constant = int(re.findall(r"^\d+", exp)[0])
+            function = re.findall(r"\(" + allowedFuncRegex + r"\)", exp)[0]
+            return str(power * constant) + "*" + function + "**" + str(power - 1)
         elif re.search(r"-*math\.sin\(" + allowedFuncRegex + r"\)", exp) != None:
             # sin of a function
             # math.sin(x**2 + math.log(x))
