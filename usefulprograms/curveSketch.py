@@ -21,42 +21,59 @@ class Function:
         Differentiate simple term or apply chain rule only to the most outer
         function of a composite function term
         """
-        print("Original:", exp)
-        if re.search(r"\d+\*\(" + allowedFuncRegex + r"\)\*\*\d+", exp) != None:
+        if re.search(r"-?\d+\*\(" + allowedFuncRegex + r"\)\*\*-?\d+", exp) != None:
             # power function of a function
             # 22*(x**2 + math.sin(x))**5
-            power = int(re.findall(r"\d+$", exp)[0])
-            constant = int(re.findall(r"^\d+", exp)[0])
+            power = int(re.findall(r"-?\d+$", exp)[0])
+            constant = int(re.findall(r"^-?\d+", exp)[0])
             function = re.findall(r"\(" + allowedFuncRegex + r"\)", exp)[0]
             return str(power * constant) + "*" + function + "**" + str(power - 1)
-        elif re.search(r"-*math\.sin\(" + allowedFuncRegex + r"\)", exp) != None:
+        elif re.search(r"-?math\.sin\(" + allowedFuncRegex + r"\)", exp) != None:
             # sin of a function
             # math.sin(x**2 + math.log(x))
-            print("sin of a triangle")
             return exp.replace("math.sin", "math.cos")
-        elif re.search(r"-*math\.cos\(" + allowedFuncRegex + r"\)", exp) != None:
+        elif re.search(r"-?math\.cos\(" + allowedFuncRegex + r"\)", exp) != None:
             # cos of a function
             # math.cos(x**2 - 4*x + 1)
-            print("cos of a triangle")
             return exp.replace("math.cos", "-math.sin")
+        elif re.search(r"-?math\.log\(" + allowedFuncRegex + r" *, *\d+\)", exp) != None:
+            # log of a function
+            # math.log(x**2 + 2*x - 4, 3)
+            function = exp[exp.index("(") + 1:exp.index(",")]
+            base = exp[exp.index(",") + 1:exp.index(")")]
+            return " 1 / ((" + function + ") * math.log(" + base.strip() + ", math.e))"
         elif exp.isdigit():
             # constant
             # 46
-            print("constant")
             return "0"
 
 func = Function("x**2 + 2*x + 1")
-print(func.f(5))
-print(func.yInt())
+print("f(x) = x**2 + 2*x + 1")
+print("f(5):", func.f(5))
+print("y-int:", func.yInt())
 
-string1 = "math.sin(x**2 + math.log(x))"
-string2 = "math.cos(x**2 - 4*x + 1)"
-string3 = "46"
-string4 = "22*((x+2)**2 + math.sin(x))**5"
+string1 = "-22*((x+2)**2 + math.sin(x))**5"
+string2 = "22*(x)**-5"
+string3 = "-1*(x)**5"
+string4 = "47*(x)**1"
+string5 = "math.sin(x**2 + math.log(x))"
+string6 = "math.cos(x**2 - 4*x + 1)"
+string7 = "math.sin(x)"
+string8 = "math.cos(x)"
+string9 = "46"
+string10 = "math.log(x**2 + 2*x - 4, 3)"
+string11 = "math.log(x, 4)"
 
 print(func.differentiateBasic(string1))
 print(func.differentiateBasic(string2))
 print(func.differentiateBasic(string3))
 print(func.differentiateBasic(string4))
+print(func.differentiateBasic(string5))
+print(func.differentiateBasic(string6))
+print(func.differentiateBasic(string7))
+print(func.differentiateBasic(string8))
+print(func.differentiateBasic(string9))
+print(func.differentiateBasic(string10))
+print(func.differentiateBasic(string11))
 
 #canvas.mainloop()
