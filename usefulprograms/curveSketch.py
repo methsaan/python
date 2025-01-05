@@ -89,7 +89,7 @@ class Function:
                  re.search(r"^-?[\d|\.]+ \*\* \(" + allowedFuncRegex + r"x\)$", expr) != None:
             # exponential function
             # 6 ** (x ** 2 + math.sin(2 * x) - 3)
-            base = re.findall("^-?[\d|\.]+", expr)[0]
+            base = re.findall(r"^-?[\d|\.]+", expr)[0]
             function = "x" if "(" not in expr else expr[expr.index("(") + 1:expr.index(")") + 1]
             return ("(" if function == "x" else "((") + \
                    base + " ** (" + function + ")) * (math.log(" + base.strip() + ", math.e))" + \
@@ -178,52 +178,20 @@ class Function:
         exprTermsDerivative = [self.differentiateOuter(i) for i in exprTerms]
         derivativeStr = " + ".join(exprTermsDerivative)
         derivativeStr = derivativeStr.replace("+ +", "+ ")
-        if number == 1:
-            print("ZERO", derivativeStr)
-            print()
-        derivativeStr = re.sub("\s\+\s+\+\s", " + ", derivativeStr)
-        if number == 1:
-            print("ONE", derivativeStr)
-            print()
-        derivativeStr = re.sub("\*\s+1\s+\*\s+1\s+\*", "*", derivativeStr)
-        if number == 1:
-            print("TWO", derivativeStr)
-            print()
-        derivativeStr = re.sub("\s\*\*\s1\.0", "", derivativeStr)
-        if number == 1:
-            print("THREE", derivativeStr)
-            print()
-        derivativeStr = re.sub("\s\*\*\s1", "", derivativeStr)
-        if number == 1:
-            print("FOUR", derivativeStr)
-            print()
+        derivativeStr = re.sub(r"\s\+\s+\+\s", " + ", derivativeStr)
+        derivativeStr = re.sub(r"\*\s+1\s+\*\s+1\s+\*", "*", derivativeStr)
+        derivativeStr = re.sub(r"\s\*\*\s1\.0", "", derivativeStr)
+        derivativeStr = re.sub(r"\s\*\*\s1", "", derivativeStr)
+        # ISSUE
         #if "DERIVATIVE" not in derivativeStr:
         #    derivativeStr = re.sub(r"(\(\()(\d+)(\)\))", r"\2", derivativeStr)
-        if number == 1:
-            print("FIVE", derivativeStr)
-            print()
         # ISSUE
         #if "DERIVATIVE" not in derivativeStr:
         #    derivativeStr = re.sub(r"(\()(\d+)(\))", r"\2", derivativeStr)
-        if number == 1:
-            print("SIX", derivativeStr)
-            print()
         derivativeStr = re.sub(r"(1)(\s\*\s)(\-?[\d|\.]+)", r"\3", derivativeStr)
-        if number == 1:
-            print("SEVEN", derivativeStr)
-            print()
         derivativeStr = re.sub(r"(\-?[\d|\.]+)(\s\*\s)(1)", r"\1", derivativeStr)
-        if number == 1:
-            print("EIGHT", derivativeStr)
-            print()
         derivativeStr = re.sub(r"(\-1)(\s\*\s)(\-?[\d|\.]+)", r"-\3", derivativeStr)
-        if number == 1:
-            print("NINE", derivativeStr)
-            print()
         derivativeStr = re.sub(r"(\-?[\d|\.]+)(\s\*\s)(\-1)", r"-\1", derivativeStr)
-        if number == 1:
-            print("TEN", derivativeStr)
-            print()
         bracketPairs = [(m.start(), m.end()) for m in re.finditer(r"^[\(\d+][\d|\.|\s|\+|\*|\-|\/]+[\d+\)]$", derivativeStr)]
         for bracketPair in bracketPairs:
             if self.correctBrackets(derivativeStr[bracketPair[0]:bracketPair[1]]) and \
@@ -245,52 +213,21 @@ class Function:
                 while len(funcPortion) > 1 and funcPortion[0] == "(" and funcPortion[-1] == ")" and self.correctBrackets(funcPortion[1:-1]):
                     funcPortion = funcPortion[1:-1]
                 derivativeStr = derivativeStr.replace(func, Function(funcPortion, self.start, self.end).getFirstDerivative())
-            if number == 1:
-                print("ZERO", derivativeStr)
-                print()
-            derivativeStr = re.sub("\s\+\s+\+\s", " + ", derivativeStr)
-            if number == 1:
-                print("ONE", derivativeStr)
-                print()
-            derivativeStr = re.sub("\*\s+1\s+\*\s+1\s+\*", "*", derivativeStr)
-            if number == 1:
-                print("TWO", derivativeStr)
-                print()
-            derivativeStr = re.sub("\s\*\*\s1\.0", "", derivativeStr)
-            if number == 1:
-                print("THREE", derivativeStr)
-                print()
-            derivativeStr = re.sub("\s\*\*\s1", "", derivativeStr)
-            if number == 1:
-                print("FOUR", derivativeStr)
-                print()
+            derivativeStr = derivativeStr.replace("+ +", "+ ")
+            derivativeStr = re.sub(r"\s\+\s+\+\s", " + ", derivativeStr)
+            derivativeStr = re.sub(r"\*\s+1\s+\*\s+1\s+\*", "*", derivativeStr)
+            derivativeStr = re.sub(r"\s\*\*\s1\.0", "", derivativeStr)
+            derivativeStr = re.sub(r"\s\*\*\s1", "", derivativeStr)
+            # ISSUE
             #if "DERIVATIVE" not in derivativeStr:
             #    derivativeStr = re.sub(r"(\(\()(\d+)(\)\))", r"\2", derivativeStr)
-            if number == 1:
-                print("FIVE", derivativeStr)
-                print()
             # ISSUE
             #if "DERIVATIVE" not in derivativeStr:
             #    derivativeStr = re.sub(r"(\()(\d+)(\))", r"\2", derivativeStr)
-            if number == 1:
-                print("SIX", derivativeStr)
-                print()
             derivativeStr = re.sub(r"(1)(\s\*\s)(\-?[\d|\.]+)", r"\3", derivativeStr)
-            if number == 1:
-                print("SEVEN", derivativeStr)
-                print()
             derivativeStr = re.sub(r"(\-?[\d|\.]+)(\s\*\s)(1)", r"\1", derivativeStr)
-            if number == 1:
-                print("EIGHT", derivativeStr)
-                print()
             derivativeStr = re.sub(r"(\-1)(\s\*\s)(\-?[\d|\.]+)", r"-\3", derivativeStr)
-            if number == 1:
-                print("NINE", derivativeStr)
-                print()
             derivativeStr = re.sub(r"(\-?[\d|\.]+)(\s\*\s)(\-1)", r"-\1", derivativeStr)
-            if number == 1:
-                print("TEN", derivativeStr)
-                print()
             bracketPairs = [(m.start(), m.end()) for m in re.finditer(r"^[\(\d+][\d|\.|\s|\+|\*|\-|\/]+[\d+\)]$", derivativeStr)]
             for bracketPair in bracketPairs:
                 if self.correctBrackets(derivativeStr[bracketPair[0]:bracketPair[1]]) and \
@@ -357,8 +294,8 @@ class Function:
     def getRightSlantAsympt(self):
         slopes = []
         for i in range(5, 10):
-            slopes.append(round(Function(self.getFirstDerivative(), self.start, self.end).f(10 ** i), 2))
-        if max(slopes) > min(slopes):
+            slopes.append(round(Function(self.getFirstDerivative(), self.start, self.end).f(10 ** i), 15))
+        if round(max(slopes), 2) > round(min(slopes), 2):
             return None
         straightenedAsympt = Function(self.funcExpr + " - " + str(max(slopes)) + " * x", self.start, self.end)
         asymptoteyInt = round(straightenedAsympt.f(10000000000), 2)
@@ -366,8 +303,8 @@ class Function:
     def getLeftSlantAsympt(self):
         slopes = []
         for i in range(5, 10):
-            slopes.append(round(Function(self.getFirstDerivative(), self.start, self.end).f(-(10 ** i)), 2))
-        if max(slopes) > min(slopes):
+            slopes.append(round(Function(self.getFirstDerivative(), self.start, self.end).f(-(10 ** i)), 15))
+        if round(max(slopes), 2) > round(min(slopes), 2):
             return None
         straightenedAsympt = Function(self.funcExpr + " - " + str(max(slopes)) + " * x", self.start, self.end)
         asymptoteyInt = round(straightenedAsympt.f(-10000000000), 2)
@@ -396,68 +333,56 @@ class Function:
         return list(dict.fromkeys(vertAsymptotes))
 
 #func = Function("x ** 2 - 6 * x + 5", -10, 10)
-# No issues
+# HA/OA - CORRECT
 
 #func = Function("(x ** 2 - 4) / (x ** 3 - 8)", -10, 10)
-# No issues
+# HA/OA - CORRECT
 
 #func = Function("math.sin(math.cos(x) + math.log(x, 10))", 0.001, 10)
-# No issues
+# HA/OA - CORRECT
 
 #func = Function("(x - 2) ** 3 - 2", -10, 10)
-# No issues
+# HA/OA - CORRECT
 
 #func = Function("-1 * ((12) / (11 * x - 3)) + 6", -30, 30)
-# No issues
+# HA/OA - CORRECT
 
 #func = Function("(((x - 2) * ((x + 5) ** 3)) * (x - 1)) / (((x + 1) * (x + 3)) * ((x - 3) * (x - 4)))", -10, 10)
-# Roots - IROC Zero division error
+# HA/OA - CORRECT
 
-#func = Function("(((7 * x - 2) * ((3 * x + 5) ** 3)) * (3 * x - 1)) / (((9 * x + 1) * (13 * x + 3)) * ((11 * x - 3) * (7 * x - 4)))", -10, 10)
-# Third derivative inaccurate
-# VA - 3rd derivative sign changes - slow
-# Right/left slant asymptote - wrong y-int - big number
+func = Function("(((7 * x - 2) * ((3 * x + 5) ** 3)) * (3 * x - 1)) / (((9 * x + 1) * (13 * x + 3)) * ((11 * x - 3) * (7 * x - 4)))", -10, 10)
+# HA/OA - CORRECT
 
 #func = Function("-1 * ((100 * x ** 3 - 6 * x + 3) / (50 * x ** 2 - 3 * x - 500)) + 5", -10, 10)
-# VA - 3rd derivative sign changes - slow
+# HA/OA - CORRECT
 
 #func = Function("math.log(x, 4) + (2 * x ** 2 - 100 * x + 1) / (2 * x)", 0.001, 30)
-# VA - 3rd derivative sign changes - slow
-# First derivative string - Case 6 - "DERIVATIVE1"
+# HA/OA - CORRECT
 
 #func = Function("math.sin(x)", -10, 10)
-# VA - incorrect - registers zeroes as VAs
+# HA/OA - CORRECT
 
-func = Function("(12 * x ** 2 + 10 * x - 4) / (10 * x - 5)", -10, 10)
-# Roots - IROC Zero division error
-# VA - incorrect - registers zeroes as VAs
-# First derivative string - Case 6 - "DERIVATIVE10"
+#func = Function("(12 * x ** 2 + 10 * x - 4) / (10 * x - 5)", -10, 10)
+# HA/OA - CORRECT
 
 #func = Function("(10 * x * math.log(x ** 2, 10)) / (x ** 2 + 2 * x - 8) - 2 * x + 8", 0.01, 10)
-# Roots - IROC Zero division error
-# Inflection points - slow
-# VA - 2nd derivative sign changes - slow
-# First derivative string - Case 6 - "DERIVATIVE1"
+# HA/OA - CORRECT
 
 #func = Function("-1 * ((1) / (29 * x - 3)) + 6", -30, 30)
-# VA - 3rd derivative sign changes - slow
-# First derivative string - Case 6 - "DERIVATIVE1"
+# HA/OA - CORRECT
 
 #func = Function("(1) / ((29 * x - 3) ** 2) + 6", -30, 30)
-# VA - 3rd derivative sign changes - slow
-# First derivative string - Case 6 - "DERIVATIVE1"
+# HA/OA - CORRECT
 
 #func = Function("(50) / ((((3 * x - 2) ** 2) * ((3 * x + 4) ** 2)) * (2 * x + 7)) + 1", -30, 30)
-# Roots - IROC Zero division error
-# VA - 3rd derivative sign changes - slow
-# First derivative string - Case 6 - "DERIVATIVE1"
+# HA/OA - CORRECT
 
 
 print("f(x) =", func.funcExpr)
 print()
 #print("y-int:", func.getyInt())
 #print()
-fPrime = func.getFirstDerivative()
+fPrime = func.getFirstDerivative(1)
 print("f'(x) =", fPrime)
 print()
 fDoublePrime = func.getSecondDerivative()
